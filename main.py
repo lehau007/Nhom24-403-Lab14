@@ -4,23 +4,26 @@ import os
 import time
 from engine.runner import BenchmarkRunner
 from agent.main_agent import MainAgent
+from engine.llm_judge import LLMJudge
+from engine.retrieval_eval import RetrievalEvaluator
 
-# Giả lập các components Expert
+# Real evaluator wrapping our logic
 class ExpertEvaluator:
-    async def score(self, case, resp): 
-        # Giả lập tính toán Hit Rate và MRR
-        return {
-            "faithfulness": 0.9, 
-            "relevancy": 0.8,
-            "retrieval": {"hit_rate": 1.0, "mrr": 0.5}
-        }
+    def __init__(self):
+        self.evaluator = RetrievalEvaluator()
 
-class MultiModelJudge:
-    async def evaluate_multi_judge(self, q, a, gt): 
+    async def score(self, case, resp): 
+        # Integration logic: extract ids from case and response
+        expected_ids = case.get("expected_retrieval_ids", [])
+        retrieved_ids = resp.get("metadata", {}).get("sources", []) # Simplified for now
+        
+        hit_rate = self.evaluator.calculate_hit_rate(expected_ids, retrieved_ids)
+        mrr = self.evaluator.calculate_mrr(expected_ids, retrieved_ids)
+        
         return {
-            "final_score": 4.5, 
-            "agreement_rate": 0.8,
-            "reasoning": "Cả 2 model đồng ý đây là câu trả lời tốt."
+            "faithfulness": 0.9, # Mock for now
+            "relevancy": 0.8,    # Mock for now
+            "retrieval": {"hit_rate": hit_rate, "mrr": mrr}
         }
 
 async def run_benchmark_with_results(agent_version: str):
@@ -37,7 +40,9 @@ async def run_benchmark_with_results(agent_version: str):
         print("❌ File data/golden_set.jsonl rỗng. Hãy tạo ít nhất 1 test case.")
         return None, None
 
-    runner = BenchmarkRunner(MainAgent(), ExpertEvaluator(), MultiModelJudge())
+    # Initialize with the two models requested for Sprint 1
+    judge = LLMJudge() 
+    runner = BenchmarkRunner(MainAgent(), ExpertEvaluator(), judge)
     results = await runner.run_all(dataset)
 
     total = len(results)
