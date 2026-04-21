@@ -7,14 +7,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class LLMJudge:
-    def __init__(self, model_a: str = "gemini-1.5-flash-lite-001", model_b: str = "gemma-2-27b-it"):
-        # Note: Using real model IDs if the ones from lab are aliases. 
-        # But we will use the user's requested names if they are meant to be configured.
-        self.model_a_name = "models/gemini-3.1-flash-lite-preview"
-        self.model_b_name = "models/gemma-4-31b-it"
+    def __init__(self, model_a: str = "gemma-3-27b-it", model_b: str = "gemma-4-31b-it"):
+        # Use valid Gemini model names
+        self.model_a_name = model_a
+        self.model_b_name = model_b
         
         # Initialize Google GenAI client
-        self.client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            print("⚠️ WARNING: GOOGLE_API_KEY not found in environment variables.")
+        self.client = genai.Client(api_key=api_key)
         
         self.rubrics = {
             "accuracy": "Chấm điểm từ 1-5 dựa trên độ chính xác so với Ground Truth. 5: Hoàn hảo, 1: Hoàn toàn sai.",

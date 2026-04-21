@@ -14,8 +14,18 @@ class ExpertEvaluator:
 
     async def score(self, case, resp): 
         # Integration logic: extract ids from case and response
+        # Try expected_retrieval_ids, fallback to source in metadata
         expected_ids = case.get("expected_retrieval_ids", [])
-        retrieved_ids = resp.get("metadata", {}).get("sources", []) # Simplified for now
+        if not expected_ids and "metadata" in case and "source" in case["metadata"]:
+            expected_ids = [case["metadata"]["source"]]
+        
+        # In MainAgent, we return retrieved_ids in metadata["sources"]
+        retrieved_ids = resp.get("retrieved_ids", [])
+        if not retrieved_ids:
+            retrieved_ids = resp.get("metadata", {}).get("sources", [])
+        
+        # If retrieved_ids contains chunk IDs, and expected_ids are filenames,
+        # we might need to match them. But let's assume they are comparable for now.
         
         hit_rate = self.evaluator.calculate_hit_rate(expected_ids, retrieved_ids)
         mrr = self.evaluator.calculate_mrr(expected_ids, retrieved_ids)

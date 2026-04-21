@@ -51,45 +51,14 @@ def save_trace(state: AgentState, output_dir: Optional[str] = None) -> str:
 
 class MainAgent:
     def __init__(self):
-        self.name = "ExpertSupervisorAgent-v4"
-        self.contract_path = Path("contracts/worker_contracts.yaml")
-        self.routing_rules = self._load_routing_rules()
-
-    def _load_routing_rules(self) -> List[Dict]:
-        if not self.contract_path.exists():
-            return []
-        with open(self.contract_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-            return data.get("supervisor", {}).get("routing_rules", [])
-
-    def supervisor_node(self, state: AgentState) -> AgentState:
-        task_lower = state["task"].lower()
-        selected_route = "retrieval_worker"
-        reason = "Default route"
-
-        for rule in self.routing_rules:
-            condition = rule.get("condition", "").lower()
-            clean_condition = condition.replace("task chứa", "").replace("'", "").replace('"', "")
-            keywords = [k.strip() for k in clean_condition.split(",") if k.strip()]
-
-            matched = [k for k in keywords if k in task_lower]
-            if matched:
-                selected_route = rule.get("route")
-                reason = f"Matched YAML rules: {matched}"
-                break
-
-        state["supervisor_route"] = selected_route
-        state["route_reason"] = reason
-        state["needs_tool"] = selected_route == "policy_tool_worker"
-        state["risk_high"] = any(k in task_lower for k in ["p1", "khẩn cấp"])
-        return state
+        self.name = "PureRAGAgent-v1"
 
     async def query(self, question: str) -> Dict[str, Any]:
         profiles = self._get_llm_profiles()
         state: AgentState = {
             "task": question,
             "supervisor_route": "retrieval_worker",
-            "route_reason": "",
+            "route_reason": "Pure RAG flow",
             "risk_high": False,
             "needs_tool": False,
             "retrieved_chunks": [],
@@ -108,29 +77,22 @@ class MainAgent:
             "retrieval_top_k": int(os.getenv("RETRIEVAL_TOP_K", "5")),
         }
 
-        state = self.supervisor_node(state)
-
-        # 1. Retrieval
+        # 1. Retrieval - Pure Vector Search
         state = await retrieval_run(state)
 
-        # 2. Policy
-        if state["supervisor_route"] == "policy_tool_worker":
-            state = await policy_run(state)
-
-        # 3. Synthesis
+        # 2. Synthesis - Add retrieved content to query and generate answer
         state = await synthesis_run(state)
 
-        # 4. Save Trace
+        # 3. Save Trace
         save_trace(state)
 
         return {
             "answer": state["final_answer"],
             "contexts": [c["text"] for c in state["retrieved_chunks"]],
-            "retrieved_ids": [c.get("id", "") for c in state["retrieved_chunks"]],
+            "retrieved_ids": [c.get("source", "") for c in state["retrieved_chunks"]],
             "metadata": {
                 "run_id": state["run_id"],
-                "route": state["supervisor_route"],
-                "reason": state["route_reason"],
+                "sources": [c.get("source", "") for c in state["retrieved_chunks"]], 
                 "profiles": profiles,
             },
         }
