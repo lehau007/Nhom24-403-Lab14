@@ -5,3 +5,5 @@ __pycache__/
 reports/
 data/golden_set.jsonl
 .gemini/
+venv/
+.venv/
