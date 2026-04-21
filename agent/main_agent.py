@@ -2,7 +2,7 @@ import asyncio
 import json
 import os
 import time
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Literal, Optional, TypedDict
 
@@ -103,7 +103,7 @@ class MainAgent:
             "workers_called": [],
             "worker_io_logs": [],
             "run_id": f"run_{int(time.time() * 1000)}",
-            "timestamp": datetime.now(UTC).isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "llm_profiles": profiles,
             "retrieval_top_k": int(os.getenv("RETRIEVAL_TOP_K", "5")),
         }

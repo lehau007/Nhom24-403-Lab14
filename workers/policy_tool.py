@@ -2,7 +2,7 @@ import re
 import asyncio
 import json
 import os
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from typing import List, Dict, Any
 
 WORKER_NAME = "policy_tool_worker"
@@ -20,12 +20,12 @@ async def _call_mcp_tool(tool_name: str, tool_input: dict) -> dict:
                     "input": tool_input,
                     "output": json.loads(result.content[0].text) if not result.isError else None,
                     "error": result.content[0].text if result.isError else None,
-                    "timestamp": datetime.now(UTC).isoformat()
+                    "timestamp": datetime.now(timezone.utc).isoformat()
                 }
     except Exception as e:
         return {
             "tool": tool_name, "input": tool_input, "output": None,
-            "error": str(e), "timestamp": datetime.now(UTC).isoformat()
+            "error": str(e), "timestamp": datetime.now(timezone.utc).isoformat()
         }
 
 def analyze_policy(task: str, chunks: list) -> dict:
@@ -97,7 +97,7 @@ async def run(state: dict) -> dict:
             "exceptions_count": len(policy_result["exceptions_found"]),
             "mcp_tools_count": len(state["mcp_tools_used"])
         },
-        "timestamp": datetime.now(UTC).isoformat()
+        "timestamp": datetime.now(timezone.utc).isoformat()
     })
     
     return state

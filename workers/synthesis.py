@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 import litellm
 from dotenv import load_dotenv
@@ -91,7 +91,7 @@ async def run(state: dict) -> dict:
                     "confidence": confidence,
                     "sources_count": len(state["sources"]),
                 },
-                "timestamp": datetime.now(UTC).isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             }
         )
         state["history"].append(f"[{WORKER_NAME}] synthesis complete (conf={confidence})")
@@ -104,7 +104,7 @@ async def run(state: dict) -> dict:
                 "worker": WORKER_NAME,
                 "input": worker_input,
                 "error": {"code": "SYNTHESIS_FAILED", "reason": str(e)},
-                "timestamp": datetime.now(UTC).isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             }
         )
         state["history"].append(f"[{WORKER_NAME}] ERROR: {e}")

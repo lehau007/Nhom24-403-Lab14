@@ -40,19 +40,21 @@ async def run_benchmark_with_results(agent_version: str):
         print("❌ File data/golden_set.jsonl rỗng. Hãy tạo ít nhất 1 test case.")
         return None, None
 
-    # Initialize with the two models requested for Sprint 1
-    judge = LLMJudge() 
+    # Initialize Judge (GPT-4o-mini for 30% cost saving)
+    judge = LLMJudge(model_b="gpt-4o-mini") 
     runner = BenchmarkRunner(MainAgent(), ExpertEvaluator(), judge)
     results = await runner.run_all(dataset)
-
-    total = len(results)
+    
+    # Use the new aggregation method
+    metrics = runner.get_summary_metrics(results)
+    
     summary = {
-        "metadata": {"version": agent_version, "total": total, "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")},
-        "metrics": {
-            "avg_score": sum(r["judge"]["final_score"] for r in results) / total,
-            "hit_rate": sum(r["ragas"]["retrieval"]["hit_rate"] for r in results) / total,
-            "agreement_rate": sum(r["judge"]["agreement_rate"] for r in results) / total
-        }
+        "metadata": {
+            "version": agent_version, 
+            "total": len(results), 
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        },
+        "metrics": metrics
     }
     return results, summary
 
@@ -71,10 +73,17 @@ async def main():
         return
 
     print("\n📊 --- KẾT QUẢ SO SÁNH (REGRESSION) ---")
-    delta = v2_summary["metrics"]["avg_score"] - v1_summary["metrics"]["avg_score"]
-    print(f"V1 Score: {v1_summary['metrics']['avg_score']}")
-    print(f"V2 Score: {v2_summary['metrics']['avg_score']}")
-    print(f"Delta: {'+' if delta >= 0 else ''}{delta:.2f}")
+    
+    m1 = v1_summary["metrics"]
+    m2 = v2_summary["metrics"]
+    
+    delta = m2["avg_judge_score"] - m1["avg_judge_score"]
+    
+    print(f"V1 Score: {m1['avg_judge_score']:.2f} | Cost: ${m1['total_cost']:.4f}")
+    print(f"V2 Score: {m2['avg_judge_score']:.2f} | Cost: ${m2['total_cost']:.4f}")
+    print(f"Delta Score: {'+' if delta >= 0 else ''}{delta:.2f}")
+    print(f"Avg Latency: {m2['avg_latency']:.2f}s")
+    print(f"Agreement Rate: {m2['avg_agreement']*100:.1f}%")
 
     os.makedirs("reports", exist_ok=True)
     with open("reports/summary.json", "w", encoding="utf-8") as f:
@@ -82,7 +91,7 @@ async def main():
     with open("reports/benchmark_results.json", "w", encoding="utf-8") as f:
         json.dump(v2_results, f, ensure_ascii=False, indent=2)
 
-    if delta > 0:
+    if delta >= 0:
         print("✅ QUYẾT ĐỊNH: CHẤP NHẬN BẢN CẬP NHẬT (APPROVE)")
     else:
         print("❌ QUYẾT ĐỊNH: TỪ CHỐI (BLOCK RELEASE)")

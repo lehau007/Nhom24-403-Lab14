@@ -3,7 +3,7 @@ import asyncio
 from dotenv import load_dotenv
 from typing import List, Dict, Any
 import litellm
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 
 load_dotenv(override=True)
