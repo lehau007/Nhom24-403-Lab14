@@ -51,6 +51,7 @@ Yêu cầu format JSON:
       "question": "...", 
       "expected_answer": "...", 
       "context": "Trích đoạn ngắn từ tài liệu chứa câu trả lời", 
+      "expected_retrieval_ids": ["{doc_name}"],
       "metadata": {{"difficulty": "easy", "type": "fact-check", "source": "{doc_name}"}}
     }}
   ]
@@ -99,6 +100,7 @@ Yêu cầu format JSON:
       "question": "...", 
       "expected_answer": "...", 
       "context": "Đoạn text chứa thông tin từ cả hai tài liệu hoặc logic bắc cầu", 
+      "expected_retrieval_ids": ["{doc_name}", "{other_doc_name}"],
       "metadata": {{
         "difficulty": "hard", 
         "type": "multi-hop|adversarial|edge-case",

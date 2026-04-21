@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from ragas import evaluate
 from ragas.embeddings import LangchainEmbeddingsWrapper
 from ragas.llms import LangchainLLMWrapper
-from ragas.metrics import AnswerRelevancy, Faithfulness
+from ragas.metrics import _answer_relevancy, _faithfulness
 
 load_dotenv(override=True)
 
@@ -67,13 +67,14 @@ class RetrievalEvaluator:
             ragas_emb = LangchainEmbeddingsWrapper(emb_obj)
 
             # 3. Khởi tạo mới các Metric để tránh 'llm must be set' error
-            m1 = Faithfulness()
-            m2 = AnswerRelevancy()
 
             loop = asyncio.get_event_loop()
             # Thực thi Ragas trong thread pool
             result = await loop.run_in_executor(
-                None, lambda: evaluate(dataset, metrics=[m1, m2], llm=ragas_llm, embeddings=ragas_emb)
+                None,
+                lambda: evaluate(
+                    dataset, metrics=[_faithfulness, _answer_relevancy], llm=ragas_llm, embeddings=ragas_emb
+                ),
             )
 
             # 4. Trích xuất kết quả an toàn
