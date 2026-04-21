@@ -1,0 +1,2906 @@
+{
+  "v1": [
+    {
+      "test_case": "Chính sách hoàn tiền phiên bản 4 có hiệu lực từ ngày nào?",
+      "agent_response": "Chính sách hoàn tiền phiên bản 4 có hiệu lực từ ngày 01/02/2026 [1].",
+      "latency": 2.614493159999256,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.8742621060106613,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin như trong Ground Truth, chỉ khác ở cách diễn đạt nhưng không làm thay đổi nội dung."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác về mặt thông tin so với Ground Truth và có trích dẫn nguồn đầy đủ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Khách hàng cần thực hiện bước nào đầu tiên để yêu cầu hoàn tiền?",
+      "agent_response": "Bước đầu tiên mà khách hàng cần thực hiện để yêu cầu hoàn tiền là gửi yêu cầu qua hệ thống ticket nội bộ với category \"Refund Request\" [1].",
+      "latency": 2.9866895519953687,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.9117555056020062,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, chỉ khác ở việc có thêm từ 'bước đầu tiên' nhưng không làm thay đổi nội dung chính của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, truyền tải đầy đủ thông tin cần thiết cho khách hàng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Các trường hợp nào bị loại trừ không được hoàn tiền?",
+      "agent_response": "⚠️ Các trường hợp không được hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [2].",
+      "latency": 2.4198700779961655,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.831240848602996,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, liệt kê đúng các trường hợp không được hoàn tiền như trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và bao quát đầy đủ các ý có trong Ground Truth, cách trình bày rõ ràng, dễ hiểu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu khách hàng chọn nhận hoàn tiền qua credit nội bộ, giá trị nhận được là bao nhiêu?",
+      "agent_response": "Nếu khách hàng chọn nhận hoàn tiền qua credit nội bộ (store credit), giá trị nhận được sẽ là 110% so với số tiền hoàn [1].",
+      "latency": 2.7361273920032545,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.8613865465187214,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với Ground Truth, nêu rõ giá trị khách hàng nhận được khi chọn hoàn tiền qua credit nội bộ là 110% so với số tiền hoàn."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, đồng thời cung cấp thêm thông tin làm rõ (store credit) giúp người dùng dễ hiểu hơn."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sản phẩm bị lỗi do nhà sản xuất và yêu cầu hoàn tiền được gửi sau 10 ngày làm việc từ ngày xác nhận đơn hàng, khách hàng có thể làm gì theo chính sách hoàn tiền mới?",
+      "agent_response": "⚠️ Khách hàng không thể yêu cầu hoàn tiền vì yêu cầu hoàn tiền phải được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng, trong khi yêu cầu của khách hàng được gửi sau 10 ngày làm việc. \n\nTheo chính sách hoàn tiền, khách hàng chỉ có quyền yêu cầu hoàn tiền khi sản phẩm bị lỗi do nhà sản xuất và yêu cầu được gửi trong vòng 7 ngày làm việc. Nếu không đáp ứng điều kiện này, yêu cầu hoàn tiền sẽ không được chấp nhận [1][4].",
+      "latency": 3.0245151540002553,
+      "ragas": {
+        "faithfulness": 0.6666666666666666,
+        "relevancy": 0.7346309795698257,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với Ground Truth. Agent đã nêu rõ rằng khách hàng không thể yêu cầu hoàn tiền vì đã vượt quá thời hạn 7 ngày làm việc, đúng như chính sách hoàn tiền đã đề ra."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth. Agent đã xác định đúng việc khách hàng không đủ điều kiện hoàn tiền do vượt quá thời hạn 7 ngày làm việc và giải thích rõ ràng lý do dựa trên chính sách."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một yêu cầu hoàn tiền được gửi cho một sản phẩm kỹ thuật số, điều gì sẽ xảy ra theo chính sách hoàn tiền phiên bản mới và phiên bản cũ?",
+      "agent_response": "⚠️ Theo chính sách hoàn tiền phiên bản mới (v4), sản phẩm thuộc danh mục hàng kỹ thuật số (bao gồm license key và subscription) không được hoàn tiền. Điều này cũng áp dụng cho các đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale và sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [2][4].\n\nĐối với chính sách hoàn tiền phiên bản cũ (v3), không có thông tin cụ thể trong tài liệu để xác định điều kiện hoàn tiền cho sản phẩm kỹ thuật số. Tuy nhiên, vì các đơn hàng đặt trước ngày 01/02/2026 sẽ áp dụng theo chính sách hoàn tiền phiên bản 3, nên có thể giả định rằng các điều kiện hoàn tiền cho sản phẩm kỹ thuật số có thể khác nhau, nhưng không có thông tin rõ ràng để xác nhận điều này [1]. \n\nTóm lại, theo chính sách hoàn tiền phiên bản mới, yêu cầu hoàn tiền cho sản phẩm kỹ thuật số sẽ không được chấp nhận.",
+      "latency": 4.335286524001276,
+      "ragas": {
+        "faithfulness": 0.2222222222222222,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu rõ chính sách hoàn tiền phiên bản mới và phiên bản cũ, nhưng thiếu thông tin về sự mâu thuẫn giữa hai phiên bản như trong Ground Truth. Tuy nhiên, thông tin về việc không hoàn tiền cho sản phẩm kỹ thuật số là chính xác."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác và đầy đủ theo Ground Truth. Agent làm rõ được quy định của phiên bản mới, đồng thời phản ánh đúng sự thiếu hụt thông tin trong tài liệu về phiên bản cũ và nhận diện được sự khác biệt/mâu thuẫn giữa hai phiên bản."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Khách hàng nào sẽ không đủ điều kiện để yêu cầu hoàn tiền theo chính sách hoàn tiền mới?",
+      "agent_response": "⚠️ Các ngoại lệ không được hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản.\n\nKhách hàng sẽ không đủ điều kiện để yêu cầu hoàn tiền nếu thuộc vào các trường hợp trên [4][5].",
+      "latency": 2.38370725200366,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7203881151387407,
+        "retrieval": {
+          "hit_rate": 0.0,
+          "mrr": 0.25
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đã nêu đầy đủ và chính xác các trường hợp mà khách hàng không đủ điều kiện để yêu cầu hoàn tiền, hoàn toàn phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent bao quát đầy đủ và chính xác các điều kiện không được hoàn tiền theo Ground Truth, đồng thời trình bày rõ ràng, dễ hiểu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu khách hàng gửi yêu cầu hoàn tiền cho một sản phẩm đã mở seal và sản phẩm đó không bị lỗi, yêu cầu của họ sẽ được xử lý như thế nào?",
+      "agent_response": "⚠️ Yêu cầu hoàn tiền cho sản phẩm đã mở seal và không bị lỗi sẽ không được xử lý theo chính sách hoàn tiền hiện tại. \n\nTheo chính sách, khách hàng chỉ được quyền yêu cầu hoàn tiền khi sản phẩm bị lỗi do nhà sản xuất, yêu cầu được gửi trong vòng 7 ngày làm việc, và sản phẩm chưa được sử dụng hoặc chưa bị mở seal [1]. Do đó, trong trường hợp sản phẩm đã mở seal và không bị lỗi, yêu cầu hoàn tiền sẽ không được chấp nhận.",
+      "latency": 2.8801447190053295,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8549197513741205,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, nêu rõ lý do tại sao yêu cầu hoàn tiền không được chấp nhận theo chính sách, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, phản ánh đúng nội dung của Ground Truth và cung cấp thêm thông tin bổ trợ hợp lý về chính sách hoàn tiền."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sự cố P1 xảy ra và không có kỹ sư nào phản hồi trong 10 phút, liệu có thể chuyển cấp cho đội ngũ khác không?",
+      "agent_response": "⚠️ Policy Exceptions: Tự động escalate lên Senior Engineer nếu không có phản hồi trong 10 phút.\n\nNếu một sự cố P1 xảy ra và không có kỹ sư nào phản hồi trong 10 phút, quy trình sẽ tự động escalate lên Senior Engineer [2].",
+      "latency": 2.1986925910023274,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.8817014822216519,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với Ground Truth, nêu rõ quy trình tự động chuyển cấp sự cố P1 lên Senior Engineer nếu không có phản hồi trong 10 phút."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với Ground Truth. Agent đã xác định đúng quy trình tự động chuyển cấp lên Senior Engineer sau 10 phút đối với sự cố P1."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Một sản phẩm đã bị lỗi do người dùng có được hoàn tiền không nếu được gửi yêu cầu trong vòng 7 ngày lần đầu xác nhận?",
+      "agent_response": "⚠️ Ngoại lệ không được hoàn tiền:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n\nKhách hàng có thể yêu cầu hoàn tiền cho sản phẩm bị lỗi do nhà sản xuất (không phải do người dùng) nếu yêu cầu được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng và sản phẩm chưa được sử dụng hoặc chưa bị mở seal [1]. Nếu sản phẩm bị lỗi do người dùng, thì không đủ điều kiện để hoàn tiền.",
+      "latency": 2.842476985002577,
+      "ragas": {
+        "faithfulness": 0.8333333333333334,
+        "relevancy": 0.6949831209754973,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã cung cấp thông tin chính xác về việc hoàn tiền cho sản phẩm bị lỗi do người dùng, nhưng có phần dài dòng và không trực tiếp trả lời câu hỏi. Tuy nhiên, thông tin về các ngoại lệ và điều kiện hoàn tiền vẫn được nêu rõ."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác câu hỏi dựa trên Ground Truth, khẳng định rõ ràng rằng sản phẩm lỗi do người dùng sẽ không được hoàn tiền, đồng thời cung cấp thêm các thông tin bổ trợ hợp lý."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Mức độ ưu tiên P1 trong quy định SLA được định nghĩa như thế nào?",
+      "agent_response": "Mức độ ưu tiên P1 trong quy định SLA được định nghĩa là \"CRITICAL (Khẩn cấp)\", tức là sự cố ảnh hưởng toàn bộ hệ thống production, không có workaround. Ví dụ điển hình bao gồm việc database sập, API gateway down, hoặc toàn bộ người dùng không thể đăng nhập [1].",
+      "latency": 1.9459536869981093,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.9139307916156708,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đã nêu rõ định nghĩa mức độ ưu tiên P1 trong quy định SLA, bao gồm cả thông tin về sự cố ảnh hưởng toàn bộ hệ thống production và không có workaround, đồng thời cung cấp ví dụ cụ thể, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã nêu chính xác định nghĩa cốt lõi từ Ground Truth và bổ sung thêm các ví dụ thực tế giúp làm rõ ngữ cảnh, hoàn toàn phù hợp với yêu cầu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Thời gian phản hồi ban đầu cho ticket P2 là bao lâu?",
+      "agent_response": "Thời gian phản hồi ban đầu cho ticket P2 là 2 giờ kể từ khi ticket được tạo [1].",
+      "latency": 1.3568711989937583,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8790002286339028,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent chính xác và đầy đủ thông tin, khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và cung cấp thông tin đầy đủ, rõ ràng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình xử lý sự cố P1 bắt đầu ra sao?",
+      "agent_response": "Quy trình xử lý sự cố P1 bắt đầu như sau:\n\n1. **Tiếp nhận**: On-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút.\n2. **Thông báo**: Gửi thông báo tới Slack #incident-p1 và email incident@company.internal ngay lập tức.\n3. **Triage và phân công**: Lead Engineer phân công engineer xử lý trong 10 phút. \n\nSau đó, engineer sẽ tiếp tục xử lý sự cố theo các bước tiếp theo đã được quy định [1].",
+      "latency": 2.4087956130024395,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.870792824508121,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về bước đầu tiên trong quy trình xử lý sự cố P1, nhưng có thêm một số chi tiết không cần thiết. Mặc dù thông tin bổ sung là hữu ích, nhưng không hoàn toàn phù hợp với yêu cầu chỉ hỏi về cách bắt đầu quy trình."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent chứa đầy đủ và chính xác thông tin từ Ground Truth, đồng thời bổ sung thêm các bước tiếp theo một cách logic và phù hợp với ngữ cảnh quy trình P1."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Thời gian khắc phục cho ticket P3 là bao lâu?",
+      "agent_response": "Thời gian khắc phục cho ticket P3 là 5 ngày làm việc [1].",
+      "latency": 1.3090021419993718,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8275853710290461,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và có trích dẫn nguồn hợp lệ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Trong trường hợp khẩn cấp P1, một kỹ sư cần quyền Elevated Access (Level 3) để khắc phục sự cố, quy trình này sẽ được điều phối như thế nào theo cả hai tài liệu?",
+      "agent_response": "⚠️ Không có Policy Exceptions.\n\nTrong trường hợp khẩn cấp P1, quy trình cấp quyền Elevated Access (Level 3) để khắc phục sự cố được điều phối như sau:\n\n1. **On-call IT Admin** có thể cấp quyền tạm thời (tối đa 24 giờ) sau khi được **Tech Lead** phê duyệt bằng lời [1].\n2. Sau 24 giờ, nếu không có ticket chính thức, quyền sẽ bị thu hồi tự động [1].\n3. Mọi quyền tạm thời phải được ghi log vào hệ thống Security Audit [1].\n\nNgoài ra, quy trình xử lý sự cố P1 cũng yêu cầu on-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút, và thông báo ngay lập tức tới Slack #incident-p1 và email incident@company.internal [3]. Lead Engineer sẽ phân công engineer xử lý trong 10 phút [3].",
+      "latency": 3.5702100380003685,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.8446494628588918,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu đúng quy trình cấp quyền tạm thời và yêu cầu phê duyệt từ Tech Lead, nhưng thiếu thông tin về việc cần tạo ticket chính thức trên Jira sau 24 giờ và thực hiện quy trình phê duyệt thông thường. Điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời chính xác về quy trình cấp quyền tạm thời (24 giờ, Tech Lead phê duyệt). Tuy nhiên, Agent thiếu thông tin quan trọng từ Ground Truth là yêu cầu bắt buộc phải tạo ticket trên Jira (project IT-ACCESS) và quy trình phê duyệt thông thường sau khi hết hạn 24 giờ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài liệu về quyền truy cập hệ thống hiện tại có tên là 'Approval Matrix for System Access' phải không?",
+      "agent_response": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 1.8461758400007966,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn sai lệch so với thông tin trong Ground Truth, vì nó không chỉ không xác nhận tên tài liệu đúng mà còn không cung cấp thông tin chính xác nào về tên hiện tại của tài liệu."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời là không tìm thấy thông tin thay vì xác nhận thông tin sai. Mặc dù Agent không đưa ra thông tin sai lệch, nhưng đã thất bại trong việc truy xuất dữ liệu có sẵn trong tài liệu để đính chính cho người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Liệu một nhân viên mới vào công ty 15 ngày có thể yêu cầu cấp quyền Admin Access (Level 4) ngay lập tức thông qua Jira project IT-SUPPORT không?",
+      "agent_response": "⚠️ Policy Exceptions: Nhân viên mới không thể yêu cầu cấp quyền Admin Access (Level 4) ngay lập tức.\n\nMột nhân viên mới vào công ty trong 15 ngày không thể yêu cầu cấp quyền Admin Access (Level 4) vì quyền này chỉ áp dụng cho các vị trí như DevOps, SRE, và IT Admin, và yêu cầu phải có phê duyệt từ IT Manager và CISO, cũng như hoàn thành khóa đào tạo bắt buộc về chính sách bảo mật. Nhân viên mới trong 30 ngày đầu chỉ có thể yêu cầu Level 1 (Read Only) [2][1].",
+      "latency": 3.4819378289976157,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8262346780026202,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent đúng về việc nhân viên mới không thể yêu cầu quyền Admin Access (Level 4) ngay lập tức. Tuy nhiên, Agent đã không đề cập đến việc yêu cầu cấp quyền phải được gửi qua Jira project IT-ACCESS, mà lại nói về IT-SUPPORT, điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng về việc nhân viên mới không được cấp quyền Admin và nêu được lý do về thời gian thử việc/đào tạo. Tuy nhiên, Agent bỏ sót chi tiết quan trọng là quy trình yêu cầu phải thực hiện qua Jira project IT-ACCESS thay vì IT-SUPPORT như câu hỏi đề cập."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sự cố P1 được resolve sau 3 giờ, tôi có cần phải viết incident report không, và thời hạn của nó là bao lâu?",
+      "agent_response": "⚠️ Bạn cần viết incident report cho sự cố P1, và thời hạn để hoàn thành báo cáo này là trong vòng 24 giờ sau khi sự cố được khắc phục [1].",
+      "latency": 2.0119853479991434,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8300586360738432,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đúng về việc cần viết incident report và thời hạn 24 giờ, nhưng thiếu thông tin về SLA P1 và quy trình bước 5, nên không hoàn toàn chính xác."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác yêu cầu bắt buộc phải viết báo cáo và thời hạn 24 giờ. Mặc dù không nhắc đến chi tiết 'bất kể thời gian resolve', nhưng thông tin cốt lõi đã khớp hoàn toàn với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Điều gì sẽ xảy ra nếu IT Manager phê duyệt quyền Admin Access (Level 4) cho một nhân viên mới mà không có sự tham gia của CISO?",
+      "agent_response": "⚠️ Việc IT Manager phê duyệt quyền Admin Access (Level 4) cho một nhân viên mới mà không có sự tham gia của CISO là không đúng quy trình. Theo quy định, quyền Level 4 (Admin Access) phải được phê duyệt bởi cả IT Manager và CISO [3]. Nếu IT Manager tự ý phê duyệt mà không có sự đồng ý của CISO, điều này có thể dẫn đến vi phạm quy trình kiểm soát truy cập và có thể gây ra các vấn đề về bảo mật.",
+      "latency": 2.7361540220008465,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.821592757410537,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đúng với nội dung của Ground Truth, nêu rõ việc phê duyệt quyền Admin Access mà không có sự tham gia của CISO là không đúng quy trình và có thể dẫn đến vi phạm bảo mật."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, phản ánh đúng quy định về việc cần sự phê duyệt của cả IT Manager và CISO đối với quyền Level 4, đồng thời nêu rõ hậu quả vi phạm quy trình."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo SLA, escalation cho ticket P2 sẽ diễn ra sau bao nhiêu phút và mức escalation này áp dụng cho loại ticket nào khác không?",
+      "agent_response": "Theo SLA, escalation cho ticket P2 sẽ diễn ra sau 90 phút không có phản hồi [1]. Mức escalation này không áp dụng cho loại ticket nào khác ngoài ticket P2, vì thông tin về escalation chỉ được đề cập cho ticket P1 và P2 trong tài liệu [1].",
+      "latency": 2.187879773999157,
+      "ragas": {
+        "faithfulness": 0.3333333333333333,
+        "relevancy": 0.869598845281813,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đúng về thời gian escalation cho ticket P2 là 90 phút. Tuy nhiên, Agent không đề cập rõ rằng ticket P1 có quy trình escalation riêng là 10 phút, điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác thời gian escalation cho P2 (90 phút) và xác định đúng rằng mức này không áp dụng cho các loại ticket khác, đồng thời giải thích hợp lý dựa trên tài liệu cung cấp."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tôi cần làm gì khi quên mật khẩu đăng nhập?",
+      "agent_response": "Khi bạn quên mật khẩu đăng nhập, bạn có thể thực hiện một trong hai cách sau:\n\n1. Truy cập vào đường link https://sso.company.internal/reset để reset mật khẩu.\n2. Liên hệ với Helpdesk qua số máy nội bộ 9000. Mật khẩu mới sẽ được gửi qua email công ty trong vòng 5 phút [1].",
+      "latency": 2.1803094360002433,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.855624442377236,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, bao gồm cả hai cách để reset mật khẩu và thời gian nhận mật khẩu mới, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent cung cấp đầy đủ và chính xác các thông tin có trong Ground Truth, bao gồm cả đường link reset, số điện thoại liên hệ và thời gian nhận mật khẩu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài khoản của tôi sẽ bị khóa sau bao nhiêu lần đăng nhập sai liên tiếp?",
+      "agent_response": "Tài khoản của bạn sẽ bị khóa sau 5 lần đăng nhập sai liên tiếp. Để mở khóa, bạn có thể liên hệ IT Helpdesk hoặc tự reset qua portal SSO [support/helpdesk-faq.md].",
+      "latency": 1.542662724998081,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8117107501550614,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, khớp với Ground Truth về số lần đăng nhập sai cần thiết để khóa tài khoản."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác số lần đăng nhập sai (5 lần) theo Ground Truth, đồng thời cung cấp thêm thông tin hữu ích về cách mở khóa tài khoản."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Công ty sử dụng phần mềm VPN nào?",
+      "agent_response": "Công ty sử dụng phần mềm VPN là Cisco AnyConnect. Bạn có thể tải phần mềm này tại địa chỉ: https://vpn.company.internal/download [1].",
+      "latency": 1.3788458229973912,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8105107947629433,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin như trong Ground Truth, bao gồm tên phần mềm VPN và đường dẫn tải về."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với thông tin trong Ground Truth, bao gồm cả tên phần mềm và đường dẫn tải về."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+      "agent_response": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là 50GB [support/helpdesk-faq.md].",
+      "latency": 1.3951547510005184,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8516215610496878,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng, chỉ khác ở cách diễn đạt nhưng không làm thay đổi nội dung thông tin."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và còn cung cấp thêm nguồn tham chiếu hữu ích."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi là nhân viên mới và muốn xin nghỉ phép trong ngày onboarding, liệu tôi có thể làm điều đó không?",
+      "agent_response": "⚠️ Policy Exceptions: Nhân viên có thể gửi yêu cầu nghỉ phép muộn hơn trong trường hợp khẩn cấp nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nTheo chính sách nghỉ phép, nhân viên cần gửi yêu cầu nghỉ phép qua hệ thống HR Portal ít nhất 3 ngày làm việc trước ngày nghỉ. Do đó, nếu bạn là nhân viên mới và muốn xin nghỉ phép trong ngày onboarding, bạn sẽ không thể làm điều đó trừ khi có trường hợp khẩn cấp và được Line Manager đồng ý [1].",
+      "latency": 2.72597051300545,
+      "ragas": {
+        "faithfulness": 0.8,
+        "relevancy": 0.8263792634433539,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác hoàn toàn vì nó không nêu rõ rằng nhân viên mới không thể xin nghỉ phép trong ngày onboarding do chưa hoàn tất thủ tục tuyển dụng. Mặc dù có đề cập đến trường hợp khẩn cấp, nhưng điều này không phù hợp với tình huống cụ thể của nhân viên mới."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời sai trọng tâm. Ground Truth khẳng định rõ ràng không được nghỉ vì chưa hoàn tất thủ tục, trong khi Agent lại tập trung vào quy trình xin nghỉ phép thông thường và đưa ra ngoại lệ không phù hợp với tình huống nhân viên mới trong ngày onboarding."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, tôi có thể chuyển tất cả các ngày phép năm vào năm tiếp theo không?",
+      "agent_response": "⚠️ Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, bạn chỉ có thể chuyển tối đa 5 ngày phép năm chưa dùng sang năm tiếp theo. Do đó, bạn không thể chuyển tất cả các ngày phép năm vào năm tiếp theo [1].",
+      "latency": 1.8563890860023093,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.8191672948208595,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, nêu rõ rằng chỉ có tối đa 5 ngày phép năm chưa dùng có thể chuyển sang năm tiếp theo, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, phản ánh đúng nội dung của Ground Truth và cung cấp thêm thông tin ngữ cảnh rõ ràng, dễ hiểu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi có hơn 5 năm kinh nghiệm nhưng vẫn chưa gửi yêu cầu nghỉ phép qua HR Portal ít nhất 3 ngày, tôi có thể được chấp nhận không?",
+      "agent_response": "⚠️ Trường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nNếu bạn có hơn 5 năm kinh nghiệm nhưng chưa gửi yêu cầu nghỉ phép qua HR Portal ít nhất 3 ngày, bạn vẫn có thể được chấp nhận nếu bạn có sự đồng ý của Line Manager qua tin nhắn trực tiếp [1].",
+      "latency": 2.1919218620023457,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không hoàn toàn chính xác vì nó cho phép gửi yêu cầu muộn hơn nếu có sự đồng ý của Line Manager, trong khi Ground Truth khẳng định yêu cầu nghỉ phép cần phải được gửi ít nhất 3 ngày trước đó để được chấp nhận."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn trái ngược với Ground Truth. Trong khi quy định yêu cầu gửi trước 3 ngày làm việc, Agent lại đưa ra thông tin sai lệch rằng có thể được chấp nhận nếu có sự đồng ý của Line Manager."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Nếu tôi không nhận được email phê duyệt nghỉ phép từ Line Manager, tôi có nên tự động coi như đơn của mình bị từ chối không?",
+      "agent_response": "⚠️ Không có thông tin rõ ràng về việc tự động coi đơn nghỉ phép bị từ chối nếu không nhận được email phê duyệt từ Line Manager.\n\nTheo quy trình, Line Manager có trách nhiệm phê duyệt hoặc từ chối yêu cầu nghỉ phép trong vòng 1 ngày làm việc, và nhân viên sẽ nhận thông báo qua email sau khi được phê duyệt [1]. Tuy nhiên, tài liệu không đề cập đến việc nhân viên có nên coi như đơn của mình bị từ chối nếu không nhận được email phê duyệt. Do đó, bạn nên liên hệ trực tiếp với Line Manager để xác nhận tình trạng yêu cầu nghỉ phép của mình.",
+      "latency": 2.8650774839989026,
+      "ragas": {
+        "faithfulness": 0.8,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đã cung cấp thông tin chính xác về quy trình phê duyệt nghỉ phép và nhấn mạnh rằng không nên tự động coi đơn bị từ chối nếu chưa nhận được phản hồi từ Line Manager. Điều này phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác, phản ánh đúng tinh thần của Ground Truth là không được tự động kết luận đơn bị từ chối, đồng thời đưa ra lời khuyên thực tế và hợp lý là liên hệ trực tiếp với Line Manager."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Trong trường hợp nghỉ ốm, tôi có thể không cần thông báo cho Line Manager nếu không nghỉ quá 3 ngày liên tiếp?",
+      "agent_response": "⚠️ Policy Exceptions: Không có.\n\nTheo chính sách nghỉ ốm, nhân viên cần thông báo cho Line Manager trước 9:00 sáng vào ngày nghỉ. Nếu nghỉ trên 3 ngày liên tiếp, nhân viên cần có giấy tờ y tế từ bệnh viện. Do đó, bạn không thể không thông báo cho Line Manager nếu nghỉ ốm, ngay cả khi không nghỉ quá 3 ngày liên tiếp [2].",
+      "latency": 2.250693042995408,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.772787453687573,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 1.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn sai lệch so với Ground Truth. Theo chính sách, nhân viên chỉ cần thông báo nếu nghỉ trên 3 ngày liên tiếp, nhưng Agent lại khẳng định rằng cần thông báo ngay cả khi nghỉ dưới 3 ngày, điều này không đúng."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn trái ngược với Ground Truth. Agent khẳng định bắt buộc phải thông báo cho Line Manager trong mọi trường hợp, trong khi Ground Truth xác nhận nhân viên không cần thông báo nếu nghỉ dưới 3 ngày."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Nếu tôi đã được cấp laptop muộn hơn ngày onboarding đầu tiên, thì tôi sẽ được cấp laptop trong bao lâu?",
+      "agent_response": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 1.3217476360005094,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không cung cấp thông tin chính xác về thời gian cấp laptop và thiếu sự rõ ràng, mặc dù nó đã thừa nhận không có thông tin trong tài liệu. Ground Truth cung cấp thông tin cụ thể hơn về tình huống này."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Agent trả lời là không tìm thấy thông tin, trong khi Ground Truth đã cung cấp câu trả lời rõ ràng cho tình huống này. Agent đã thất bại trong việc truy xuất hoặc hiểu dữ liệu có sẵn."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Ai là đối tượng áp dụng quy trình cấp phép truy cập theo tài liệu này?",
+      "agent_response": "Đối tượng áp dụng quy trình cấp phép truy cập theo tài liệu này bao gồm tất cả nhân viên, contractor, và third-party vendor [1].",
+      "latency": 1.8504599969965057,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8769435761989817,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, trùng khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, đồng thời có trích dẫn nguồn tài liệu hỗ trợ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Mất bao lâu để xử lý yêu cầu cấp quyền Level 2?",
+      "agent_response": "Yêu cầu cấp quyền Level 2 (Standard Access) sẽ mất 2 ngày làm việc để xử lý. Quy trình này bao gồm phê duyệt từ Line Manager và IT Admin [2].",
+      "latency": 1.880884728001547,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7809096743190079,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, khớp với đáp án đúng về thời gian xử lý yêu cầu cấp quyền Level 2."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác với Ground Truth về thời gian xử lý (2 ngày làm việc) và cung cấp thêm thông tin bổ sung hữu ích về quy trình."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình yêu cầu cấp quyền bắt đầu như thế nào?",
+      "agent_response": "Quy trình yêu cầu cấp quyền bắt đầu bằng việc nhân viên tạo Access Request ticket trên Jira (project IT-ACCESS) [1].",
+      "latency": 1.5358956300042337,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7438518169441801,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, không có sai sót nào."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, bao gồm cả thông tin về project Jira."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Điều gì xảy ra với quyền truy cập khi nhân viên nghỉ việc?",
+      "agent_response": "⚠️ Quyền truy cập sẽ được thu hồi ngay trong ngày cuối khi nhân viên nghỉ việc [1].",
+      "latency": 1.4702169469965156,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8467118399526368,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng, thể hiện rõ ràng rằng quyền truy cập sẽ được thu hồi ngay trong ngày cuối khi nhân viên nghỉ việc."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, đồng thời cung cấp thêm thông tin về nguồn tham khảo."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tôi là một nhân viên mới đã làm việc 15 ngày, tôi cần truy cập hệ thống gấp để hoàn thành công việc từ xa vào ngày thứ 3, liệu tôi có được phép làm remote và cấp quyền truy cập Admin không?",
+      "agent_response": "⚠️ Bạn không đủ điều kiện để làm việc từ xa (remote) và không thể được cấp quyền truy cập Admin.\n\nTheo chính sách, nhân viên chỉ có thể làm remote sau khi đã qua thời gian thử việc (probation period) và bạn mới làm việc được 15 ngày, tức là vẫn còn trong thời gian thử việc. Hơn nữa, việc làm remote cần có sự phê duyệt từ Team Lead qua HR Portal, và bạn không thể làm remote vào ngày thứ 3, ngày onsite bắt buộc theo lịch team [1].\n\nVề quyền truy cập, bạn chỉ có thể được cấp quyền Level 1 (Read Only) trong 30 ngày đầu làm việc, và quyền Admin (Level 4) chỉ được cấp cho các vị trí như DevOps, SRE, IT Admin, với thời gian xử lý là 5 ngày làm việc và yêu cầu đào tạo về chính sách bảo mật [2][4].",
+      "latency": 3.798238344999845,
+      "ragas": {
+        "faithfulness": 0.5833333333333334,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin theo Ground Truth. Nó nêu rõ lý do không được cấp quyền Admin và không đủ điều kiện làm remote, phù hợp với chính sách công ty về quyền truy cập và làm việc từ xa."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác cả hai vấn đề (quyền truy cập và làm việc từ xa) dựa trên Ground Truth, đồng thời cung cấp thêm các thông tin bổ sung hợp lý về quy trình phê duyệt và phân quyền cụ thể, giúp người dùng hiểu rõ lý do bị từ chối."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài liệu 'Approval Matrix for System Access' hiện nay đang có hiệu lực như thế nào và nó quy định mức Level 4 khác gì so với quy trình hiện tại?",
+      "agent_response": "⚠️ Tài liệu 'Approval Matrix for System Access' hiện nay đang có hiệu lực và quy định mức Level 4 khác với quy trình hiện tại như sau:\n\nMức Level 4 — Admin Access áp dụng cho các vị trí như DevOps, SRE, và IT Admin. Quy trình phê duyệt yêu cầu ở mức này bao gồm sự phê duyệt của IT Manager và CISO, với thời gian xử lý là 5 ngày làm việc. Ngoài ra, yêu cầu thêm cho Level 4 là nhân viên phải hoàn thành training bắt buộc về security policy [1].\n\nSo với quy trình hiện tại, Level 4 yêu cầu nhiều cấp phê duyệt hơn (IT Manager + CISO) và có thời gian xử lý lâu hơn (5 ngày) so với các mức thấp hơn. Điều này cho thấy mức độ nhạy cảm và trách nhiệm cao hơn trong việc cấp quyền truy cập admin [1][3].",
+      "latency": 4.006411251997633,
+      "ragas": {
+        "faithfulness": 0.5454545454545454,
+        "relevancy": 0.8430889363013666,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 1.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn sai lệch so với Ground Truth. Agent cho rằng tài liệu 'Approval Matrix for System Access' vẫn đang có hiệu lực và có sự khác biệt về quy trình, trong khi thực tế tài liệu này đã được đổi tên và không có sự khác biệt nào về quy trình."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn sai lệch so với Ground Truth. Agent đã tự bịa đặt thông tin về quy trình phê duyệt và thời gian xử lý cho Level 4, trong khi thực tế tài liệu này chỉ là tên gọi cũ của 'ACCESS CONTROL SOP' và không có sự thay đổi về quy trình."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Những trường hợp nào mà một nhân viên được phép truy cập vào hệ thống mà không cần tuân thủ quy trình xin quyền Level 1-4 trên Jira?",
+      "agent_response": "⚠️ Các trường hợp mà một nhân viên được phép truy cập vào hệ thống mà không cần tuân thủ quy trình xin quyền Level 1-4 trên Jira bao gồm:\n\n1. **Trường hợp khẩn cấp trong sự cố P1**: Nhân viên có thể được cấp quyền tạm thời để khắc phục sự cố. Quy trình escalation khẩn cấp yêu cầu On-call IT Admin cấp quyền tạm thời (tối đa 24 giờ) sau khi được Tech Lead phê duyệt bằng lời. Sau 24 giờ, phải có ticket chính thức hoặc quyền sẽ bị thu hồi tự động [4]. \n\nTất cả các quyền tạm thời này cũng phải được ghi log vào hệ thống Security Audit [4].",
+      "latency": 3.2005924030017923,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.9193877419287443,
+        "retrieval": {
+          "hit_rate": 0.0,
+          "mrr": 0.25
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.25,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent chỉ đề cập đến trường hợp khẩn cấp trong sự cố P1, nhưng lại mở rộng thêm thông tin về việc ghi log và quyền tạm thời, điều này không hoàn toàn chính xác theo Ground Truth. Tuy nhiên, nó vẫn đúng một phần vì có nhắc đến quy trình phê duyệt của Tech Lead."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 0,
+            "reasoning": "Error GEMINI: litellm.Timeout: Connection timed out. Timeout passed=600.0, time taken=600.003 seconds"
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Là một DevOps, tôi có thể yêu cầu IT Manager cấp quyền Admin cho tôi thông qua tin nhắn trực tiếp để xử lý công việc từ xa khi đang nghỉ phép không?",
+      "agent_response": "⚠️ Policy Exceptions: Trong trường hợp khẩn cấp, có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nTheo quy trình hiện tại, bạn không thể yêu cầu IT Manager cấp quyền Admin thông qua tin nhắn trực tiếp để xử lý công việc từ xa khi đang nghỉ phép, trừ khi đó là một tình huống khẩn cấp và bạn đã nhận được sự đồng ý từ Line Manager. Trong trường hợp khẩn cấp, quy trình yêu cầu quyền tạm thời chỉ được thực hiện bởi On-call IT Admin sau khi được Tech Lead phê duyệt bằng lời [1]. \n\nNếu không có tình huống khẩn cấp, bạn cần tạo một Access Request ticket trên Jira và tuân theo quy trình phê duyệt thông thường [2].",
+      "latency": 4.03338018499926,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 3.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent đã đề cập đến quy trình yêu cầu quyền Admin và nhấn mạnh rằng chỉ trong trường hợp khẩn cấp mới có thể gửi yêu cầu qua tin nhắn trực tiếp. Tuy nhiên, nó không hoàn toàn chính xác khi không đề cập đến yêu cầu đào tạo security policy và sự phê duyệt từ CISO, điều này là cần thiết theo Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 3,
+            "reasoning": "Agent trả lời chưa chính xác về quy trình cấp quyền Admin (Level 4). Agent tập trung vào việc xin quyền qua tin nhắn cho trường hợp khẩn cấp, trong khi Ground Truth khẳng định việc cấp quyền Admin bắt buộc phải qua Jira và có sự phê duyệt của IT Manager + CISO, kèm điều kiện đào tạo bảo mật. Agent đã bỏ lỡ các yêu cầu quan trọng này."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo chính sách cập nhật năm 2026, nhân viên có thể chuyển tối đa 10 ngày phép năm chưa dùng sang năm tiếp theo nếu làm việc trên 5 năm kinh nghiệm không?",
+      "agent_response": "⚠️ Không có chính sách nào cho phép nhân viên chuyển tối đa 10 ngày phép năm chưa dùng sang năm tiếp theo. Theo chính sách cập nhật năm 2026, nhân viên chỉ có thể chuyển tối đa 5 ngày phép năm chưa dùng sang năm tiếp theo, bất kể số năm kinh nghiệm làm việc [1].",
+      "latency": 2.232122416004131,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7764441837034607,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác khi khẳng định rằng chính sách chỉ cho phép chuyển tối đa 5 ngày phép năm chưa dùng sang năm tiếp theo, không phân biệt thâm niên công tác. Điều này hoàn toàn phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác câu hỏi, bác bỏ giả định sai về số ngày phép và làm rõ rằng chính sách không phân biệt thâm niên, hoàn toàn khớp với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi là SRE và đã hoàn thành 5 ngày đào tạo security policy, tôi có thể tự cấp quyền Admin cho mình mà không cần đợi IT Manager duyệt không?",
+      "agent_response": "⚠️ Policy Exceptions: Không có ngoại lệ nào cho việc tự cấp quyền Admin.\n\nTheo quy định, để được cấp quyền Admin Access (Level 4), bạn cần có sự phê duyệt từ IT Manager và CISO, ngay cả khi bạn đã hoàn thành 5 ngày đào tạo về security policy. Do đó, bạn không thể tự cấp quyền Admin cho mình mà không cần đợi sự phê duyệt từ IT Manager [2].",
+      "latency": 2.133676090001245,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.7035313324779106,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, nêu rõ rằng việc tự cấp quyền Admin không được phép và cần có sự phê duyệt từ IT Manager và CISO, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác câu hỏi, khẳng định rõ ràng là không được phép và giải thích đúng quy trình cần sự phê duyệt của cả IT Manager và CISO, đồng thời làm rõ vai trò của việc đào tạo chỉ là điều kiện bổ sung."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nhân viên có trên 5 năm kinh nghiệm được hưởng bao nhiêu ngày nghỉ phép năm?",
+      "agent_response": "Nhân viên có trên 5 năm kinh nghiệm được hưởng 18 ngày nghỉ phép năm [1].",
+      "latency": 1.6846344980003778,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8744980882567589,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với Ground Truth về nội dung. Việc thêm trích dẫn [1] không làm sai lệch thông tin mà còn giúp tăng tính xác thực."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình xin nghỉ phép thông thường cần thực hiện trước bao lâu?",
+      "agent_response": "Quy trình xin nghỉ phép thông thường cần thực hiện ít nhất 3 ngày làm việc trước ngày nghỉ [1].",
+      "latency": 1.6635013759951107,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8032177781633872,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về thời gian cần thông báo trước khi nghỉ phép, nhưng thiếu chi tiết về việc gửi yêu cầu qua hệ thống HR Portal."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác về mặt thông tin (thời hạn 3 ngày làm việc) so với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Hệ số lương làm thêm giờ vào ngày lễ là bao nhiêu?",
+      "agent_response": "Hệ số lương làm thêm giờ vào ngày lễ là 300% lương giờ tiêu chuẩn [1].",
+      "latency": 1.9761001730003045,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7959837426783144,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, chỉ khác ở cách diễn đạt nhưng nội dung vẫn đúng."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với Ground Truth về nội dung, việc trích dẫn nguồn [1] không làm sai lệch thông tin."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Những ngày nào trong tuần là ngày onsite bắt buộc đối với nhân viên làm việc từ xa?",
+      "agent_response": "Ngày onsite bắt buộc đối với nhân viên làm việc từ xa là Thứ 3 và Thứ 5 theo lịch team [1].",
+      "latency": 1.7740415270018275,
+      "ragas": {
+        "faithfulness": 0.3333333333333333,
+        "relevancy": 0.8971245856039275,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, không có sai sót nào."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với thông tin trong Ground Truth, đồng thời có trích dẫn nguồn hỗ trợ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một nhân viên đã nghỉ phép ốm và muốn yêu cầu hoàn tiền cho đơn hàng của họ, liệu họ có thể nhận trợ cấp nào từ chính sách nghỉ phép và hoàn tiền không?",
+      "agent_response": "⚠️ Ngoại lệ không được hoàn tiền bao gồm sản phẩm thuộc danh mục hàng kỹ thuật số và đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n\nNhân viên đã nghỉ phép ốm có thể yêu cầu hoàn tiền cho đơn hàng của họ nếu đáp ứng đủ các điều kiện của chính sách hoàn tiền. Cụ thể, yêu cầu hoàn tiền phải được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng, và sản phẩm phải bị lỗi do nhà sản xuất, không phải do người dùng. Nếu đơn hàng không thuộc các ngoại lệ không được hoàn tiền, nhân viên có thể nhận trợ cấp hoàn tiền theo quy định [1][2][5].",
+      "latency": 3.220258355002443,
+      "ragas": {
+        "faithfulness": 0.6666666666666666,
+        "relevancy": 0.7238242774946246,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác vì nó không đề cập đến yêu cầu hoàn tiền phải được gửi trong vòng 7 ngày làm việc và không liên quan đến nghỉ phép. Mặc dù có thông tin về các điều kiện hoàn tiền, nhưng không giải quyết đúng câu hỏi về khả năng nhận trợ cấp trong trường hợp nghỉ phép ốm."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời sai trọng tâm. Ground Truth khẳng định không có trợ cấp hoàn tiền liên quan đến nghỉ phép, trong khi Agent lại đưa ra các điều kiện hoàn tiền chung chung, gây hiểu lầm rằng nhân viên có thể được hoàn tiền nếu đáp ứng các điều kiện đó, thay vì làm rõ việc nghỉ phép không phải là lý do hợp lệ để hoàn tiền."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Trường hợp nào theo chính sách hoàn tiền phiên bản 3 sẽ không được áp dụng trong phiên bản 4?",
+      "agent_response": "⚠️ Các trường hợp không được hoàn tiền theo chính sách hoàn tiền phiên bản 4 mà không áp dụng trong phiên bản 3 bao gồm:\n\n1. Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n2. Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n3. Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản.\n\nNhững điều này được nêu rõ trong chính sách hoàn tiền phiên bản 4 [3].",
+      "latency": 2.89876471900061,
+      "ragas": {
+        "faithfulness": 0.6,
+        "relevancy": 0.8913096365371381,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent nêu ra một số trường hợp không được hoàn tiền theo phiên bản 4, nhưng có một số thông tin không chính xác hoặc không cần thiết, như trường hợp sản phẩm đã được kích hoạt hoặc đăng ký tài khoản, không được đề cập trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng các ý chính trong Ground Truth, tuy nhiên lại liệt kê thêm một trường hợp thứ 3 (sản phẩm đã kích hoạt) không có trong Ground Truth, dẫn đến việc cung cấp thông tin dư thừa."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo chính sách hoàn tiền, trường hợp nào không đủ điều kiện hoàn tiền mà người tiêu dùng có thể gặp phải?",
+      "agent_response": "⚠️ Các trường hợp không đủ điều kiện hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [2].",
+      "latency": 2.753926194003725,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.828303688124875,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về các trường hợp không đủ điều kiện hoàn tiền, nhưng có thêm một số trường hợp khác không được đề cập trong Ground Truth. Điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 3,
+            "reasoning": "Agent đã trả lời đúng ý chính trong Ground Truth nhưng lại đưa thêm các thông tin bổ sung (hàng kỹ thuật số, mã giảm giá) không có trong dữ liệu gốc, dẫn đến nguy cơ cung cấp thông tin sai lệch nếu các điều kiện đó không thực sự tồn tại trong chính sách."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một nhân viên làm việc từ xa mà không bật camera trong cuộc họp, họ có thể bị ảnh hưởng như thế nào đến quyền lợi nghỉ phép của họ?",
+      "agent_response": "⚠️ Không có thông tin cụ thể về việc nhân viên làm việc từ xa mà không bật camera trong cuộc họp sẽ ảnh hưởng đến quyền lợi nghỉ phép của họ. Tuy nhiên, theo quy định, việc bật camera trong các cuộc họp team là yêu cầu kỹ thuật bắt buộc khi làm việc từ xa [1]. Nếu không tuân thủ yêu cầu này, có thể dẫn đến các vấn đề về hiệu suất làm việc, nhưng không có thông tin rõ ràng về việc này sẽ ảnh hưởng trực tiếp đến quyền lợi nghỉ phép. \n\nTôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 2.465031974003068,
+      "ragas": {
+        "faithfulness": 0.8,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent xác nhận rằng không có thông tin cụ thể về ảnh hưởng đến quyền lợi nghỉ phép, nhưng không đề cập đến khả năng phản hồi tiêu cực từ Line Manager, điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng trọng tâm là không có ảnh hưởng đến quyền lợi nghỉ phép. Tuy nhiên, Agent hơi thận trọng quá mức khi nói 'không có thông tin rõ ràng' thay vì khẳng định trực tiếp như Ground Truth, và bổ sung thêm thông tin về 'yêu cầu kỹ thuật' không có trong Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo chính sách nghỉ phép, mỗi nhân viên đều có 12 ngày nghỉ phép năm, vì vậy họ có thể chuyển nhượng tối đa 10 ngày sang năm sau không?",
+      "agent_response": "⚠️ Chính sách nghỉ phép quy định rằng tối đa 5 ngày phép năm chưa sử dụng có thể được chuyển sang năm tiếp theo, không phải 10 ngày như câu hỏi đề cập. [1]",
+      "latency": 2.316661627002759,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8053690251038282,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với thông tin trong Ground Truth, nêu rõ rằng chỉ có tối đa 5 ngày phép chưa sử dụng có thể được chuyển nhượng sang năm sau."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác thông tin về số ngày phép được chuyển nhượng (5 ngày) và đính chính lại sai sót trong câu hỏi của người dùng một cách rõ ràng, khớp hoàn toàn với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu nhân viên có 15 ngày nghỉ phép hàng năm và đã nghỉ hết tất cả các ngày, họ có thể tiếp tục làm việc từ xa trong khi không còn ngày nghỉ, đúng không?",
+      "agent_response": "⚠️ Policy Exceptions: Không có thông tin cụ thể về việc làm việc từ xa khi không còn ngày nghỉ phép.\n\nTôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 2.328009896002186,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác vì đã bỏ qua thông tin quan trọng về việc nhân viên có thể làm việc từ xa với sự phê duyệt từ Team Lead, dẫn đến việc không cung cấp thông tin đầy đủ cho câu hỏi."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Agent trả lời sai hoàn toàn so với Ground Truth. Thay vì cung cấp thông tin có sẵn trong tài liệu (được phép làm việc từ xa nếu có sự phê duyệt của Team Lead), Agent lại khẳng định không tìm thấy thông tin, dẫn đến việc cung cấp thông tin sai lệch cho người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    }
+  ],
+  "v2": [
+    {
+      "test_case": "Chính sách hoàn tiền phiên bản 4 có hiệu lực từ ngày nào?",
+      "agent_response": "Chính sách hoàn tiền phiên bản 4 có hiệu lực từ ngày 01/02/2026 [1].",
+      "latency": 1.6402479679964017,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.8742621060106613,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin như trong Ground Truth, chỉ khác ở cách diễn đạt nhưng không làm thay đổi nội dung."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác về mặt thông tin so với Ground Truth và có trích dẫn nguồn đầy đủ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Khách hàng cần thực hiện bước nào đầu tiên để yêu cầu hoàn tiền?",
+      "agent_response": "Bước đầu tiên mà khách hàng cần thực hiện để yêu cầu hoàn tiền là gửi yêu cầu qua hệ thống ticket nội bộ với category \"Refund Request\" [1].",
+      "latency": 1.304293784996844,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.9117555056020062,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, chỉ khác ở việc có thêm từ 'bước đầu tiên' nhưng không làm thay đổi nội dung chính của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, truyền tải đầy đủ thông tin cần thiết cho khách hàng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Các trường hợp nào bị loại trừ không được hoàn tiền?",
+      "agent_response": "⚠️ Các trường hợp không được hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [2].",
+      "latency": 1.7933984250048525,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8336246266984566,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, phản ánh đúng các trường hợp không được hoàn tiền như trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và bao quát đầy đủ các ý có trong Ground Truth, đồng thời trình bày rõ ràng, dễ hiểu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu khách hàng chọn nhận hoàn tiền qua credit nội bộ, giá trị nhận được là bao nhiêu?",
+      "agent_response": "Nếu khách hàng chọn nhận hoàn tiền qua credit nội bộ (store credit), giá trị nhận được sẽ là 110% so với số tiền hoàn. [1]",
+      "latency": 1.4204975890024798,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8256285275608038,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đồng nhất với Ground Truth, chỉ ra rõ ràng giá trị nhận được khi khách hàng chọn hoàn tiền qua credit nội bộ."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác về mặt nội dung so với Ground Truth và cung cấp thêm thông tin làm rõ (store credit) giúp khách hàng dễ hiểu hơn."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sản phẩm bị lỗi do nhà sản xuất và yêu cầu hoàn tiền được gửi sau 10 ngày làm việc từ ngày xác nhận đơn hàng, khách hàng có thể làm gì theo chính sách hoàn tiền mới?",
+      "agent_response": "⚠️ Theo chính sách hoàn tiền mới, khách hàng không thể yêu cầu hoàn tiền nếu yêu cầu được gửi sau 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng. Trong trường hợp này, yêu cầu hoàn tiền được gửi sau 10 ngày làm việc, do đó khách hàng không đủ điều kiện để yêu cầu hoàn tiền. \n\nKhách hàng chỉ có thể yêu cầu hoàn tiền khi sản phẩm bị lỗi do nhà sản xuất và yêu cầu được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng [1][4].",
+      "latency": 2.6967666880009347,
+      "ragas": {
+        "faithfulness": 0.6,
+        "relevancy": 0.7848009274701321,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với Ground Truth. Agent đã nêu rõ rằng khách hàng không đủ điều kiện để yêu cầu hoàn tiền vì yêu cầu được gửi sau 10 ngày làm việc, trong khi chính sách yêu cầu phải gửi trong vòng 7 ngày. Thông tin được cung cấp đầy đủ và rõ ràng."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth, xác định đúng việc khách hàng không đủ điều kiện hoàn tiền do vượt quá thời hạn 7 ngày làm việc."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một yêu cầu hoàn tiền được gửi cho một sản phẩm kỹ thuật số, điều gì sẽ xảy ra theo chính sách hoàn tiền phiên bản mới và phiên bản cũ?",
+      "agent_response": "⚠️ Theo chính sách hoàn tiền phiên bản mới (v4), sản phẩm thuộc danh mục hàng kỹ thuật số (bao gồm license key và subscription) không được hoàn tiền. Điều này cũng áp dụng cho các đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale và sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [2][4].\n\nĐối với chính sách hoàn tiền phiên bản cũ (v3), không có thông tin cụ thể trong tài liệu để xác định điều kiện hoàn tiền cho sản phẩm kỹ thuật số. Tuy nhiên, theo thông tin từ phiên bản mới, có thể suy luận rằng các điều kiện tương tự có thể đã được áp dụng.\n\nTóm lại, theo chính sách hoàn tiền phiên bản mới, yêu cầu hoàn tiền cho sản phẩm kỹ thuật số sẽ không được chấp nhận.",
+      "latency": 2.9464486010037945,
+      "ragas": {
+        "faithfulness": 0.2857142857142857,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu rõ chính sách hoàn tiền cho sản phẩm kỹ thuật số theo phiên bản mới và đưa ra suy luận hợp lý về phiên bản cũ, nhưng thiếu thông tin về mâu thuẫn giữa hai phiên bản như trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời chính xác về chính sách v4 và thừa nhận sự thiếu hụt thông tin ở v3. Tuy nhiên, Agent đã thực hiện suy luận chủ quan ('có thể suy luận rằng các điều kiện tương tự có thể đã được áp dụng') thay vì chỉ ra sự mâu thuẫn/thiếu sót rõ ràng như Ground Truth yêu cầu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Khách hàng nào sẽ không đủ điều kiện để yêu cầu hoàn tiền theo chính sách hoàn tiền mới?",
+      "agent_response": "⚠️ Các ngoại lệ không được hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản. [4]",
+      "latency": 2.3109378520020982,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.6983724329707269,
+        "retrieval": {
+          "hit_rate": 0.0,
+          "mrr": 0.25
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đã nêu rõ các trường hợp không đủ điều kiện hoàn tiền, bao gồm sản phẩm kỹ thuật số, đơn hàng áp dụng mã giảm giá đặc biệt và sản phẩm đã được kích hoạt, hoàn toàn khớp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent bao quát đầy đủ và chính xác các điều kiện không được hoàn tiền theo Ground Truth, đồng thời trình bày rõ ràng, dễ hiểu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu khách hàng gửi yêu cầu hoàn tiền cho một sản phẩm đã mở seal và sản phẩm đó không bị lỗi, yêu cầu của họ sẽ được xử lý như thế nào?",
+      "agent_response": "⚠️ Ngoại lệ không được hoàn tiền: Sản phẩm đã mở seal và không bị lỗi không đủ điều kiện hoàn tiền.\n\nTheo chính sách hoàn tiền, khách hàng chỉ được yêu cầu hoàn tiền nếu sản phẩm bị lỗi do nhà sản xuất, chưa được sử dụng hoặc chưa bị mở seal, và yêu cầu phải được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng [1]. Do đó, nếu khách hàng gửi yêu cầu hoàn tiền cho một sản phẩm đã mở seal và sản phẩm đó không bị lỗi, yêu cầu của họ sẽ không được xử lý và không đủ điều kiện hoàn tiền [1].",
+      "latency": 2.7757258950005053,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7846171892864845,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, nêu rõ lý do tại sao yêu cầu hoàn tiền không được chấp nhận, phù hợp với chính sách hoàn tiền đã đề ra."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, phản ánh đúng nội dung của Ground Truth và cung cấp thêm thông tin bổ trợ hợp lý về chính sách hoàn tiền."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sự cố P1 xảy ra và không có kỹ sư nào phản hồi trong 10 phút, liệu có thể chuyển cấp cho đội ngũ khác không?",
+      "agent_response": "⚠️ Có quy trình escalation tự động cho sự cố P1. Nếu không có phản hồi trong 10 phút, sự cố sẽ tự động escalate lên Senior Engineer [2]. \n\nDo đó, nếu một sự cố P1 xảy ra và không có kỹ sư nào phản hồi trong 10 phút, nó sẽ được chuyển cấp cho đội ngũ khác (Senior Engineer).",
+      "latency": 2.146957223005302,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.8651144254533887,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent gần đúng với Ground Truth, nhưng có sự khác biệt nhỏ về cách diễn đạt. Agent đã nêu rõ rằng sự cố sẽ tự động được chuyển cấp lên Senior Engineer, nhưng không nhấn mạnh rằng quy trình này là theo quy định. Điều này có thể gây hiểu lầm về tính chất tự động của quy trình."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với Ground Truth. Agent đã xác nhận việc chuyển cấp tự động lên Senior Engineer sau 10 phút, phản ánh đúng quy trình được yêu cầu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Một sản phẩm đã bị lỗi do người dùng có được hoàn tiền không nếu được gửi yêu cầu trong vòng 7 ngày lần đầu xác nhận?",
+      "agent_response": "⚠️ Ngoại lệ không được hoàn tiền: Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription) và đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n\nKhách hàng có thể yêu cầu hoàn tiền cho sản phẩm bị lỗi do nhà sản xuất (không phải do người dùng) nếu yêu cầu được gửi trong vòng 7 ngày làm việc kể từ thời điểm xác nhận đơn hàng và đơn hàng chưa được sử dụng hoặc chưa bị mở seal [1].",
+      "latency": 2.6773404220002703,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.6452085027161482,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.25,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác vì không nêu rõ rằng sản phẩm bị lỗi do người dùng không đủ điều kiện hoàn tiền. Thông tin về sản phẩm kỹ thuật số và mã giảm giá không liên quan đến câu hỏi chính."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời trực tiếp và chính xác vào trọng tâm câu hỏi là 'Không' (thông qua việc giải thích rõ chỉ hoàn tiền cho lỗi nhà sản xuất), đồng thời cung cấp thêm các điều kiện loại trừ cần thiết để làm rõ chính sách."
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Mức độ ưu tiên P1 trong quy định SLA được định nghĩa như thế nào?",
+      "agent_response": "Mức độ ưu tiên P1 trong quy định SLA được định nghĩa như sau: \n\nP1 — CRITICAL (Khẩn cấp):\n- Định nghĩa: Sự cố ảnh hưởng toàn bộ hệ thống production, không có workaround.\n- Ví dụ: Database sập, API gateway down, toàn bộ người dùng không thể đăng nhập [1].",
+      "latency": 1.9895819570010644,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.921051386461306,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, bao gồm định nghĩa và ví dụ cụ thể cho mức độ ưu tiên P1 trong quy định SLA."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và bao hàm đầy đủ nội dung của Ground Truth, đồng thời cung cấp thêm các ví dụ minh họa giúp làm rõ định nghĩa."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Thời gian phản hồi ban đầu cho ticket P2 là bao lâu?",
+      "agent_response": "Thời gian phản hồi ban đầu cho ticket P2 là 2 giờ kể từ khi ticket được tạo [1].",
+      "latency": 1.4316984299948672,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8790002286339028,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent chính xác và đầy đủ thông tin cần thiết, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và cung cấp thông tin đầy đủ, rõ ràng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình xử lý sự cố P1 bắt đầu ra sao?",
+      "agent_response": "Quy trình xử lý sự cố P1 bắt đầu như sau:\n\n1. **Tiếp nhận**: On-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút.\n2. **Thông báo**: Gửi thông báo tới Slack #incident-p1 và email incident@company.internal ngay lập tức.\n3. **Triage và phân công**: Lead Engineer phân công engineer xử lý trong 10 phút.\n\nSau đó, engineer sẽ tiếp tục xử lý và cập nhật tiến độ lên ticket mỗi 30 phút cho đến khi sự cố được khắc phục [1].",
+      "latency": 3.2034496769992984,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8716227982527691,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent đã nêu đúng quy trình bắt đầu của P1, bao gồm việc tiếp nhận alert hoặc ticket và xác nhận severity trong 5 phút. Ngoài ra, Agent còn cung cấp thêm thông tin chi tiết về các bước tiếp theo, điều này cho thấy sự hiểu biết sâu sắc về quy trình."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã cung cấp chính xác thông tin từ Ground Truth ở bước đầu tiên và bổ sung thêm các bước quy trình liên quan một cách logic, đầy đủ, không có thông tin sai lệch."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Thời gian khắc phục cho ticket P3 là bao lâu?",
+      "agent_response": "Thời gian khắc phục cho ticket P3 là 5 ngày làm việc [1].",
+      "latency": 1.356160124996677,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8275853710290461,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và có trích dẫn nguồn hợp lệ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Trong trường hợp khẩn cấp P1, một kỹ sư cần quyền Elevated Access (Level 3) để khắc phục sự cố, quy trình này sẽ được điều phối như thế nào theo cả hai tài liệu?",
+      "agent_response": "⚠️ Policy Exceptions: Trong trường hợp khẩn cấp P1, quy trình cấp quyền Elevated Access (Level 3) sẽ không tuân theo quy trình thông thường mà sẽ được thực hiện theo quy trình escalation khẩn cấp.\n\nTrong trường hợp khẩn cấp P1, quy trình điều phối cấp quyền Elevated Access (Level 3) được thực hiện như sau:\n\n1. **Cấp quyền tạm thời**: On-call IT Admin có thể cấp quyền tạm thời (tối đa 24 giờ) sau khi được Tech Lead phê duyệt bằng lời [1].\n2. **Thời gian cấp quyền**: Sau 24 giờ, nếu không có ticket chính thức, quyền sẽ bị thu hồi tự động [1].\n3. **Ghi log**: Tất cả quyền tạm thời phải được ghi log vào hệ thống Security Audit [1].\n\nNgoài ra, trong quy trình xử lý sự cố P1, các bước tiếp theo bao gồm tiếp nhận alert hoặc ticket, thông báo qua Slack và email, triage và phân công engineer xử lý, cập nhật tiến độ lên ticket, và viết incident report sau khi khắc phục [3][4].",
+      "latency": 4.715054949003388,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.8443682851846878,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu đúng quy trình cấp quyền tạm thời và thời gian cấp quyền, nhưng thiếu thông tin về việc cần tạo ticket chính thức trên Jira sau 24 giờ và thực hiện theo quy trình phê duyệt thông thường. Điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng các bước thực hiện cấp quyền tạm thời (24h, phê duyệt bằng lời, ghi log). Tuy nhiên, Agent thiếu thông tin quan trọng từ Ground Truth về việc bắt buộc phải tạo ticket trên Jira (project IT-ACCESS) và quy trình phê duyệt thông thường sau khi hết hạn 24 giờ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài liệu về quyền truy cập hệ thống hiện tại có tên là 'Approval Matrix for System Access' phải không?",
+      "agent_response": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 1.3135934339952655,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn sai, vì nó không chỉ ra được tên tài liệu hiện tại và cũng không xác nhận rằng 'Approval Matrix for System Access' là tên cũ. Điều này cho thấy Agent không có thông tin chính xác về tài liệu."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời là không tìm thấy thông tin thay vì xác nhận thông tin sai. Mặc dù Agent không đưa ra thông tin sai lệch, nhưng đã thất bại trong việc truy xuất dữ liệu có sẵn trong tài liệu để đính chính cho người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Liệu một nhân viên mới vào công ty 15 ngày có thể yêu cầu cấp quyền Admin Access (Level 4) ngay lập tức thông qua Jira project IT-SUPPORT không?",
+      "agent_response": "⚠️ Nhân viên mới vào công ty trong 30 ngày đầu chỉ có thể yêu cầu Level 1 - Read Only access. Để yêu cầu Level 4 - Admin Access, nhân viên cần phải là DevOps, SRE, hoặc IT Admin và phải hoàn thành khóa đào tạo về security policy. Quy trình phê duyệt cho Level 4 yêu cầu sự đồng ý của IT Manager và CISO, và không có quy định nào cho phép nhân viên mới yêu cầu quyền này ngay lập tức [1][2].",
+      "latency": 4.775081634004891,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8013362722330216,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu đúng thông tin về việc nhân viên mới chỉ được cấp Level 1 và yêu cầu đào tạo, nhưng không chính xác khi nói rằng yêu cầu phải gửi qua Jira project IT-SUPPORT, trong khi thực tế là IT-ACCESS. Điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng về việc nhân viên mới không được cấp quyền Admin và nêu rõ các điều kiện cần thiết. Tuy nhiên, Agent thiếu thông tin quan trọng về việc chỉ ra sai sót trong quy trình (sử dụng sai project Jira: IT-ACCESS thay vì IT-SUPPORT)."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một sự cố P1 được resolve sau 3 giờ, tôi có cần phải viết incident report không, và thời hạn của nó là bao lâu?",
+      "agent_response": "⚠️ Bạn cần viết incident report cho sự cố P1 đã được resolve sau 3 giờ. Thời hạn để viết báo cáo là trong vòng 24 giờ sau khi sự cố được khắc phục [1].",
+      "latency": 1.8058949039987056,
+      "ragas": {
+        "faithfulness": 0.5,
+        "relevancy": 0.8665242526555058,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đúng về việc cần viết incident report và thời hạn 24 giờ, nhưng chưa nhấn mạnh rõ rằng quy định này áp dụng bất kể thời gian resolve, miễn là trong hạn mức 4 giờ. Do đó, điểm số không hoàn toàn chính xác."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác yêu cầu về việc bắt buộc viết báo cáo và thời hạn 24 giờ. Mặc dù không nhắc lại chi tiết về hạn mức 4 giờ như Ground Truth, nhưng thông tin cốt lõi đã hoàn toàn khớp và chính xác."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Điều gì sẽ xảy ra nếu IT Manager phê duyệt quyền Admin Access (Level 4) cho một nhân viên mới mà không có sự tham gia của CISO?",
+      "agent_response": "⚠️ Việc IT Manager phê duyệt quyền Admin Access (Level 4) cho một nhân viên mới mà không có sự tham gia của CISO là không tuân thủ quy trình đã được quy định. Theo quy định, quyền Level 4 chỉ được cấp khi có sự phê duyệt của cả IT Manager và CISO [3]. Nếu không có sự tham gia của CISO, việc cấp quyền này sẽ không hợp lệ và có thể dẫn đến các vấn đề về bảo mật và compliance.",
+      "latency": 3.521182181997574,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8934393681875431,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, nêu rõ việc vi phạm quy định và hậu quả có thể xảy ra khi không có sự phê duyệt của CISO. Điều này phù hợp với nội dung trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, phản ánh đúng yêu cầu về quy trình phê duyệt (cần cả IT Manager và CISO) và nêu rõ hậu quả về mặt tuân thủ (compliance) như Ground Truth đã đề cập."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo SLA, escalation cho ticket P2 sẽ diễn ra sau bao nhiêu phút và mức escalation này áp dụng cho loại ticket nào khác không?",
+      "agent_response": "Theo SLA, escalation cho ticket P2 sẽ diễn ra sau 90 phút không có phản hồi [1]. Mức escalation này không áp dụng cho loại ticket nào khác ngoài ticket P2, vì thông tin về escalation chỉ được đề cập cho ticket P1 và P2 trong tài liệu [1].",
+      "latency": 1.824338047998026,
+      "ragas": {
+        "faithfulness": 0.3333333333333333,
+        "relevancy": 0.8700181047449155,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đúng về thời gian escalation cho ticket P2 là 90 phút. Tuy nhiên, Agent không nêu rõ rằng ticket P1 có quy trình escalation riêng là 10 phút, điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác thời gian escalation cho P2 (90 phút) và xác định đúng rằng mức này không áp dụng cho các loại ticket khác, đồng thời giải thích hợp lý dựa trên tài liệu cung cấp."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tôi cần làm gì khi quên mật khẩu đăng nhập?",
+      "agent_response": "Khi bạn quên mật khẩu đăng nhập, bạn có thể thực hiện một trong hai cách sau:\n\n1. Truy cập vào đường link https://sso.company.internal/reset để reset mật khẩu.\n2. Liên hệ với Helpdesk qua số máy nội bộ ext. 9000. Mật khẩu mới sẽ được gửi qua email công ty trong vòng 5 phút [1].",
+      "latency": 1.9659501709975302,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.855624442377236,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, bao gồm cả hai cách để reset mật khẩu và thời gian nhận mật khẩu mới, giống như trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent cung cấp đầy đủ và chính xác các thông tin có trong Ground Truth, bao gồm đường dẫn reset mật khẩu, số điện thoại liên hệ và thời gian nhận mật khẩu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài khoản của tôi sẽ bị khóa sau bao nhiêu lần đăng nhập sai liên tiếp?",
+      "agent_response": "Tài khoản của bạn sẽ bị khóa sau 5 lần đăng nhập sai liên tiếp. Để mở khóa, bạn có thể liên hệ IT Helpdesk hoặc tự reset qua portal SSO [support/helpdesk-faq.md].",
+      "latency": 1.7791958690067986,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.798335569403264,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, bao gồm số lần đăng nhập sai và cách mở khóa tài khoản."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác số lần đăng nhập sai dẫn đến khóa tài khoản (5 lần) theo đúng Ground Truth, đồng thời cung cấp thêm thông tin hữu ích về cách xử lý, giúp tăng giá trị cho người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Công ty sử dụng phần mềm VPN nào?",
+      "agent_response": "Công ty sử dụng phần mềm VPN là Cisco AnyConnect. Bạn có thể tải xuống tại [https://vpn.company.internal/download](https://vpn.company.internal/download) [1].",
+      "latency": 1.6233477810019394,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8423428567390202,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, bao gồm tên phần mềm VPN và đường dẫn tải về giống như trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với thông tin trong Ground Truth, đồng thời cung cấp thêm định dạng trích dẫn nguồn hợp lý."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+      "agent_response": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là 50GB [support/helpdesk-faq.md].",
+      "latency": 1.528087279999454,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8546511152482577,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng, chỉ khác ở cách diễn đạt nhưng không làm thay đổi nội dung thông tin."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và còn cung cấp thêm nguồn tham khảo hữu ích."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi là nhân viên mới và muốn xin nghỉ phép trong ngày onboarding, liệu tôi có thể làm điều đó không?",
+      "agent_response": "⚠️ Policy Exceptions: Nhân viên có thể gửi yêu cầu nghỉ phép muộn hơn trong trường hợp khẩn cấp nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nTheo chính sách nghỉ phép, nhân viên cần gửi yêu cầu nghỉ phép qua hệ thống HR Portal ít nhất 3 ngày làm việc trước ngày nghỉ. Do đó, nếu bạn là nhân viên mới và muốn xin nghỉ phép trong ngày onboarding, bạn sẽ không thể thực hiện điều này theo quy định thông thường. Tuy nhiên, nếu có lý do khẩn cấp, bạn có thể gửi yêu cầu muộn hơn nhưng cần sự đồng ý của Line Manager qua tin nhắn trực tiếp [1].",
+      "latency": 3.1042158419950283,
+      "ragas": {
+        "faithfulness": 0.8333333333333334,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin về chính sách nghỉ phép và khả năng xin nghỉ trong trường hợp khẩn cấp, nhưng không nêu rõ rằng nhân viên mới không thể xin nghỉ phép trong ngày onboarding do chưa hoàn tất thủ tục tuyển dụng, như trong Ground Truth. Điều này dẫn đến sự thiếu chính xác trong câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 3,
+            "reasoning": "Agent trả lời chưa chính xác hoàn toàn so với Ground Truth. Agent tập trung vào quy trình nghỉ phép chung thay vì khẳng định rõ ràng rằng nhân viên mới không thể nghỉ trong ngày onboarding do chưa hoàn tất thủ tục tuyển dụng như Ground Truth yêu cầu."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, tôi có thể chuyển tất cả các ngày phép năm vào năm tiếp theo không?",
+      "agent_response": "⚠️ Chính sách nghỉ phép mới cho phép nhân viên chỉ được chuyển tối đa 5 ngày phép năm chưa sử dụng sang năm tiếp theo. Do đó, bạn không thể chuyển tất cả các ngày phép năm vào năm tiếp theo. [1]",
+      "latency": 1.7680019179970259,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7582661973912005,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, nêu rõ rằng chỉ có tối đa 5 ngày phép năm chưa sử dụng có thể chuyển sang năm tiếp theo, phù hợp với Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác, truyền tải đúng thông tin từ Ground Truth và giải thích rõ ràng lý do tại sao không thể chuyển tất cả ngày phép."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi có hơn 5 năm kinh nghiệm nhưng vẫn chưa gửi yêu cầu nghỉ phép qua HR Portal ít nhất 3 ngày, tôi có thể được chấp nhận không?",
+      "agent_response": "⚠️ Trường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nNếu bạn có hơn 5 năm kinh nghiệm nhưng chưa gửi yêu cầu nghỉ phép qua HR Portal ít nhất 3 ngày, bạn vẫn có thể được chấp nhận nếu bạn có sự đồng ý của Line Manager qua tin nhắn trực tiếp [1].",
+      "latency": 2.19716753699322,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không hoàn toàn chính xác vì nó cho phép gửi yêu cầu muộn hơn trong trường hợp khẩn cấp, trong khi Ground Truth khẳng định rằng yêu cầu nghỉ phép cần phải được gửi ít nhất 3 ngày trước. Điều này dẫn đến sự hiểu lầm về quy định nghỉ phép."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn trái ngược với Ground Truth. Trong khi quy định yêu cầu gửi trước ít nhất 3 ngày làm việc, Agent lại đưa ra thông tin sai lệch rằng có thể được chấp nhận nếu có sự đồng ý của Line Manager."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Nếu tôi không nhận được email phê duyệt nghỉ phép từ Line Manager, tôi có nên tự động coi như đơn của mình bị từ chối không?",
+      "agent_response": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 1.2514777619944653,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không cung cấp thông tin rõ ràng và thiếu sự hướng dẫn cần thiết cho người hỏi. Mặc dù Agent không tìm thấy thông tin, nhưng câu trả lời nên nhấn mạnh rằng không thể tự động coi đơn bị từ chối mà không có sự xác nhận từ Line Manager."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời 'không tìm thấy thông tin' trong khi Ground Truth cung cấp câu trả lời trực tiếp. Agent đã thất bại trong việc truy xuất hoặc suy luận từ dữ liệu có sẵn, dẫn đến việc không hỗ trợ được người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Trong trường hợp nghỉ ốm, tôi có thể không cần thông báo cho Line Manager nếu không nghỉ quá 3 ngày liên tiếp?",
+      "agent_response": "⚠️ Policy Exceptions: Không có.\n\nTheo chính sách nghỉ ốm, nhân viên cần thông báo cho Line Manager trước 9:00 sáng ngày nghỉ. Nếu nghỉ trên 3 ngày liên tiếp, nhân viên cần có giấy tờ y tế từ bệnh viện. Do đó, nếu bạn nghỉ ốm không quá 3 ngày liên tiếp, bạn vẫn cần thông báo cho Line Manager [2].",
+      "latency": 1.8111654780004756,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.7768927459613314,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 0.5,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về việc cần thông báo cho Line Manager, nhưng lại không nhấn mạnh rõ ràng rằng chỉ cần thông báo nếu nghỉ trên 3 ngày liên tiếp, dẫn đến sự hiểu lầm có thể xảy ra."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Câu trả lời của Agent hoàn toàn trái ngược với Ground Truth. Agent khẳng định vẫn cần thông báo cho Line Manager, trong khi Ground Truth xác nhận không cần thông báo nếu nghỉ dưới 3 ngày."
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Nếu tôi đã được cấp laptop muộn hơn ngày onboarding đầu tiên, thì tôi sẽ được cấp laptop trong bao lâu?",
+      "agent_response": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 1.5552055779990042,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không cung cấp thông tin chính xác về thời gian cấp laptop, mặc dù nó thừa nhận thiếu thông tin. Ground Truth rõ ràng nêu rằng sẽ không có laptop sau ngày onboarding đầu tiên nếu không có thông báo từ HR, điều này hoàn toàn trái ngược với câu trả lời của Agent."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Agent trả lời là không tìm thấy thông tin, trong khi Ground Truth đã cung cấp câu trả lời rõ ràng cho tình huống này. Agent đã thất bại trong việc truy xuất hoặc hiểu dữ liệu có sẵn."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Ai là đối tượng áp dụng quy trình cấp phép truy cập theo tài liệu này?",
+      "agent_response": "Đối tượng áp dụng quy trình cấp phép truy cập theo tài liệu này bao gồm tất cả nhân viên, contractor, và third-party vendor [1].",
+      "latency": 1.7424798639985966,
+      "ragas": {
+        "faithfulness": 0.3333333333333333,
+        "relevancy": 0.8720738402248047,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, đồng thời có trích dẫn nguồn tài liệu hỗ trợ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Mất bao lâu để xử lý yêu cầu cấp quyền Level 2?",
+      "agent_response": "Thời gian xử lý yêu cầu cấp quyền Level 2 (Standard Access) là 2 ngày làm việc, bao gồm phê duyệt từ Line Manager và IT Admin [2].",
+      "latency": 3.9097329470023396,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.741960818232498,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ thông tin, khớp với đáp án đúng là 2 ngày làm việc."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác với Ground Truth và cung cấp thêm thông tin ngữ cảnh hữu ích về quy trình phê duyệt."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình yêu cầu cấp quyền bắt đầu như thế nào?",
+      "agent_response": "Quy trình yêu cầu cấp quyền bắt đầu như sau:\n\n1. Nhân viên tạo Access Request ticket trên Jira (project IT-ACCESS).\n2. Line Manager phê duyệt yêu cầu trong 1 ngày làm việc.\n3. IT Admin kiểm tra compliance và cấp quyền.\n4. IT Security review với Level 3 và Level 4.\n5. Nhân viên nhận thông báo qua email khi quyền được cấp [1].",
+      "latency": 6.2699878529965645,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7340569289105151,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 0.5,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chi tiết về quy trình yêu cầu cấp quyền, nhưng chỉ yêu cầu bắt đầu từ việc tạo Access Request ticket là đủ để đạt điểm tối đa. Các bước sau không cần thiết cho câu hỏi."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác bước bắt đầu của quy trình theo Ground Truth. Các thông tin bổ sung phía sau không làm sai lệch nội dung chính mà giúp làm rõ thêm quy trình."
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Điều gì xảy ra với quyền truy cập khi nhân viên nghỉ việc?",
+      "agent_response": "⚠️ Quyền truy cập sẽ được thu hồi ngay trong ngày cuối khi nhân viên nghỉ việc [1].",
+      "latency": 3.5798672789969714,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8384580576035301,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng, thể hiện rõ ràng rằng quyền truy cập sẽ được thu hồi ngay trong ngày cuối khi nhân viên nghỉ việc."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với nội dung của Ground Truth, đồng thời cung cấp thêm thông tin về nguồn tham khảo."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tôi là một nhân viên mới đã làm việc 15 ngày, tôi cần truy cập hệ thống gấp để hoàn thành công việc từ xa vào ngày thứ 3, liệu tôi có được phép làm remote và cấp quyền truy cập Admin không?",
+      "agent_response": "⚠️ Bạn không đủ điều kiện để làm việc từ xa (remote) vì bạn mới làm việc được 15 ngày, trong khi quy định yêu cầu nhân viên phải hoàn thành thời gian thử việc (probation period) để có thể làm remote tối đa 2 ngày/tuần. Hơn nữa, lịch làm việc onsite bắt buộc vào thứ 3 và thứ 5 theo lịch team, do đó bạn không thể làm remote vào ngày thứ 3.\n\nVề quyền truy cập Admin, bạn cũng không đủ điều kiện để được cấp quyền này. Theo quy định, quyền Admin chỉ được cấp cho các vị trí như DevOps, SRE, IT Admin và yêu cầu phải có phê duyệt từ IT Manager và CISO, cùng với việc hoàn thành khóa đào tạo về chính sách bảo mật. Bạn hiện tại chỉ có thể được cấp quyền Level 1 (Read Only) trong 30 ngày đầu làm việc, và cần có sự phê duyệt từ Line Manager [1][2][4].",
+      "latency": 3.8891164189990377,
+      "ragas": {
+        "faithfulness": 0.9,
+        "relevancy": 0.8226416118584247,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và đầy đủ, nêu rõ lý do không được cấp quyền Admin và không đủ điều kiện làm remote, phù hợp với quy định trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác và đầy đủ các yêu cầu của câu hỏi dựa trên Ground Truth. Agent đã giải thích rõ ràng về quy định làm việc từ xa và chính sách cấp quyền truy cập, đồng thời bổ sung thêm các thông tin chi tiết về quy trình phê duyệt và lịch làm việc onsite, giúp người dùng hiểu rõ lý do bị từ chối."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Tài liệu 'Approval Matrix for System Access' hiện nay đang có hiệu lực như thế nào và nó quy định mức Level 4 khác gì so với quy trình hiện tại?",
+      "agent_response": "⚠️ Không có thông tin cụ thể về hiệu lực hiện tại của tài liệu 'Approval Matrix for System Access' trong các nguồn đã cung cấp.\n\nTuy nhiên, theo tài liệu, Level 4 - Admin Access áp dụng cho DevOps, SRE, IT Admin, với phê duyệt từ IT Manager và CISO, thời gian xử lý là 5 ngày làm việc và yêu cầu thêm training bắt buộc về security policy. So với quy trình hiện tại, Level 4 có mức độ phê duyệt cao hơn và yêu cầu đào tạo bổ sung về chính sách bảo mật, điều này có thể không áp dụng cho các cấp độ thấp hơn như Level 1, 2, và 3 [1].",
+      "latency": 2.7159307559995796,
+      "ragas": {
+        "faithfulness": 0.625,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác về hiệu lực của tài liệu và sự khác biệt giữa Level 4 và quy trình hiện tại. Agent đã không nhận ra rằng 'Approval Matrix for System Access' là tên gọi cũ của 'ACCESS CONTROL SOP' và không có sự khác biệt về quy trình, dẫn đến thông tin sai lệch."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent đã thất bại trong việc xác định mối quan hệ giữa 'Approval Matrix for System Access' và 'ACCESS CONTROL SOP' (tên gọi mới). Thay vì nhận ra đây là cùng một tài liệu, Agent lại suy diễn sai lệch về sự khác biệt quy trình giữa Level 4 và các cấp độ khác, dẫn đến thông tin không chính xác so với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Những trường hợp nào mà một nhân viên được phép truy cập vào hệ thống mà không cần tuân thủ quy trình xin quyền Level 1-4 trên Jira?",
+      "agent_response": "⚠️ Các trường hợp mà một nhân viên được phép truy cập vào hệ thống mà không cần tuân thủ quy trình xin quyền Level 1-4 trên Jira bao gồm:\n\n1. **Trường hợp khẩn cấp**: Nhân viên có thể được cấp quyền tạm thời trong trường hợp khẩn cấp (P1 incident) để khắc phục sự cố. Quy trình này yêu cầu sự phê duyệt bằng lời từ Tech Lead và quyền tạm thời chỉ có hiệu lực tối đa 24 giờ. Sau 24 giờ, phải có ticket chính thức hoặc quyền sẽ bị thu hồi tự động [4]. \n\nTóm lại, trong tình huống khẩn cấp, nhân viên có thể truy cập mà không cần tuân thủ quy trình thông thường.",
+      "latency": 3.4158643880000454,
+      "ragas": {
+        "faithfulness": 0.75,
+        "relevancy": 0.9182047233260208,
+        "retrieval": {
+          "hit_rate": 0.0,
+          "mrr": 0.25
+        }
+      },
+      "judge": {
+        "final_score": 4.0,
+        "agreement_rate": 0.5,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent chỉ đề cập đến trường hợp khẩn cấp mà không nêu rõ rằng đây là trường hợp duy nhất được phép bỏ qua quy trình. Mặc dù có thông tin về việc phê duyệt từ Tech Lead và thời gian hiệu lực, nhưng thiếu thông tin về việc không có trường hợp nào khác được phép bỏ qua quy trình Jira, dẫn đến điểm số không cao."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã xác định chính xác trường hợp ngoại lệ duy nhất là sự cố P1, nêu đúng điều kiện phê duyệt từ Tech Lead và thời hạn 24 giờ, đồng thời khẳng định không có trường hợp nào khác được phép bỏ qua quy trình."
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Là một DevOps, tôi có thể yêu cầu IT Manager cấp quyền Admin cho tôi thông qua tin nhắn trực tiếp để xử lý công việc từ xa khi đang nghỉ phép không?",
+      "agent_response": "⚠️ Policy Exceptions: Trong trường hợp khẩn cấp, có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.\n\nTheo quy trình hiện tại, việc cấp quyền Admin không thể thực hiện thông qua tin nhắn trực tiếp mà cần phải tuân theo quy trình chính thức. Để yêu cầu quyền Admin, bạn cần tạo một Access Request ticket trên Jira và chờ phê duyệt từ Line Manager, IT Admin và IT Security [1][2][3]. Tuy nhiên, trong trường hợp khẩn cấp, nếu bạn có sự đồng ý của Line Manager qua tin nhắn trực tiếp, có thể có khả năng cấp quyền tạm thời trong tối đa 24 giờ [1][4].",
+      "latency": 3.7112590359975,
+      "ragas": {
+        "faithfulness": 0.875,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      },
+      "judge": {
+        "final_score": 2.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent đề cập đến quy trình yêu cầu quyền Admin và có nhắc đến trường hợp khẩn cấp, nhưng không chính xác hoàn toàn về yêu cầu phê duyệt từ IT Manager và CISO, cũng như việc đào tạo security policy. Điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 2,
+            "reasoning": "Agent trả lời sai trọng tâm. Ground Truth khẳng định việc cấp quyền Admin không được thực hiện qua tin nhắn, trong khi Agent lại gợi ý có thể cấp quyền tạm thời qua tin nhắn trong trường hợp khẩn cấp. Agent cũng bỏ lỡ các yêu cầu bắt buộc như đào tạo security policy và phê duyệt từ CISO."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Theo chính sách cập nhật năm 2026, nhân viên có thể chuyển tối đa 10 ngày phép năm chưa dùng sang năm tiếp theo nếu làm việc trên 5 năm kinh nghiệm không?",
+      "agent_response": "⚠️ Chính sách cập nhật năm 2026 quy định rằng nhân viên chỉ có thể chuyển tối đa 5 ngày phép năm chưa dùng sang năm tiếp theo, không phải 10 ngày. Điều này áp dụng cho tất cả nhân viên, bao gồm cả những người có trên 5 năm kinh nghiệm [1].",
+      "latency": 1.6951685559979524,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8284734908466868,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác với thông tin trong Ground Truth, nêu rõ rằng chỉ được chuyển tối đa 5 ngày phép năm chưa dùng, không phân biệt thâm niên công tác."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác thông tin cốt lõi là tối đa 5 ngày (thay vì 10) và làm rõ rằng quy định này áp dụng cho tất cả nhân viên, khớp hoàn toàn với Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu tôi là SRE và đã hoàn thành 5 ngày đào tạo security policy, tôi có thể tự cấp quyền Admin cho mình mà không cần đợi IT Manager duyệt không?",
+      "agent_response": "⚠️ Policy Exceptions: Không có ngoại lệ nào cho việc tự cấp quyền Admin.\n\nTheo quy định, để được cấp quyền Admin Access (Level 4), nhân viên phải được IT Manager và CISO phê duyệt. Việc này không thể thực hiện tự cấp quyền mà không có sự phê duyệt từ IT Manager, ngay cả khi bạn đã hoàn thành 5 ngày đào tạo về security policy [2]. Do đó, bạn không thể tự cấp quyền Admin cho mình mà không cần đợi IT Manager duyệt.",
+      "latency": 2.3098887610030943,
+      "ragas": {
+        "faithfulness": 0.6,
+        "relevancy": 0.8037839524587357,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và phù hợp với Ground Truth. Nó nêu rõ rằng việc tự cấp quyền Admin không được phép và cần có sự phê duyệt từ IT Manager và CISO, đồng thời nhấn mạnh rằng việc hoàn thành đào tạo chỉ là điều kiện bổ sung, không thay thế quy trình phê duyệt."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent trả lời chính xác câu hỏi, khẳng định rõ ràng không được tự cấp quyền và giải thích đúng quy trình phê duyệt (cần IT Manager và CISO), đồng thời làm rõ việc đào tạo chỉ là điều kiện bổ sung."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nhân viên có trên 5 năm kinh nghiệm được hưởng bao nhiêu ngày nghỉ phép năm?",
+      "agent_response": "Nhân viên có trên 5 năm kinh nghiệm được hưởng 18 ngày nghỉ phép năm [1].",
+      "latency": 1.0948450840005535,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.9311592436252504,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với đáp án đúng trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với Ground Truth về nội dung. Việc thêm trích dẫn [1] không làm sai lệch thông tin mà còn tăng tính xác thực."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Quy trình xin nghỉ phép thông thường cần thực hiện trước bao lâu?",
+      "agent_response": "Quy trình xin nghỉ phép thông thường cần thực hiện ít nhất 3 ngày làm việc trước ngày nghỉ. Nhân viên phải gửi yêu cầu nghỉ phép qua hệ thống HR Portal và Line Manager sẽ phê duyệt hoặc từ chối trong vòng 1 ngày làm việc sau đó [1].",
+      "latency": 1.7575982499984093,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7909635670326766,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về thời gian cần thực hiện quy trình xin nghỉ phép, nhưng có thêm thông tin về việc phê duyệt của Line Manager, điều này không cần thiết cho câu hỏi. Tuy nhiên, thông tin chính vẫn đúng và đầy đủ."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác thông tin về thời hạn 3 ngày làm việc theo Ground Truth, đồng thời cung cấp thêm thông tin bổ sung về quy trình phê duyệt giúp câu trả lời đầy đủ và hữu ích hơn."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Hệ số lương làm thêm giờ vào ngày lễ là bao nhiêu?",
+      "agent_response": "Hệ số lương làm thêm giờ vào ngày lễ là 300% lương giờ tiêu chuẩn [hr/leave-policy-2026.pdf].",
+      "latency": 1.2504126710045966,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.7580836464797879,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, chỉ khác ở cách diễn đạt nhưng không làm thay đổi nội dung thông tin."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác so với Ground Truth và còn cung cấp thêm nguồn tham chiếu tài liệu, giúp tăng độ tin cậy."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Những ngày nào trong tuần là ngày onsite bắt buộc đối với nhân viên làm việc từ xa?",
+      "agent_response": "Ngày onsite bắt buộc đối với nhân viên làm việc từ xa là Thứ 3 và Thứ 5 theo lịch team [1].",
+      "latency": 1.3677177589997882,
+      "ragas": {
+        "faithfulness": 0.3333333333333333,
+        "relevancy": 0.9440542475419035,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 5.0,
+        "agreement_rate": 1.0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và trùng khớp với Ground Truth, không có sai sót nào."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và khớp với thông tin trong Ground Truth, đồng thời có trích dẫn nguồn hỗ trợ."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một nhân viên đã nghỉ phép ốm và muốn yêu cầu hoàn tiền cho đơn hàng của họ, liệu họ có thể nhận trợ cấp nào từ chính sách nghỉ phép và hoàn tiền không?",
+      "agent_response": "⚠️ Không có thông tin cụ thể về việc nhân viên nghỉ phép ốm có thể nhận trợ cấp nào từ chính sách nghỉ phép và hoàn tiền.\n\nTheo chính sách hoàn tiền, khách hàng có quyền yêu cầu hoàn tiền nếu đáp ứng đủ các điều kiện như sản phẩm bị lỗi do nhà sản xuất, yêu cầu được gửi trong vòng 7 ngày làm việc và đơn hàng chưa được sử dụng hoặc chưa bị mở seal [2][5]. Tuy nhiên, không có thông tin nào trong tài liệu nội bộ đề cập đến việc nhân viên nghỉ phép ốm có thể nhận trợ cấp hoặc hoàn tiền cho đơn hàng của họ.\n\nTôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 2.6710316159951617,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 4.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu rõ rằng không có thông tin cụ thể về việc nhân viên nghỉ phép ốm có thể nhận trợ cấp nào và đã đề cập đến các điều kiện hoàn tiền. Tuy nhiên, câu trả lời chưa hoàn toàn chính xác khi không nhấn mạnh rõ ràng rằng yêu cầu hoàn tiền không liên quan đến nghỉ phép, điều này là điểm chính trong Ground Truth."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 5,
+            "reasoning": "Agent đã trả lời chính xác dựa trên tài liệu được cung cấp, khẳng định không có mối liên hệ giữa việc nghỉ phép ốm và chính sách hoàn tiền. Đồng thời, Agent cũng nêu rõ các điều kiện hoàn tiền thực tế, khớp với nội dung của Ground Truth."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Trường hợp nào theo chính sách hoàn tiền phiên bản 3 sẽ không được áp dụng trong phiên bản 4?",
+      "agent_response": "⚠️ Các trường hợp không được áp dụng hoàn tiền trong phiên bản 4 so với phiên bản 3 bao gồm:\n\n1. Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n2. Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n3. Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản.\n\nNhững điều này được nêu rõ trong chính sách hoàn tiền phiên bản 4 [3].",
+      "latency": 2.164724189999106,
+      "ragas": {
+        "faithfulness": 0.0,
+        "relevancy": 0.9004263245827265,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 2.0,
+        "agreement_rate": 0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent đã nêu đúng hai trường hợp không được áp dụng hoàn tiền trong phiên bản 4 so với phiên bản 3, nhưng đã thêm một trường hợp không cần thiết (sản phẩm đã được kích hoạt hoặc đăng ký tài khoản), điều này làm giảm độ chính xác của câu trả lời."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 0,
+            "reasoning": "Error GEMINI: litellm.Timeout: Connection timed out. Timeout passed=600.0, time taken=600.002 seconds"
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Theo chính sách hoàn tiền, trường hợp nào không đủ điều kiện hoàn tiền mà người tiêu dùng có thể gặp phải?",
+      "agent_response": "⚠️ Các trường hợp không đủ điều kiện hoàn tiền bao gồm:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).\n- Đơn hàng đã áp dụng mã giảm giá đặc biệt theo chương trình khuyến mãi Flash Sale.\n- Sản phẩm đã được kích hoạt hoặc đăng ký tài khoản [1][2].",
+      "latency": 1.8424776660031057,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.828303688124875,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 0.5
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 4,
+            "reasoning": "Câu trả lời của Agent cung cấp thông tin chính xác về một trường hợp không đủ điều kiện hoàn tiền (sản phẩm đã được kích hoạt hoặc đăng ký tài khoản) và bổ sung thêm một số trường hợp khác. Tuy nhiên, không có thông tin nào về việc các trường hợp khác có thể không đủ điều kiện hoàn tiền, nên điểm số không đạt tối đa."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 3,
+            "reasoning": "Agent đã trả lời đúng ý chính từ Ground Truth nhưng lại đưa thêm các thông tin bổ sung (hàng kỹ thuật số, mã giảm giá) không có trong dữ liệu gốc, dẫn đến nguy cơ cung cấp thông tin sai lệch nếu các điều kiện đó không thực sự tồn tại trong chính sách."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Nếu một nhân viên làm việc từ xa mà không bật camera trong cuộc họp, họ có thể bị ảnh hưởng như thế nào đến quyền lợi nghỉ phép của họ?",
+      "agent_response": "⚠️ Không có thông tin cụ thể về việc nhân viên làm việc từ xa mà không bật camera trong cuộc họp sẽ ảnh hưởng đến quyền lợi nghỉ phép của họ. Tuy nhiên, theo chính sách, việc bật camera trong các cuộc họp team là yêu cầu kỹ thuật bắt buộc khi làm việc từ xa [1]. Nếu không tuân thủ yêu cầu này, có thể dẫn đến các vấn đề về tuân thủ quy định công ty, nhưng không có thông tin rõ ràng về việc ảnh hưởng đến quyền lợi nghỉ phép. \n\nTôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 2.8388153100022464,
+      "ragas": {
+        "faithfulness": 0.8,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 3.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 3,
+            "reasoning": "Câu trả lời của Agent không hoàn toàn chính xác vì nó không đề cập đến việc không có ảnh hưởng đến quyền lợi nghỉ phép, nhưng lại nhấn mạnh về việc có thể bị phản hồi tiêu cực từ Line Manager. Điều này cho thấy Agent đã hiểu một phần câu hỏi nhưng chưa đầy đủ."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 4,
+            "reasoning": "Agent trả lời đúng trọng tâm là không có ảnh hưởng đến quyền lợi nghỉ phép. Tuy nhiên, Agent hơi thận trọng quá mức khi nói 'không có thông tin rõ ràng' thay vì khẳng định trực tiếp như Ground Truth, và thiếu thông tin về việc có thể bị phản hồi tiêu cực từ Line Manager."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "pass"
+    },
+    {
+      "test_case": "Theo chính sách nghỉ phép, mỗi nhân viên đều có 12 ngày nghỉ phép năm, vì vậy họ có thể chuyển nhượng tối đa 10 ngày sang năm sau không?",
+      "agent_response": "⚠️ Chính sách nghỉ phép quy định rằng tối đa 5 ngày phép năm chưa dùng được chuyển sang năm tiếp theo, không phải 10 ngày như câu hỏi đề cập [1].",
+      "latency": 2.1426969439999084,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.8001232600128177,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 2.5,
+        "agreement_rate": 0,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 5,
+            "reasoning": "Câu trả lời của Agent hoàn toàn chính xác và nêu rõ thông tin sai lệch trong câu hỏi, đồng thời cung cấp thông tin đúng về số ngày phép có thể chuyển nhượng."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 0,
+            "reasoning": "Error GEMINI: litellm.Timeout: Connection timed out. Timeout passed=600.0, time taken=600.003 seconds"
+          }
+        },
+        "status": "conflict"
+      },
+      "status": "fail"
+    },
+    {
+      "test_case": "Nếu nhân viên có 15 ngày nghỉ phép hàng năm và đã nghỉ hết tất cả các ngày, họ có thể tiếp tục làm việc từ xa trong khi không còn ngày nghỉ, đúng không?",
+      "agent_response": "⚠️ Không có thông tin cụ thể nào trong tài liệu nội bộ về việc nhân viên có thể làm việc từ xa khi đã hết ngày nghỉ phép. \n\nTuy nhiên, theo chính sách nghỉ phép, nhân viên có 15 ngày nghỉ phép hàng năm và nếu đã sử dụng hết số ngày này, họ sẽ không còn ngày nghỉ để sử dụng. Do đó, việc làm việc từ xa trong tình huống này không được đề cập rõ ràng trong tài liệu. \n\nTôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+      "latency": 2.6331666839978425,
+      "ragas": {
+        "faithfulness": 1.0,
+        "relevancy": 0.0,
+        "retrieval": {
+          "hit_rate": 1.0,
+          "mrr": 1.0
+        }
+      },
+      "judge": {
+        "final_score": 1.5,
+        "agreement_rate": 0.75,
+        "individual_results": {
+          "gpt-4o-mini": {
+            "score": 2,
+            "reasoning": "Câu trả lời của Agent không chính xác vì đã bỏ qua thông tin quan trọng về việc nhân viên có thể làm việc từ xa với sự phê duyệt từ Team Lead. Mặc dù Agent đã nêu rõ không có thông tin trong tài liệu, nhưng vẫn cần phải cung cấp thông tin chính xác hơn về khả năng làm việc từ xa trong tình huống này."
+          },
+          "gemini-3.1-flash-lite-preview": {
+            "score": 1,
+            "reasoning": "Agent trả lời sai hoàn toàn so với Ground Truth. Thay vì xác nhận khả năng làm việc từ xa khi được phê duyệt, Agent lại khẳng định không có thông tin và không đưa ra được giải pháp cho người dùng."
+          }
+        },
+        "status": "consensus"
+      },
+      "status": "fail"
+    }
+  ]
+}
