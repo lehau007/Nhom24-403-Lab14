@@ -7,25 +7,6 @@ from agent.main_agent import MainAgent
 from engine.llm_judge import LLMJudge
 from engine.retrieval_eval import RetrievalEvaluator
 
-# Real evaluator wrapping our logic
-class ExpertEvaluator:
-    def __init__(self):
-        self.evaluator = RetrievalEvaluator()
-
-    async def score(self, case, resp): 
-        # Integration logic: extract ids from case and response
-        expected_ids = case.get("expected_retrieval_ids", [])
-        retrieved_ids = resp.get("metadata", {}).get("sources", []) # Simplified for now
-        
-        hit_rate = self.evaluator.calculate_hit_rate(expected_ids, retrieved_ids)
-        mrr = self.evaluator.calculate_mrr(expected_ids, retrieved_ids)
-        
-        return {
-            "faithfulness": 0.9, # Mock for now
-            "relevancy": 0.8,    # Mock for now
-            "retrieval": {"hit_rate": hit_rate, "mrr": mrr}
-        }
-
 async def run_benchmark_with_results(agent_version: str):
     print(f"🚀 Khởi động Benchmark cho {agent_version}...")
 
@@ -42,7 +23,7 @@ async def run_benchmark_with_results(agent_version: str):
 
     # Initialize with the two models requested for Sprint 1
     judge = LLMJudge() 
-    runner = BenchmarkRunner(MainAgent(), ExpertEvaluator(), judge)
+    runner = BenchmarkRunner(MainAgent(), RetrievalEvaluator(), judge)
     results = await runner.run_all(dataset)
 
     total = len(results)
