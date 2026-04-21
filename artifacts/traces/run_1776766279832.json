@@ -1,0 +1,108 @@
+{
+  "task": "Công ty sử dụng phần mềm VPN nào?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "Q: Phần mềm VPN nào công ty dùng?\nA: Công ty sử dụng Cisco AnyConnect. Download tại https://vpn.company.internal/download.\n\nQ: Tôi bị mất kết nối VPN liên tục, phải làm gì?\nA: Kiểm tra kết nối Internet trước. Nếu vẫn lỗi, tạo ticket P3 với log file VPN đính kèm.\n\nQ: VPN có giới hạn số thiết bị không?\nA: Mỗi tài khoản được kết nối VPN trên tối đa 2 thiết bị cùng lúc.",
+      "source": "support/helpdesk-faq.md",
+      "score": 0.7584,
+      "metadata": {
+        "access": "internal",
+        "effective_date": "2026-01-20",
+        "source": "support/helpdesk-faq.md",
+        "section": "Section 2: VPN và kết nối từ xa",
+        "department": "IT"
+      },
+      "id": "it_helpdesk_faq_1"
+    },
+    {
+      "text": "Q: Tôi cần cài phần mềm mới, phải làm gì?\nA: Gửi yêu cầu qua Jira project IT-SOFTWARE. Line Manager phải phê duyệt trước khi IT cài đặt.\n\nQ: Ai chịu trách nhiệm gia hạn license phần mềm?\nA: IT Procurement team quản lý tất cả license. Nhắc nhở sẽ được gửi 30 ngày trước khi hết hạn.",
+      "source": "support/helpdesk-faq.md",
+      "score": 0.6397,
+      "metadata": {
+        "effective_date": "2026-01-20",
+        "department": "IT",
+        "access": "internal",
+        "section": "Section 3: Phần mềm và license",
+        "source": "support/helpdesk-faq.md"
+      },
+      "id": "it_helpdesk_faq_2"
+    },
+    {
+      "text": "4.1 Điều kiện remote:\n- Nhân viên sau probation period có thể làm remote tối đa 2 ngày/tuần.\n- Team Lead phải phê duyệt lịch remote qua HR Portal.\n- Ngày onsite bắt buộc: Thứ 3 và Thứ 5 theo lịch team.\n\n4.2 Yêu cầu kỹ thuật khi remote:\n- Kết nối VPN bắt buộc khi làm việc với hệ thống nội bộ.\n- Camera bật trong các cuộc họp team.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.635,
+      "metadata": {
+        "access": "internal",
+        "source": "hr/leave-policy-2026.pdf",
+        "section": "Phần 4: Remote work policy",
+        "effective_date": "2026-01-01",
+        "department": "HR"
+      },
+      "id": "hr_leave_policy_3"
+    }
+  ],
+  "retrieved_sources": [
+    "support/helpdesk-faq.md",
+    "hr/leave-policy-2026.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Công ty sử dụng phần mềm VPN là Cisco AnyConnect. Bạn có thể tải phần mềm này tại https://vpn.company.internal/download [1].",
+  "sources": [
+    "support/helpdesk-faq.md",
+    "hr/leave-policy-2026.pdf"
+  ],
+  "confidence": 0.68,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.68)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Công ty sử dụng phần mềm VPN nào?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 124,
+        "confidence": 0.68,
+        "sources_count": 2
+      },
+      "timestamp": "2026-04-21T10:11:21.237990+00:00"
+    }
+  ],
+  "run_id": "run_1776766279832",
+  "timestamp": "2026-04-21T10:11:19.832558+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

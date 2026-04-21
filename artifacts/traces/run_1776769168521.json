@@ -1,0 +1,62 @@
+{
+  "task": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [],
+  "retrieved_sources": [],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+  "sources": [],
+  "confidence": 0.2,
+  "history": [
+    "[retrieval_worker] ERROR: Collection expecting embedding with dimension of 3072, got 1536",
+    "[synthesis_worker] synthesis complete (conf=0.2)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+        "chunks_count": 0,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 77,
+        "confidence": 0.2,
+        "sources_count": 0
+      },
+      "timestamp": "2026-04-21T10:59:29.693414+00:00"
+    }
+  ],
+  "run_id": "run_1776769168521",
+  "timestamp": "2026-04-21T10:59:28.521615+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

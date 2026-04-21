@@ -1,0 +1,108 @@
+{
+  "task": "Tài khoản của tôi sẽ bị khóa sau bao nhiêu lần đăng nhập sai liên tiếp?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "Q: Tôi quên mật khẩu, phải làm gì?\nA: Truy cập https://sso.company.internal/reset hoặc liên hệ Helpdesk qua ext. 9000. Mật khẩu mới sẽ được gửi qua email công ty trong vòng 5 phút.\n\nQ: Tài khoản bị khóa sau bao nhiêu lần đăng nhập sai?\nA: Tài khoản bị khóa sau 5 lần đăng nhập sai liên tiếp. Để mở khóa, liên hệ IT Helpdesk hoặc tự reset qua portal SSO.\n\nQ: Mật khẩu cần thay đổi định kỳ không?\nA: Có. Mật khẩu phải được thay đổi mỗi 90 ngày. Hệ thống sẽ nhắc nhở 7 ngày trước khi hết hạn.",
+      "source": "support/helpdesk-faq.md",
+      "score": 0.7282,
+      "metadata": {
+        "effective_date": "2026-01-20",
+        "access": "internal",
+        "department": "IT",
+        "section": "Section 1: Tài khoản và mật khẩu",
+        "source": "support/helpdesk-faq.md"
+      },
+      "id": "it_helpdesk_faq_0"
+    },
+    {
+      "text": "Q: Hộp thư đến đầy, phải làm gì?\nA: Xóa email cũ hoặc yêu cầu tăng dung lượng qua ticket IT-ACCESS. Dung lượng tiêu chuẩn là 50GB.\n\nQ: Tôi không nhận được email từ bên ngoài?\nA: Kiểm tra thư mục Spam trước. Nếu vẫn không có, tạo ticket P2 kèm địa chỉ email gửi và thời gian gửi.",
+      "source": "support/helpdesk-faq.md",
+      "score": 0.6028,
+      "metadata": {
+        "department": "IT",
+        "source": "support/helpdesk-faq.md",
+        "section": "Section 5: Email và lịch",
+        "effective_date": "2026-01-20",
+        "access": "internal"
+      },
+      "id": "it_helpdesk_faq_4"
+    },
+    {
+      "text": "Bước 1: Nhân viên tạo Access Request ticket trên Jira (project IT-ACCESS).\nBước 2: Line Manager phê duyệt yêu cầu trong 1 ngày làm việc.\nBước 3: IT Admin kiểm tra compliance và cấp quyền.\nBước 4: IT Security review với Level 3 và Level 4.\nBước 5: Nhân viên nhận thông báo qua email khi quyền được cấp.",
+      "source": "it/access-control-sop.md",
+      "score": 0.5888,
+      "metadata": {
+        "access": "internal",
+        "source": "it/access-control-sop.md",
+        "effective_date": "2026-01-01",
+        "department": "IT Security",
+        "section": "Section 3: Quy trình yêu cầu cấp quyền"
+      },
+      "id": "access_control_sop_2"
+    }
+  ],
+  "retrieved_sources": [
+    "it/access-control-sop.md",
+    "support/helpdesk-faq.md"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Tài khoản của bạn sẽ bị khóa sau 5 lần đăng nhập sai liên tiếp. Để mở khóa, bạn có thể liên hệ IT Helpdesk hoặc tự reset qua portal SSO [support/helpdesk-faq.md].",
+  "sources": [
+    "it/access-control-sop.md",
+    "support/helpdesk-faq.md"
+  ],
+  "confidence": 0.64,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.64)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Tài khoản của tôi sẽ bị khóa sau bao nhiêu lần đăng nhập sai liên tiếp?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 162,
+        "confidence": 0.64,
+        "sources_count": 2
+      },
+      "timestamp": "2026-04-21T10:46:38.563870+00:00"
+    }
+  ],
+  "run_id": "run_1776768396829",
+  "timestamp": "2026-04-21T10:46:36.829294+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

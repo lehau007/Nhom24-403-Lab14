@@ -1,0 +1,108 @@
+{
+  "task": "Những ngày nào trong tuần là ngày onsite bắt buộc đối với nhân viên làm việc từ xa?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "4.1 Điều kiện remote:\n- Nhân viên sau probation period có thể làm remote tối đa 2 ngày/tuần.\n- Team Lead phải phê duyệt lịch remote qua HR Portal.\n- Ngày onsite bắt buộc: Thứ 3 và Thứ 5 theo lịch team.\n\n4.2 Yêu cầu kỹ thuật khi remote:\n- Kết nối VPN bắt buộc khi làm việc với hệ thống nội bộ.\n- Camera bật trong các cuộc họp team.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7604,
+      "metadata": {
+        "source": "hr/leave-policy-2026.pdf",
+        "access": "internal",
+        "effective_date": "2026-01-01",
+        "section": "Phần 4: Remote work policy",
+        "department": "HR"
+      },
+      "id": "hr_leave_policy_3"
+    },
+    {
+      "text": "Email: hr@company.internal\nHotline: ext. 2000\nHR Portal: https://hr.company.internal\nGiờ làm việc: Thứ 2 - Thứ 6, 8:30 - 17:30",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.6501,
+      "metadata": {
+        "section": "Phần 5: Liên hệ HR",
+        "department": "HR",
+        "effective_date": "2026-01-01",
+        "source": "hr/leave-policy-2026.pdf",
+        "access": "internal"
+      },
+      "id": "hr_leave_policy_4"
+    },
+    {
+      "text": "Email: cs-refund@company.internal\nHotline nội bộ: ext. 1234\nGiờ làm việc: Thứ 2 - Thứ 6, 8:00 - 17:30",
+      "source": "policy/refund-v4.pdf",
+      "score": 0.6444,
+      "metadata": {
+        "section": "Điều 6: Liên hệ và hỗ trợ",
+        "department": "CS",
+        "effective_date": "2026-02-01",
+        "access": "internal",
+        "source": "policy/refund-v4.pdf"
+      },
+      "id": "policy_refund_v4_5"
+    }
+  ],
+  "retrieved_sources": [
+    "hr/leave-policy-2026.pdf",
+    "policy/refund-v4.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Ngày onsite bắt buộc đối với nhân viên làm việc từ xa là Thứ 3 và Thứ 5 theo lịch team [1].",
+  "sources": [
+    "hr/leave-policy-2026.pdf",
+    "policy/refund-v4.pdf"
+  ],
+  "confidence": 0.68,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.68)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Những ngày nào trong tuần là ngày onsite bắt buộc đối với nhân viên làm việc từ xa?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 91,
+        "confidence": 0.68,
+        "sources_count": 2
+      },
+      "timestamp": "2026-04-21T10:49:17.488899+00:00"
+    }
+  ],
+  "run_id": "run_1776768555752",
+  "timestamp": "2026-04-21T10:49:15.752774+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

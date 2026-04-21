@@ -1,0 +1,108 @@
+{
+  "task": "Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, tôi có thể chuyển tất cả các ngày phép năm vào năm tiếp theo không?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "1.1 Nghỉ phép năm (Annual Leave):\n- Số ngày: 12 ngày/năm cho nhân viên dưới 3 năm kinh nghiệm.\n- Số ngày: 15 ngày/năm cho nhân viên từ 3-5 năm kinh nghiệm.\n- Số ngày: 18 ngày/năm cho nhân viên trên 5 năm kinh nghiệm.\n- Chuyển năm sau: Tối đa 5 ngày phép năm chưa dùng được chuyển sang năm tiếp theo.\n\n1.2 Nghỉ ốm (Sick Leave):\n- Số ngày: 10 ngày/năm có trả lương.\n- Yêu cầu: Thông báo cho Line Manager trước 9:00 sáng ngày nghỉ.\n- Nếu nghỉ trên 3 ngày liên tiếp: Cần giấy tờ y tế từ bệnh viện.\n\n1.3 Nghỉ thai sản:\n- Nghỉ sinh con: 6 tháng theo quy định Luật Lao động.\n- Nghỉ nuôi con nhỏ: 1 tiếng/ngày trong 12 tháng đầu sau sinh.\n\n1.4 Nghỉ lễ tết:\nTheo lịch nghỉ lễ quốc gia do HR công bố hàng năm vào tháng 12.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7242,
+      "metadata": {
+        "section": "Phần 1: Các loại nghỉ phép",
+        "source": "hr/leave-policy-2026.pdf",
+        "effective_date": "2026-01-01",
+        "access": "internal",
+        "department": "HR"
+      },
+      "id": "hr_leave_policy_0"
+    },
+    {
+      "text": "Chính sách này áp dụng cho tất cả các đơn hàng được đặt trên hệ thống nội bộ kể từ ngày 01/02/2026.\nCác đơn hàng đặt trước ngày có hiệu lực sẽ áp dụng theo chính sách hoàn tiền phiên bản 3.",
+      "source": "policy/refund-v4.pdf",
+      "score": 0.6741,
+      "metadata": {
+        "department": "CS",
+        "effective_date": "2026-02-01",
+        "source": "policy/refund-v4.pdf",
+        "section": "Điều 1: Phạm vi áp dụng",
+        "access": "internal"
+      },
+      "id": "policy_refund_v4_0"
+    },
+    {
+      "text": "Bước 1: Nhân viên gửi yêu cầu nghỉ phép qua hệ thống HR Portal (https://hr.company.internal) ít nhất 3 ngày làm việc trước ngày nghỉ.\nBước 2: Line Manager phê duyệt hoặc từ chối trong vòng 1 ngày làm việc.\nBước 3: Nhân viên nhận thông báo qua email sau khi được phê duyệt.\n\nTrường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.6738,
+      "metadata": {
+        "access": "internal",
+        "section": "Phần 2: Quy trình xin nghỉ phép",
+        "source": "hr/leave-policy-2026.pdf",
+        "department": "HR",
+        "effective_date": "2026-01-01"
+      },
+      "id": "hr_leave_policy_1"
+    }
+  ],
+  "retrieved_sources": [
+    "hr/leave-policy-2026.pdf",
+    "policy/refund-v4.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "⚠️ Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, bạn chỉ có thể chuyển tối đa 5 ngày phép năm chưa sử dụng sang năm tiếp theo. Do đó, bạn không thể chuyển tất cả các ngày phép năm vào năm tiếp theo [1].",
+  "sources": [
+    "hr/leave-policy-2026.pdf",
+    "policy/refund-v4.pdf"
+  ],
+  "confidence": 0.69,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.69)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Theo chính sách nghỉ phép mới có hiệu lực từ 2026-01-01, tôi có thể chuyển tất cả các ngày phép năm vào năm tiếp theo không?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 213,
+        "confidence": 0.69,
+        "sources_count": 2
+      },
+      "timestamp": "2026-04-21T10:47:16.472382+00:00"
+    }
+  ],
+  "run_id": "run_1776768434413",
+  "timestamp": "2026-04-21T10:47:14.413797+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

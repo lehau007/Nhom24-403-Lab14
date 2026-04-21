@@ -1,0 +1,62 @@
+{
+  "task": "Trong trường hợp nghỉ ốm, tôi có thể không cần thông báo cho Line Manager nếu không nghỉ quá 3 ngày liên tiếp?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [],
+  "retrieved_sources": [],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Tôi không tìm thấy đủ thông tin trong tài liệu nội bộ để trả lời câu hỏi này.",
+  "sources": [],
+  "confidence": 0.2,
+  "history": [
+    "[retrieval_worker] ERROR: No module named 'chromadb'",
+    "[synthesis_worker] synthesis complete (conf=0.2)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Trong trường hợp nghỉ ốm, tôi có thể không cần thông báo cho Line Manager nếu không nghỉ quá 3 ngày liên tiếp?",
+        "chunks_count": 0,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 77,
+        "confidence": 0.2,
+        "sources_count": 0
+      },
+      "timestamp": "2026-04-21T09:56:11.225553+00:00"
+    }
+  ],
+  "run_id": "run_1776765370432",
+  "timestamp": "2026-04-21T09:56:10.432168+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "openai",
+      "model": "text-embedding-3-small"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 5
+}

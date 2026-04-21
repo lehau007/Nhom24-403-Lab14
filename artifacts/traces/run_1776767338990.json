@@ -1,0 +1,106 @@
+{
+  "task": "Nếu nhân viên có 15 ngày nghỉ phép hàng năm và đã nghỉ hết tất cả các ngày, họ có thể tiếp tục làm việc từ xa trong khi không còn ngày nghỉ, đúng không?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "4.1 Điều kiện remote:\n- Nhân viên sau probation period có thể làm remote tối đa 2 ngày/tuần.\n- Team Lead phải phê duyệt lịch remote qua HR Portal.\n- Ngày onsite bắt buộc: Thứ 3 và Thứ 5 theo lịch team.\n\n4.2 Yêu cầu kỹ thuật khi remote:\n- Kết nối VPN bắt buộc khi làm việc với hệ thống nội bộ.\n- Camera bật trong các cuộc họp team.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.716,
+      "metadata": {
+        "department": "HR",
+        "section": "Phần 4: Remote work policy",
+        "effective_date": "2026-01-01",
+        "source": "hr/leave-policy-2026.pdf",
+        "access": "internal"
+      },
+      "id": "hr_leave_policy_3"
+    },
+    {
+      "text": "Bước 1: Nhân viên gửi yêu cầu nghỉ phép qua hệ thống HR Portal (https://hr.company.internal) ít nhất 3 ngày làm việc trước ngày nghỉ.\nBước 2: Line Manager phê duyệt hoặc từ chối trong vòng 1 ngày làm việc.\nBước 3: Nhân viên nhận thông báo qua email sau khi được phê duyệt.\n\nTrường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7156,
+      "metadata": {
+        "access": "internal",
+        "department": "HR",
+        "effective_date": "2026-01-01",
+        "section": "Phần 2: Quy trình xin nghỉ phép",
+        "source": "hr/leave-policy-2026.pdf"
+      },
+      "id": "hr_leave_policy_1"
+    },
+    {
+      "text": "1.1 Nghỉ phép năm (Annual Leave):\n- Số ngày: 12 ngày/năm cho nhân viên dưới 3 năm kinh nghiệm.\n- Số ngày: 15 ngày/năm cho nhân viên từ 3-5 năm kinh nghiệm.\n- Số ngày: 18 ngày/năm cho nhân viên trên 5 năm kinh nghiệm.\n- Chuyển năm sau: Tối đa 5 ngày phép năm chưa dùng được chuyển sang năm tiếp theo.\n\n1.2 Nghỉ ốm (Sick Leave):\n- Số ngày: 10 ngày/năm có trả lương.\n- Yêu cầu: Thông báo cho Line Manager trước 9:00 sáng ngày nghỉ.\n- Nếu nghỉ trên 3 ngày liên tiếp: Cần giấy tờ y tế từ bệnh viện.\n\n1.3 Nghỉ thai sản:\n- Nghỉ sinh con: 6 tháng theo quy định Luật Lao động.\n- Nghỉ nuôi con nhỏ: 1 tiếng/ngày trong 12 tháng đầu sau sinh.\n\n1.4 Nghỉ lễ tết:\nTheo lịch nghỉ lễ quốc gia do HR công bố hàng năm vào tháng 12.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7136,
+      "metadata": {
+        "section": "Phần 1: Các loại nghỉ phép",
+        "effective_date": "2026-01-01",
+        "source": "hr/leave-policy-2026.pdf",
+        "department": "HR",
+        "access": "internal"
+      },
+      "id": "hr_leave_policy_0"
+    }
+  ],
+  "retrieved_sources": [
+    "hr/leave-policy-2026.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "⚠️ Không có thông tin cụ thể nào trong tài liệu nội bộ về việc nhân viên có thể làm việc từ xa khi đã hết ngày nghỉ phép. \n\nTuy nhiên, theo chính sách, nhân viên có thể làm việc từ xa tối đa 2 ngày/tuần sau khi đã hoàn thành thời gian thử việc, và lịch làm việc từ xa phải được phê duyệt bởi Team Lead qua HR Portal [1]. \n\nDo đó, nếu nhân viên đã hết ngày nghỉ phép, họ vẫn có thể làm việc từ xa nếu được phê duyệt, nhưng không có thông tin rõ ràng về việc này trong tài liệu.",
+  "sources": [
+    "hr/leave-policy-2026.pdf"
+  ],
+  "confidence": 0.72,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.72)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Nếu nhân viên có 15 ngày nghỉ phép hàng năm và đã nghỉ hết tất cả các ngày, họ có thể tiếp tục làm việc từ xa trong khi không còn ngày nghỉ, đúng không?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 476,
+        "confidence": 0.72,
+        "sources_count": 1
+      },
+      "timestamp": "2026-04-21T10:29:01.735969+00:00"
+    }
+  ],
+  "run_id": "run_1776767338990",
+  "timestamp": "2026-04-21T10:28:58.990108+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

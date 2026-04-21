@@ -1,0 +1,106 @@
+{
+  "task": "Thời gian khắc phục cho ticket P3 là bao lâu?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Matched YAML rules: ['ticket']",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "Ticket P1:\n- Phản hồi ban đầu (first response): 15 phút kể từ khi ticket được tạo.\n- Xử lý và khắc phục (resolution): 4 giờ.\n- Escalation: Tự động escalate lên Senior Engineer nếu không có phản hồi trong 10 phút.\n- Thông báo stakeholder: Ngay khi nhận ticket, update mỗi 30 phút cho đến khi resolve.\n\nTicket P2:\n- Phản hồi ban đầu: 2 giờ.\n- Xử lý và khắc phục: 1 ngày làm việc.\n- Escalation: Tự động escalate sau 90 phút không có phản hồi.\n\nTicket P3:\n- Phản hồi ban đầu: 1 ngày làm việc.\n- Xử lý và khắc phục: 5 ngày làm việc.\n\nTicket P4:\n- Phản hồi ban đầu: 3 ngày làm việc.\n- Xử lý và khắc phục: Theo sprint cycle (thông thường 2-4 tuần).",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.782,
+      "metadata": {
+        "source": "support/sla-p1-2026.pdf",
+        "section": "Phần 2: SLA theo mức độ ưu tiên",
+        "department": "IT",
+        "effective_date": "2026-01-15",
+        "access": "internal"
+      },
+      "id": "sla_p1_2026_1"
+    },
+    {
+      "text": "Ticket system: Jira (project IT-SUPPORT)\nSlack channel: #incident-p1, #incident-p2\nPagerDuty: Tự động nhắn on-call khi P1 ticket mới\nHotline on-call: ext. 9999 (24/7)",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.7067,
+      "metadata": {
+        "effective_date": "2026-01-15",
+        "access": "internal",
+        "source": "support/sla-p1-2026.pdf",
+        "section": "Phần 4: Công cụ và kênh liên lạc",
+        "department": "IT"
+      },
+      "id": "sla_p1_2026_3"
+    },
+    {
+      "text": "P1 — CRITICAL (Khẩn cấp):\nĐịnh nghĩa: Sự cố ảnh hưởng toàn bộ hệ thống production, không có workaround.\nVí dụ: Database sập, API gateway down, toàn bộ người dùng không thể đăng nhập.\n\nP2 — HIGH (Nghiêm trọng):\nĐịnh nghĩa: Sự cố ảnh hưởng một phần hệ thống, có workaround tạm thời.\nVí dụ: Một số tính năng không hoạt động, ảnh hưởng một nhóm người dùng.\n\nP3 — MEDIUM (Trung bình):\nĐịnh nghĩa: Lỗi ảnh hưởng không đáng kể, người dùng vẫn làm việc được.\n\nP4 — LOW (Thấp):\nĐịnh nghĩa: Yêu cầu cải tiến, gợi ý, hoặc lỗi giao diện nhỏ.",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.7044,
+      "metadata": {
+        "access": "internal",
+        "section": "Phần 1: Định nghĩa mức độ ưu tiên",
+        "department": "IT",
+        "effective_date": "2026-01-15",
+        "source": "support/sla-p1-2026.pdf"
+      },
+      "id": "sla_p1_2026_0"
+    }
+  ],
+  "retrieved_sources": [
+    "support/sla-p1-2026.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Thời gian khắc phục cho ticket P3 là 5 ngày làm việc [1].",
+  "sources": [
+    "support/sla-p1-2026.pdf"
+  ],
+  "confidence": 0.73,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.73)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Thời gian khắc phục cho ticket P3 là bao lâu?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 57,
+        "confidence": 0.73,
+        "sources_count": 1
+      },
+      "timestamp": "2026-04-21T10:09:24.883665+00:00"
+    }
+  ],
+  "run_id": "run_1776766163510",
+  "timestamp": "2026-04-21T10:09:23.510378+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

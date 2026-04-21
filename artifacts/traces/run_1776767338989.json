@@ -1,0 +1,106 @@
+{
+  "task": "Theo chính sách nghỉ phép, mỗi nhân viên đều có 12 ngày nghỉ phép năm, vì vậy họ có thể chuyển nhượng tối đa 10 ngày sang năm sau không?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "1.1 Nghỉ phép năm (Annual Leave):\n- Số ngày: 12 ngày/năm cho nhân viên dưới 3 năm kinh nghiệm.\n- Số ngày: 15 ngày/năm cho nhân viên từ 3-5 năm kinh nghiệm.\n- Số ngày: 18 ngày/năm cho nhân viên trên 5 năm kinh nghiệm.\n- Chuyển năm sau: Tối đa 5 ngày phép năm chưa dùng được chuyển sang năm tiếp theo.\n\n1.2 Nghỉ ốm (Sick Leave):\n- Số ngày: 10 ngày/năm có trả lương.\n- Yêu cầu: Thông báo cho Line Manager trước 9:00 sáng ngày nghỉ.\n- Nếu nghỉ trên 3 ngày liên tiếp: Cần giấy tờ y tế từ bệnh viện.\n\n1.3 Nghỉ thai sản:\n- Nghỉ sinh con: 6 tháng theo quy định Luật Lao động.\n- Nghỉ nuôi con nhỏ: 1 tiếng/ngày trong 12 tháng đầu sau sinh.\n\n1.4 Nghỉ lễ tết:\nTheo lịch nghỉ lễ quốc gia do HR công bố hàng năm vào tháng 12.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7555,
+      "metadata": {
+        "department": "HR",
+        "effective_date": "2026-01-01",
+        "access": "internal",
+        "section": "Phần 1: Các loại nghỉ phép",
+        "source": "hr/leave-policy-2026.pdf"
+      },
+      "id": "hr_leave_policy_0"
+    },
+    {
+      "text": "Bước 1: Nhân viên gửi yêu cầu nghỉ phép qua hệ thống HR Portal (https://hr.company.internal) ít nhất 3 ngày làm việc trước ngày nghỉ.\nBước 2: Line Manager phê duyệt hoặc từ chối trong vòng 1 ngày làm việc.\nBước 3: Nhân viên nhận thông báo qua email sau khi được phê duyệt.\n\nTrường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.7065,
+      "metadata": {
+        "department": "HR",
+        "effective_date": "2026-01-01",
+        "access": "internal",
+        "source": "hr/leave-policy-2026.pdf",
+        "section": "Phần 2: Quy trình xin nghỉ phép"
+      },
+      "id": "hr_leave_policy_1"
+    },
+    {
+      "text": "Email: hr@company.internal\nHotline: ext. 2000\nHR Portal: https://hr.company.internal\nGiờ làm việc: Thứ 2 - Thứ 6, 8:30 - 17:30",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.6669,
+      "metadata": {
+        "access": "internal",
+        "source": "hr/leave-policy-2026.pdf",
+        "section": "Phần 5: Liên hệ HR",
+        "effective_date": "2026-01-01",
+        "department": "HR"
+      },
+      "id": "hr_leave_policy_4"
+    }
+  ],
+  "retrieved_sources": [
+    "hr/leave-policy-2026.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "⚠️ Chính sách nghỉ phép quy định rằng tối đa 5 ngày phép năm chưa dùng được chuyển sang năm tiếp theo, không phải 10 ngày. [1]",
+  "sources": [
+    "hr/leave-policy-2026.pdf"
+  ],
+  "confidence": 0.71,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.71)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Theo chính sách nghỉ phép, mỗi nhân viên đều có 12 ngày nghỉ phép năm, vì vậy họ có thể chuyển nhượng tối đa 10 ngày sang năm sau không?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 126,
+        "confidence": 0.71,
+        "sources_count": 1
+      },
+      "timestamp": "2026-04-21T10:29:00.682472+00:00"
+    }
+  ],
+  "run_id": "run_1776767338989",
+  "timestamp": "2026-04-21T10:28:58.989108+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

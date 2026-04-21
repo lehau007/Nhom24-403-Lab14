@@ -1,0 +1,106 @@
+{
+  "task": "Quy trình xử lý sự cố P1 bắt đầu ra sao?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Matched YAML rules: ['p1', 'sự cố']",
+  "risk_high": true,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "Bước 1: Tiếp nhận\nOn-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút.\n\nBước 2: Thông báo\nGửi thông báo tới Slack #incident-p1 và email incident@company.internal ngay lập tức.\n\nBước 3: Triage và phân công\nLead Engineer phân công engineer xử lý trong 10 phút.\n\nBước 4: Xử lý\nEngineer cập nhật tiến độ lên ticket mỗi 30 phút. Nếu cần hỗ trợ thêm, escalate ngay.\n\nBước 5: Resolution\nSau khi khắc phục, viết incident report trong vòng 24 giờ.",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.8088,
+      "metadata": {
+        "source": "support/sla-p1-2026.pdf",
+        "department": "IT",
+        "access": "internal",
+        "section": "Phần 3: Quy trình xử lý sự cố P1",
+        "effective_date": "2026-01-15"
+      },
+      "id": "sla_p1_2026_2"
+    },
+    {
+      "text": "Ticket system: Jira (project IT-SUPPORT)\nSlack channel: #incident-p1, #incident-p2\nPagerDuty: Tự động nhắn on-call khi P1 ticket mới\nHotline on-call: ext. 9999 (24/7)",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.7719,
+      "metadata": {
+        "department": "IT",
+        "effective_date": "2026-01-15",
+        "section": "Phần 4: Công cụ và kênh liên lạc",
+        "source": "support/sla-p1-2026.pdf",
+        "access": "internal"
+      },
+      "id": "sla_p1_2026_3"
+    },
+    {
+      "text": "P1 — CRITICAL (Khẩn cấp):\nĐịnh nghĩa: Sự cố ảnh hưởng toàn bộ hệ thống production, không có workaround.\nVí dụ: Database sập, API gateway down, toàn bộ người dùng không thể đăng nhập.\n\nP2 — HIGH (Nghiêm trọng):\nĐịnh nghĩa: Sự cố ảnh hưởng một phần hệ thống, có workaround tạm thời.\nVí dụ: Một số tính năng không hoạt động, ảnh hưởng một nhóm người dùng.\n\nP3 — MEDIUM (Trung bình):\nĐịnh nghĩa: Lỗi ảnh hưởng không đáng kể, người dùng vẫn làm việc được.\n\nP4 — LOW (Thấp):\nĐịnh nghĩa: Yêu cầu cải tiến, gợi ý, hoặc lỗi giao diện nhỏ.",
+      "source": "support/sla-p1-2026.pdf",
+      "score": 0.7494,
+      "metadata": {
+        "effective_date": "2026-01-15",
+        "access": "internal",
+        "source": "support/sla-p1-2026.pdf",
+        "department": "IT",
+        "section": "Phần 1: Định nghĩa mức độ ưu tiên"
+      },
+      "id": "sla_p1_2026_0"
+    }
+  ],
+  "retrieved_sources": [
+    "support/sla-p1-2026.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Quy trình xử lý sự cố P1 bắt đầu như sau:\n\n1. **Tiếp nhận**: On-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút.\n2. **Thông báo**: Gửi thông báo tới Slack #incident-p1 và email incident@company.internal ngay lập tức.\n3. **Triage và phân công**: Lead Engineer phân công engineer xử lý trong 10 phút.\n\nSau đó, engineer sẽ tiếp tục xử lý sự cố theo các bước tiếp theo [1].",
+  "sources": [
+    "support/sla-p1-2026.pdf"
+  ],
+  "confidence": 0.78,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.78)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Quy trình xử lý sự cố P1 bắt đầu ra sao?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 390,
+        "confidence": 0.78,
+        "sources_count": 1
+      },
+      "timestamp": "2026-04-21T10:18:21.546858+00:00"
+    }
+  ],
+  "run_id": "run_1776766698385",
+  "timestamp": "2026-04-21T10:18:18.385169+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

@@ -1,0 +1,110 @@
+{
+  "task": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+  "supervisor_route": "retrieval_worker",
+  "route_reason": "Default route",
+  "risk_high": false,
+  "needs_tool": false,
+  "retrieved_chunks": [
+    {
+      "text": "Q: Hộp thư đến đầy, phải làm gì?\nA: Xóa email cũ hoặc yêu cầu tăng dung lượng qua ticket IT-ACCESS. Dung lượng tiêu chuẩn là 50GB.\n\nQ: Tôi không nhận được email từ bên ngoài?\nA: Kiểm tra thư mục Spam trước. Nếu vẫn không có, tạo ticket P2 kèm địa chỉ email gửi và thời gian gửi.",
+      "source": "support/helpdesk-faq.md",
+      "score": 0.7726,
+      "metadata": {
+        "access": "internal",
+        "department": "IT",
+        "source": "support/helpdesk-faq.md",
+        "section": "Section 5: Email và lịch",
+        "effective_date": "2026-01-20"
+      },
+      "id": "it_helpdesk_faq_4"
+    },
+    {
+      "text": "Email: hr@company.internal\nHotline: ext. 2000\nHR Portal: https://hr.company.internal\nGiờ làm việc: Thứ 2 - Thứ 6, 8:30 - 17:30",
+      "source": "hr/leave-policy-2026.pdf",
+      "score": 0.646,
+      "metadata": {
+        "section": "Phần 5: Liên hệ HR",
+        "access": "internal",
+        "effective_date": "2026-01-01",
+        "department": "HR",
+        "source": "hr/leave-policy-2026.pdf"
+      },
+      "id": "hr_leave_policy_4"
+    },
+    {
+      "text": "Email: cs-refund@company.internal\nHotline nội bộ: ext. 1234\nGiờ làm việc: Thứ 2 - Thứ 6, 8:00 - 17:30",
+      "source": "policy/refund-v4.pdf",
+      "score": 0.628,
+      "metadata": {
+        "effective_date": "2026-02-01",
+        "department": "CS",
+        "section": "Điều 6: Liên hệ và hỗ trợ",
+        "access": "internal",
+        "source": "policy/refund-v4.pdf"
+      },
+      "id": "policy_refund_v4_5"
+    }
+  ],
+  "retrieved_sources": [
+    "hr/leave-policy-2026.pdf",
+    "support/helpdesk-faq.md",
+    "policy/refund-v4.pdf"
+  ],
+  "policy_result": {},
+  "mcp_tools_used": [],
+  "final_answer": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là 50GB [support/helpdesk-faq.md].",
+  "sources": [
+    "hr/leave-policy-2026.pdf",
+    "support/helpdesk-faq.md",
+    "policy/refund-v4.pdf"
+  ],
+  "confidence": 0.68,
+  "history": [
+    "[retrieval_worker] retrieved 3 chunks",
+    "[synthesis_worker] synthesis complete (conf=0.68)"
+  ],
+  "workers_called": [
+    "retrieval_worker",
+    "synthesis_worker"
+  ],
+  "worker_io_logs": [
+    {
+      "worker": "synthesis_worker",
+      "input": {
+        "task": "Dung lượng hộp thư email tiêu chuẩn của nhân viên là bao nhiêu?",
+        "chunks_count": 3,
+        "profile": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        }
+      },
+      "output": {
+        "answer_length": 84,
+        "confidence": 0.68,
+        "sources_count": 3
+      },
+      "timestamp": "2026-04-21T10:34:26.238537+00:00"
+    }
+  ],
+  "run_id": "run_1776767664608",
+  "timestamp": "2026-04-21T10:34:24.608541+00:00",
+  "llm_profiles": {
+    "supervisor": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "retrieval": {
+      "provider": "gemini",
+      "model": "gemini-embedding-2-preview"
+    },
+    "synthesis": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    },
+    "policy": {
+      "provider": "openai",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "retrieval_top_k": 3
+}

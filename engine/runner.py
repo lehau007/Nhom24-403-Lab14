@@ -39,7 +39,7 @@ class BenchmarkRunner:
             self.total_cost += judge_result.get("cost", 0.0)
             
             return {
-                "question": test_case["question"],
+                "test_case": test_case["question"],
                 "agent_response": response["answer"],
                 "latency": latency,
                 "ragas": ragas_scores,
@@ -70,8 +70,10 @@ class BenchmarkRunner:
             batch_results = await asyncio.gather(*tasks)
             results.extend(batch_results)
             
-            # Optional: Small delay between batches if needed for aggressive rate limits
-            # await asyncio.sleep(1) 
+            # Wait 10 seconds between batches to respect 30 requests/minute rate limit
+            # (30 reqs/min = 1 req/2s -> 5 reqs/batch = 10s minimum per batch)
+            print(f"  [Rate Limit] Sleeping for 10 seconds before next batch...")
+            await asyncio.sleep(10)
             
         return results
 
