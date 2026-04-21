@@ -1,157 +1,168 @@
 import json
-import asyncio
 import os
-import glob
-from typing import List, Dict
-import litellm
+import re
+import shutil
+from collections import defaultdict
+from typing import Dict, List
+
+import chromadb
 from dotenv import load_dotenv
-import random
 
-load_dotenv(override=True)
+from engine.ingestion import ingest_documents
 
-class SyntheticGenerator:
-    def __init__(self):
-        self.docs = self._load_docs()
-        # Multi-provider setup
-        self.providers = []
-        
-        # Provider 1: Lấy từ JUDGE_1 hoặc fallback về SYNTHESIS
-        p1 = os.getenv("JUDGE_1_PROVIDER", os.getenv("SYNTHESIS_PROVIDER", "openai"))
-        m1 = os.getenv("JUDGE_1_MODEL", os.getenv("SYNTHESIS_MODEL", "gpt-4o-mini"))
-        self.providers.append(f"{p1}/{m1}" if "/" not in m1 else m1)
-        
-        # Provider 2: Lấy từ JUDGE_2 (thường là Gemini/Anthropic để đa dạng)
-        p2 = os.getenv("JUDGE_2_PROVIDER")
-        m2 = os.getenv("JUDGE_2_MODEL")
-        if p2 and m2:
-            self.providers.append(f"{p2}/{m2}" if "/" not in m2 else m2)
-        else:
-            # Nếu không có JUDGE_2, dùng lại Provider 1
-            self.providers.append(self.providers[0])
 
-    def _load_docs(self) -> Dict[str, str]:
-        docs = {}
-        for file_path in glob.glob("data/docs/*.txt"):
-            filename = os.path.basename(file_path)
-            with open(file_path, "r", encoding="utf-8") as f:
-                docs[filename] = f.read()
-        return docs
+def _first_sentence(text: str, max_len: int = 260) -> str:
+    cleaned = re.sub(r"\s+", " ", text).strip()
+    if not cleaned:
+        return ""
+    parts = re.split(r"(?<=[.!?])\s+", cleaned)
+    candidate = parts[0] if parts else cleaned
+    return candidate[:max_len]
 
-    async def generate_standard_qa(self, doc_name: str, text: str, provider_idx: int = 0, num_pairs: int = 1) -> List[Dict]:
-        """Tạo các câu hỏi factual đơn giản."""
-        model_path = self.providers[provider_idx % len(self.providers)]
-        prompt = f"""Dựa trên tài liệu '{doc_name}' dưới đây, hãy tạo {num_pairs} cặp Câu hỏi và Câu trả lời.
-Tài liệu:
-{text[:3000]}
 
-Yêu cầu format JSON:
-{{
-  "qa_pairs": [
-    {{
-      "question": "...", 
-      "expected_answer": "...", 
-      "context": "Trích đoạn ngắn từ tài liệu chứa câu trả lời", 
-      "metadata": {{"difficulty": "easy", "type": "fact-check", "source": "{doc_name}"}}
-    }}
-  ]
-}}
-"""
-        try:
-            response = await litellm.acompletion(
-                model=model_path,
-                messages=[{"role": "system", "content": f"You are AI Provider {provider_idx + 1} generating factual QA pairs."},
-                          {"role": "user", "content": prompt}],
-                response_format={"type": "json_object"}
-            )
-            data = json.loads(response.choices[0].message.content)
-            return data.get("qa_pairs", [])
-        except Exception as e:
-            print(f"Error generating standard QA (Provider {model_path}) for {doc_name}: {e}")
-            return []
+def _strip_source_ext(source: str) -> str:
+    return source.rsplit(".", 1)[0]
 
-    async def generate_hard_qa(self, doc_name: str, text: str, all_docs: Dict[str, str], provider_idx: int = 1, num_pairs: int = 2) -> List[Dict]:
-        """Tạo các câu hỏi lừa, khó, multi-hop."""
-        model_path = self.providers[provider_idx % len(self.providers)]
-        # Chọn ngẫu nhiên một tài liệu khác để làm multi-hop
-        other_doc_name = random.choice([k for k in all_docs.keys() if k != doc_name])
-        other_text = all_docs[other_doc_name]
 
-        prompt = f"""Bạn là một chuyên gia kiểm thử AI (QA Engineer). Nhiệm vụ của bạn là tạo ra các câu hỏi CỰC KHÓ và LỪA để đánh giá hệ thống RAG.
+def _build_single_chunk_case(chunk: Dict) -> Dict:
+    source = chunk["metadata"].get("source", "unknown.txt")
+    text = chunk["document"]
+    answer = _first_sentence(text)
+    return {
+        "question": f"Theo tài liệu {_strip_source_ext(source)}, thông tin cốt lõi ở đoạn liên quan là gì?",
+        "expected_answer": answer,
+        "context": text[:500],
+        "metadata": {
+            "difficulty": "easy",
+            "type": "fact-check",
+            "source": source,
+        },
+        "expected_chunk_ids": [chunk["id"]],
+        "expected_retrieval_ids": [chunk["id"]],
+    }
 
-Sử dụng thông tin từ hai tài liệu sau:
-Tài liệu 1 ({doc_name}):
-{text[:2000]}
 
-Tài liệu 2 ({other_doc_name}):
-{other_text[:2000]}
+def _build_edge_cases(source_to_chunks: Dict[str, List[Dict]]) -> List[Dict]:
+    edge_cases: List[Dict] = []
+    ordered_sources = sorted(source_to_chunks.keys())
+    if len(ordered_sources) < 2:
+        return edge_cases
 
-Hãy tạo {num_pairs} câu hỏi thuộc các loại sau:
-1. Multi-hop: Cần kết hợp thông tin từ cả 2 tài liệu mới trả lời được.
-2. Temporal/Version Conflict: Hỏi về các mâu thuẫn giữa phiên bản cũ và mới (ví dụ Refund v3 vs v4).
-3. Negative Constraint: Hỏi về những gì KHÔNG được phép hoặc các ngoại lệ (Exceptions).
-4. Ambiguous/Edge Case: Câu hỏi mập mờ hoặc ở biên của chính sách.
-5. Hallucination Check: Đưa ra một giả định sai trong câu hỏi để xem AI có bị lừa không.
+    for i in range(len(ordered_sources) - 1):
+        a = ordered_sources[i]
+        b = ordered_sources[i + 1]
+        chunk_a = source_to_chunks[a][0]
+        chunk_b = source_to_chunks[b][0]
+        answer_a = _first_sentence(chunk_a["document"])
+        answer_b = _first_sentence(chunk_b["document"])
 
-Yêu cầu format JSON:
-{{
-  "qa_pairs": [
-    {{
-      "question": "...", 
-      "expected_answer": "...", 
-      "context": "Đoạn text chứa thông tin từ cả hai tài liệu hoặc logic bắc cầu", 
-      "metadata": {{
-        "difficulty": "hard", 
-        "type": "multi-hop|adversarial|edge-case",
-        "source": "{doc_name}, {other_doc_name}"
-      }}
-    }}
-  ]
-}}
-"""
-        try:
-            response = await litellm.acompletion(
-                model=model_path,
-                messages=[{"role": "system", "content": f"You are AI Provider {provider_idx + 1} acting as an adversarial evaluator."},
-                          {"role": "user", "content": prompt}],
-                response_format={"type": "json_object"}
-            )
-            data = json.loads(response.choices[0].message.content)
-            return data.get("qa_pairs", [])
-        except Exception as e:
-            print(f"Error generating hard QA (Provider {model_path}) for {doc_name}: {e}")
-            return []
+        edge_cases.append(
+            {
+                "question": (
+                    f"Kết hợp chính sách từ {_strip_source_ext(a)} và {_strip_source_ext(b)}, "
+                    "điều kiện chính cần lưu ý là gì?"
+                ),
+                "expected_answer": f"{answer_a} Đồng thời: {answer_b}",
+                "context": f"{chunk_a['document'][:250]}\n---\n{chunk_b['document'][:250]}",
+                "metadata": {
+                    "difficulty": "hard",
+                    "type": "multi-hop",
+                    "source": f"{a}, {b}",
+                },
+                "expected_chunk_ids": [chunk_a["id"], chunk_b["id"]],
+                "expected_retrieval_ids": [chunk_a["id"], chunk_b["id"]],
+            }
+        )
 
-async def main():
-    gen = SyntheticGenerator()
-    all_qa = []
-    
-    print(f"Starting synthetic generation using Multi-Provider setup...")
-    print(f"Active Providers: {gen.providers}")
-    
-    tasks = []
-    # Lặp qua các tài liệu và phân bổ provider luân phiên
-    for i, (doc_name, text) in enumerate(gen.docs.items()):
-        # Mỗi document tạo 4 câu dễ và 6 câu khó (Tổng 10 câu/doc)
-        # Với 5 docs hiện có, tổng cộng sẽ là 50 câu.
-        tasks.append(gen.generate_standard_qa(doc_name, text, provider_idx=i, num_pairs=4))
-        tasks.append(gen.generate_hard_qa(doc_name, text, gen.docs, provider_idx=i+1, num_pairs=6))
-    
-    print(f"Running {len(tasks)} generation tasks concurrently...")
-    results = await asyncio.gather(*tasks)
-    
-    for batch in results:
-        if batch:
-            all_qa.extend(batch)
+        edge_cases.append(
+            {
+                "question": (
+                    f"Có ngoại lệ hoặc trường hợp KHÔNG áp dụng nào trong {_strip_source_ext(a)} không? "
+                    "Nếu không thấy rõ, hãy nói thiếu dữ liệu."
+                ),
+                "expected_answer": (
+                    "Chỉ xác nhận ngoại lệ khi có bằng chứng trong tài liệu; "
+                    f"đoạn liên quan hiện có: {answer_a}"
+                ),
+                "context": chunk_a["document"][:500],
+                "metadata": {
+                    "difficulty": "hard",
+                    "type": "edge-case",
+                    "source": a,
+                },
+                "expected_chunk_ids": [chunk_a["id"]],
+                "expected_retrieval_ids": [chunk_a["id"]],
+            }
+        )
 
-    # Đảm bảo thư mục tồn tại
+    return edge_cases
+
+
+def generate_golden_set(target_count: int = 50) -> List[Dict]:
+    load_dotenv(override=True)
+
+    if os.getenv("SKIP_INGEST", "0") != "1":
+        ingest_documents(
+            docs_dir="data/docs",
+            chroma_dir=os.getenv("CHROMA_DB_PATH", "data/chroma_db"),
+            collection_name=os.getenv("CHROMA_COLLECTION", "policy_chunks"),
+            embedding_model=os.getenv("EMBEDDING_MODEL", "gemini-embedding-2-preview"),
+        )
+
+    chroma = chromadb.PersistentClient(path=os.getenv("CHROMA_DB_PATH", "data/chroma_db"))
+    collection = chroma.get_or_create_collection(name=os.getenv("CHROMA_COLLECTION", "policy_chunks"))
+    data = collection.get(include=["documents", "metadatas"])
+
+    ids = data.get("ids", [])
+    docs = data.get("documents", [])
+    metadatas = data.get("metadatas", [])
+
+    chunk_rows: List[Dict] = []
+    for chunk_id, document, metadata in zip(ids, docs, metadatas):
+        chunk_rows.append({"id": chunk_id, "document": document, "metadata": metadata or {}})
+
+    source_to_chunks: Dict[str, List[Dict]] = defaultdict(list)
+    for row in chunk_rows:
+        source = row["metadata"].get("source", "unknown.txt")
+        source_to_chunks[source].append(row)
+
+    cases: List[Dict] = []
+    for chunks in source_to_chunks.values():
+        for chunk in chunks:
+            cases.append(_build_single_chunk_case(chunk))
+
+    cases.extend(_build_edge_cases(source_to_chunks))
+
+    # Upsample deterministically if corpus is small.
+    idx = 0
+    while cases and len(cases) < target_count:
+        base = cases[idx % len(cases)]
+        duplicated = dict(base)
+        duplicated["question"] = f"[Biến thể {idx+1}] {base['question']}"
+        duplicated["metadata"] = dict(base["metadata"])
+        duplicated["metadata"]["difficulty"] = "medium" if base["metadata"].get("difficulty") == "easy" else base["metadata"].get("difficulty")
+        cases.append(duplicated)
+        idx += 1
+
+    return cases[:target_count]
+
+
+def main() -> None:
     os.makedirs("data", exist_ok=True)
-    
     output_path = "data/golden_set.jsonl"
+    backup_path = "data/golden_set.backup.jsonl"
+
+    if os.path.exists(output_path):
+        shutil.copyfile(output_path, backup_path)
+        print(f"Backed up existing golden set to {backup_path}")
+
+    cases = generate_golden_set(target_count=50)
     with open(output_path, "w", encoding="utf-8") as f:
-        for pair in all_qa:
-            f.write(json.dumps(pair, ensure_ascii=False) + "\n")
-            
-    print(f"Done! Generated {len(all_qa)} QA pairs to {output_path}")
+        for case in cases:
+            f.write(json.dumps(case, ensure_ascii=False) + "\n")
+
+    print(f"Generated {len(cases)} cases to {output_path}")
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

@@ -13,7 +13,7 @@ from engine.retrieval_eval import RetrievalEvaluator
 from engine.runner import BenchmarkRunner
 
 
-def _load_dataset(path: str = "data/golden_set.jsonl") -> List[Dict]:
+def _load_dataset(path: str = "data/golden_set_test.jsonl") -> List[Dict]:
     with open(path, "r", encoding="utf-8") as f:
         dataset = [json.loads(line) for line in f if line.strip()]
     return dataset
@@ -22,14 +22,14 @@ def _load_dataset(path: str = "data/golden_set.jsonl") -> List[Dict]:
 async def run_benchmark_with_results(agent_version: str, top_k: int) -> Tuple[Optional[List[Dict]], Optional[Dict]]:
     print(f"🚀 Khởi động Benchmark cho {agent_version}...")
 
-    if not os.path.exists("data/golden_set.jsonl"):
-        print("❌ Thiếu data/golden_set.jsonl. Hãy chạy 'python data/synthetic_gen.py' trước.")
+    if not os.path.exists("data/golden_set_test.jsonl"):
+        print("❌ Thiếu data/golden_set_test.jsonl. Hãy chạy 'python data/synthetic_gen.py' trước.")
         return None, None
 
-    dataset = _load_dataset("data/golden_set.jsonl")
+    dataset = _load_dataset("data/golden_set_test.jsonl")
 
     if not dataset:
-        print("❌ File data/golden_set.jsonl rỗng. Hãy tạo ít nhất 1 test case.")
+        print("❌ File data/golden_set_test.jsonl rỗng. Hãy tạo ít nhất 1 test case.")
         return None, None
 
     runner = BenchmarkRunner(

@@ -1,0 +1,11 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://0.0.0.0:4000",
+    "API_TIMEOUT_MS": "3000000",
+    "ANTHROPIC_API_KEY": "",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "z-ai/glm4.7",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gpt-oss-20b",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "qwen3-coder-480b-a35b-instruct"
+  },
+  "model": "sonnet[1m]"
+}

@@ -3,38 +3,33 @@
 ## 🎯 Tổng quan
 "Nếu bạn không thể đo lường nó, bạn không thể cải thiện nó." — Nhiệm vụ của nhóm bạn là xây dựng một **Hệ thống đánh giá tự động** chuyên nghiệp để benchmark AI Agent. Hệ thống này phải chứng minh được bằng con số cụ thể: Agent đang tốt ở đâu và tệ ở đâu.
 
----
+## 🔧 Hướng dẫn chạy nhanh (Quick Start)
 
-## 🕒 Lịch trình thực hiện (4 Tiếng)
-- **Giai đoạn 1 (45'):** Thiết kế Golden Dataset & Script SDG. Tạo ra ít nhất 50 test cases chất lượng.
-- **Giai đoạn 2 (90'):** Phát triển Eval Engine (RAGAS, Custom Judge) & Async Runner.
-- **Giai đoạn 3 (60'):** Chạy Benchmark, Phân cụm lỗi (Failure Clustering) & Phân tích "5 Whys".
-- **Giai đoạn 4 (45'):** Tối ưu Agent dựa trên kết quả & Hoàn thiện báo cáo nộp bài.
+```bash
+# 1. Cài đặt dependencies
+pip install -r requirements.txt
 
----
+# 2. Cấu hình môi trường (Copy API Key vào file .env)
+cp .env.example .env
 
-## 🛠️ Các nhiệm vụ chính (Expert Mission)
+# 3. Chạy toàn bộ Pipeline (Ingestion -> Benchmark -> Report)
+$env:PYTHONIOENCODING="utf-8"; $env:PYTHONUNBUFFERED="1"; .\.venv\Scripts\python.exe main.py
 
-### 1. Retrieval & SDG (Nhóm Data)
-- **Retrieval Eval:** Tính toán Hit Rate và MRR cho Vector DB. Bạn phải chứng minh được Retrieval stage hoạt động tốt trước khi đánh giá Generation.
-- **SDG:** Tạo 50+ cases, bao gồm cả Ground Truth IDs của tài liệu để tính Hit Rate.
+# 4. Kiểm tra định dạng trước khi nộp
+python check_lab.py
+```
 
-### 2. Multi-Judge Consensus Engine (Nhóm AI/Backend)
-- **Consensus logic:** Sử dụng ít nhất 2 model Judge khác nhau. 
-- **Calibration:** Tính toán hệ số đồng thuận (Agreement Rate) và xử lý xung đột điểm số tự động.
-
-### 3. Regression Release Gate (Nhóm DevOps/Analyst)
-- **Delta Analysis:** So sánh kết quả của Agent phiên bản mới với phiên bản cũ.
-- **Auto-Gate:** Viết logic tự động quyết định "Release" hoặc "Rollback" dựa trên các chỉ số Chất lượng/Chi phí/Hiệu năng.
+> [!IMPORTANT]
+> **Cơ chế Xử lý Lỗi (Fault Tolerance):** Hệ thống đã được tích hợp logic tự động bỏ qua (skip) và trả về giá trị 0/Error khi gặp sự cố Server Disconnected hoặc API bị rate limit/lock quá lâu. Điều này đảm bảo pipeline benchmark không bị treo và vẫn xuất được báo cáo cuối cùng cho các case thành công.
 
 ---
 
 ## 📤 Danh mục nộp bài (Submission Checklist)
 Nhóm nộp 1 đường dẫn Repository (GitHub/GitLab) chứa:
-1. [ ] **Source Code**: Toàn bộ mã nguồn hoàn chỉnh.
-2. [ ] **Reports**: File `reports/summary.json` và `reports/benchmark_results.json` (được tạo ra sau khi chạy `main.py`).
-3. [ ] **Group Report**: File `analysis/failure_analysis.md` (đã điền đầy đủ).
-4. [ ] **Individual Reports**: Các file `analysis/reflections/reflection_[Tên_SV].md`.
+1. [x] **Source Code**: Toàn bộ mã nguồn hoàn chỉnh.
+2. [x] **Reports**: File `reports/summary.json` và `reports/benchmark_results.json` (đã tạo thành công).
+3. [x] **Group Report**: File `analysis/failure_analysis.md` (đã cập nhật số liệu thực tế).
+4. [x] **Individual Reports**: Các file `analysis/reflections/reflection_2A202600110_LeVanHau.md` (đã hoàn thiện).
 
 ---
 
@@ -54,28 +49,5 @@ Báo cáo 5 Whys phải chỉ ra được lỗi nằm ở đâu: Ingestion pipel
 
 ---
 
-## 🔧 Hướng dẫn chạy
-
-```bash
-# 1. Cài đặt dependencies
-pip install -r requirements.txt
-
-# 2. Tạo Golden Dataset (chạy trước khi benchmark)
-python data/synthetic_gen.py
-
-# 3. Chạy Benchmark & tạo reports
-python main.py
-
-# 4. Kiểm tra định dạng trước khi nộp
-python check_lab.py
-```
-
----
-
-## ⚠️ Lưu ý quan trọng
-- **Bắt buộc** chạy `python data/synthetic_gen.py` trước để tạo file `data/golden_set.jsonl`. File này không được commit sẵn trong repo.
-- Trước khi nộp bài, hãy chạy `python check_lab.py` để đảm bảo định dạng dữ liệu đã chuẩn. Bất kỳ lỗi định dạng nào dẫn đến việc script chấm điểm tự động không chạy được sẽ bị trừ 5 điểm thủ tục.
-- File `.env` chứa API Key **KHÔNG** được push lên GitHub.
-
----
-*Chúc nhóm bạn xây dựng được một Evaluation Factory thực sự mạnh mẽ!*
+## ⚠️ Lưu ý
+- **Không bắt buộc** chạy `python data/synthetic_gen.py` trước để tạo file `data/golden_set.jsonl`. File này đã được tạo sẵn trong repo. 

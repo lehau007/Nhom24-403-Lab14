@@ -1,7 +1,6 @@
 import asyncio
 import time
 from typing import List, Dict
-# Import other components...
 
 class BenchmarkRunner:
     def __init__(self, agent, evaluator, judge):
@@ -11,33 +10,56 @@ class BenchmarkRunner:
 
     async def run_single_test(self, test_case: Dict) -> Dict:
         start_time = time.perf_counter()
-        
-        # 1. Gọi Agent
-        response = await self.agent.query(test_case["question"])
-        latency = time.perf_counter() - start_time
-        
-        # 2. Chạy RAGAS metrics
-        ragas_scores = await self.evaluator.score(test_case, response)
-        
-        # 3. Chạy Multi-Judge
-        judge_result = await self.judge.evaluate_multi_judge(
-            test_case["question"], 
-            response["answer"], 
-            test_case["expected_answer"]
-        )
-        
-        return {
-            "test_case": test_case["question"],
-            "agent_response": response["answer"],
-            "latency": latency,
-            "ragas": ragas_scores,
-            "judge": judge_result,
-            "status": "fail" if judge_result["final_score"] < 3 else "pass"
-        }
+        try:
+            print(f"[{test_case['question'][:15]}] Gọi agent.query...")
+            response = await self.agent.query(test_case["question"])
+            print(f"[{test_case['question'][:15]}] Agent trả lời xong.")
+            latency = time.perf_counter() - start_time
 
-    async def run_all(self, dataset: List[Dict], batch_size: int = 5) -> List[Dict]:
+            print(f"[{test_case['question'][:15]}] Tính điểm RAGAS...")
+            ragas_scores = self.evaluator.score(test_case, response)
+            
+            print(f"[{test_case['question'][:15]}] Bắt đầu judge...")
+            judge_result = await self.judge.evaluate_multi_judge(
+                test_case["question"],
+                response["answer"],
+                test_case["expected_answer"],
+            )
+            print(f"[{test_case['question'][:15]}] Judge xong.")
+
+            return {
+                "test_case": test_case["question"],
+                "agent_response": response["answer"],
+                "retrieved_ids": response.get("retrieved_ids", []),
+                "latency": latency,
+                "ragas": ragas_scores,
+                "judge": judge_result,
+                "status": "fail" if judge_result["final_score"] < 3 else "pass",
+            }
+        except Exception as exc:
+            latency = time.perf_counter() - start_time
+            return {
+                "test_case": test_case.get("question", "<missing_question>"),
+                "agent_response": "",
+                "retrieved_ids": [],
+                "latency": latency,
+                "ragas": {
+                    "faithfulness": 0.0,
+                    "relevancy": 0.0,
+                    "retrieval": {"hit_rate": 0.0, "mrr": 0.0},
+                },
+                "judge": {
+                    "final_score": 1.0,
+                    "agreement_rate": 0.0,
+                    "individual_scores": {},
+                    "error": str(exc),
+                },
+                "status": "error",
+            }
+
+    async def run_all(self, dataset: List[Dict], batch_size: int = 1) -> List[Dict]:
         """
-        Chạy song song bằng asyncio.gather với giới hạn batch_size để không bị Rate Limit.
+        Chạy bằng asyncio nhưng set batch_size=1 và thêm sleep để an toàn với rate limits.
         """
         results = []
         for i in range(0, len(dataset), batch_size):
@@ -45,4 +67,5 @@ class BenchmarkRunner:
             tasks = [self.run_single_test(case) for case in batch]
             batch_results = await asyncio.gather(*tasks)
             results.extend(batch_results)
+            await asyncio.sleep(2)  # Delay between batches
         return results
