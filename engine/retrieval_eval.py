@@ -1,164 +1,101 @@
 import asyncio
-import json
 import os
-import time
-from datetime import UTC, datetime
-from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional, TypedDict
+from typing import Any, Dict, List
 
-import yaml
+from datasets import Dataset
 from dotenv import load_dotenv
-
-from workers.policy_tool import run as policy_run
-from workers.retrieval import run as retrieval_run
-from workers.synthesis import run as synthesis_run
+from ragas import evaluate
+from ragas.embeddings import LangchainEmbeddingsWrapper
+from ragas.llms import LangchainLLMWrapper
+from ragas.metrics import AnswerRelevancy, Faithfulness
 
 load_dotenv(override=True)
 
-# --- CONTRACT COMPLIANT TYPES ---
-RouteName = Literal["retrieval_worker", "policy_tool_worker", "human_review"]
 
-
-class AgentState(TypedDict):
-    task: str
-    supervisor_route: RouteName
-    route_reason: str
-    risk_high: bool
-    needs_tool: bool
-    retrieved_chunks: List[Dict[str, Any]]
-    retrieved_sources: List[str]
-    policy_result: Dict[str, Any]
-    mcp_tools_used: List[Dict[str, Any]]
-    final_answer: str
-    sources: List[str]
-    confidence: float
-    history: List[str]
-    workers_called: List[str]
-    worker_io_logs: List[Dict[str, Any]]
-    run_id: str
-    timestamp: str
-    llm_profiles: Dict[str, Any]
-    retrieval_top_k: int
-
-
-def save_trace(state: AgentState, output_dir: Optional[str] = None) -> str:
-    output_dir = output_dir or os.getenv("TRACE_OUTPUT_DIR", "./artifacts/traces")
-    os.makedirs(output_dir, exist_ok=True)
-    filename = os.path.join(output_dir, f"{state['run_id']}.json")
-    with open(filename, "w", encoding="utf-8") as file:
-        json.dump(state, file, ensure_ascii=False, indent=2)
-    return filename
-
-
-class MainAgent:
+class RetrievalEvaluator:
     def __init__(self):
-        self.name = "ExpertSupervisorAgent-v4"
-        self.contract_path = Path("contracts/worker_contracts.yaml")
-        self.routing_rules = self._load_routing_rules()
+        # 1. Chuẩn bị cấu hình model từ .env
+        judge_provider = os.getenv("JUDGE_1_PROVIDER", "openai")
+        judge_model = os.getenv("JUDGE_1_MODEL", "gpt-4o-mini")
 
-    def _load_routing_rules(self) -> List[Dict]:
-        if not self.contract_path.exists():
-            return []
-        with open(self.contract_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-            return data.get("supervisor", {}).get("routing_rules", [])
+        embed_provider = os.getenv("RETRIEVAL_PROVIDER", "gemini")
+        embed_model = os.getenv("RETRIEVAL_MODEL", "gemini-embedding-2-preview")
 
-    def supervisor_node(self, state: AgentState) -> AgentState:
-        task_lower = state["task"].lower()
-        selected_route = "retrieval_worker"
-        reason = "Default route"
+        self.llm_path = f"{judge_provider}/{judge_model}" if "/" not in judge_model else judge_model
+        self.emb_path = f"{embed_provider}/{embed_model}" if "/" not in embed_model else embed_model
 
-        for rule in self.routing_rules:
-            condition = rule.get("condition", "").lower()
-            clean_condition = condition.replace("task chứa", "").replace("'", "").replace('"', "")
-            keywords = [k.strip() for k in clean_condition.split(",") if k.strip()]
+    def calculate_hit_rate(self, expected_ids: List[str], retrieved_ids: List[str], top_k: int = 3) -> float:
+        if not expected_ids or not retrieved_ids:
+            return 0.0
+        return 1.0 if any(doc_id in retrieved_ids[:top_k] for doc_id in expected_ids) else 0.0
 
-            matched = [k for k in keywords if k in task_lower]
-            if matched:
-                selected_route = rule.get("route")
-                reason = f"Matched YAML rules: {matched}"
-                break
+    def calculate_mrr(self, expected_ids: List[str], retrieved_ids: List[str]) -> float:
+        if not expected_ids or not retrieved_ids:
+            return 0.0
+        for i, doc_id in enumerate(retrieved_ids):
+            if doc_id in expected_ids:
+                return 1.0 / (i + 1)
+        return 0.0
 
-        state["supervisor_route"] = selected_route
-        state["route_reason"] = reason
-        state["needs_tool"] = selected_route == "policy_tool_worker"
-        state["risk_high"] = any(k in task_lower for k in ["p1", "khẩn cấp"])
-        return state
+    async def score(self, case: Dict[str, Any], resp: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Đánh giá an toàn luồng sử dụng Ragas.
+        """
+        retrieved_ids = resp.get("retrieved_ids", [])
+        expected_ids = case.get("expected_retrieval_ids", [])
 
-    async def query(self, question: str) -> Dict[str, Any]:
-        profiles = self._get_llm_profiles()
-        state: AgentState = {
-            "task": question,
-            "supervisor_route": "retrieval_worker",
-            "route_reason": "",
-            "risk_high": False,
-            "needs_tool": False,
-            "retrieved_chunks": [],
-            "retrieved_sources": [],
-            "policy_result": {},
-            "mcp_tools_used": [],
-            "final_answer": "",
-            "sources": [],
-            "confidence": 0.0,
-            "history": [],
-            "workers_called": [],
-            "worker_io_logs": [],
-            "run_id": f"run_{int(time.time() * 1000)}",
-            "timestamp": datetime.now(UTC).isoformat(),
-            "llm_profiles": profiles,
-            "retrieval_top_k": int(os.getenv("RETRIEVAL_TOP_K", "5")),
+        hit_rate = self.calculate_hit_rate(expected_ids, retrieved_ids)
+        mrr = self.calculate_mrr(expected_ids, retrieved_ids)
+
+        # 1. Chuẩn bị Dataset (Ragas yêu cầu list cho mỗi field)
+        data = {
+            "question": [case["question"]],
+            "answer": [resp["answer"]],
+            "contexts": [[c for c in resp.get("contexts", [])]],
+            "ground_truth": [case.get("expected_answer", "")],
         }
+        dataset = Dataset.from_dict(data)
 
-        state = self.supervisor_node(state)
+        try:
+            from langchain_litellm import ChatLiteLLM, LiteLLMEmbeddings
 
-        # 1. Retrieval
-        state = await retrieval_run(state)
+            # 2. Khởi tạo đối tượng LLM và Embeddings ĐỘC LẬP cho mỗi request
+            llm_obj = ChatLiteLLM(model=self.llm_path, temperature=0)
+            emb_obj = LiteLLMEmbeddings(model=self.emb_path)
 
-        # 2. Policy
-        if state["supervisor_route"] == "policy_tool_worker":
-            state = await policy_run(state)
+            ragas_llm = LangchainLLMWrapper(llm_obj)
+            ragas_emb = LangchainEmbeddingsWrapper(emb_obj)
 
-        # 3. Synthesis
-        state = await synthesis_run(state)
+            # 3. Khởi tạo mới các Metric để tránh 'llm must be set' error
+            m1 = Faithfulness()
+            m2 = AnswerRelevancy()
 
-        # 4. Save Trace
-        save_trace(state)
+            loop = asyncio.get_event_loop()
+            # Thực thi Ragas trong thread pool
+            result = await loop.run_in_executor(
+                None, lambda: evaluate(dataset, metrics=[m1, m2], llm=ragas_llm, embeddings=ragas_emb)
+            )
+
+            # 4. Trích xuất kết quả an toàn
+            res_df = result.to_pandas()
+            faith_score = float(res_df["faithfulness"].iloc[0])
+            relevancy_score = float(res_df["answer_relevancy"].iloc[0])
+
+            # Xử lý trường hợp Ragas trả về NaN
+            import math
+
+            if math.isnan(faith_score):
+                faith_score = 0.0
+            if math.isnan(relevancy_score):
+                relevancy_score = 0.0
+
+        except Exception as e:
+            print(f"!!! Ragas Evaluation Error: {e}")
+            faith_score = 0.0
+            relevancy_score = 0.0
 
         return {
-            "answer": state["final_answer"],
-            "contexts": [c["text"] for c in state["retrieved_chunks"]],
-            "retrieved_ids": [c.get("id", "") for c in state["retrieved_chunks"]],
-            "metadata": {
-                "run_id": state["run_id"],
-                "route": state["supervisor_route"],
-                "reason": state["route_reason"],
-                "profiles": profiles,
-            },
+            "faithfulness": faith_score,
+            "relevancy": relevancy_score,
+            "retrieval": {"hit_rate": hit_rate, "mrr": mrr},
         }
-
-    def _get_llm_profiles(self) -> dict:
-        roles = ["supervisor", "retrieval", "synthesis", "policy"]
-        profiles = {}
-        for role in roles:
-            provider = os.getenv(f"{role.upper()}_PROVIDER")
-            model = os.getenv(f"{role.upper()}_MODEL")
-
-            # Fallback nếu thiếu cấu hình
-            if not provider or not model:
-                if role == "retrieval":
-                    provider, model = "openai", "text-embedding-3-small"
-                else:
-                    provider, model = "openai", "gpt-4o-mini"
-
-            profiles[role] = {"provider": provider, "model": model}
-        return profiles
-
-
-if __name__ == "__main__":
-    agent = MainAgent()
-
-    async def main():
-        resp = await agent.query("Chính sách hoàn tiền Flash Sale?")
-        print(f"Result: {resp['answer']}")
-
-    asyncio.run(main())
