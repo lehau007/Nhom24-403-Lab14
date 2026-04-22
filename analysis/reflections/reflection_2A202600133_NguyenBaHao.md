@@ -1,5 +1,6 @@
 # BÁO CÁO CÁ NHÂN (REFLECTION) - LAB 14
 **Vị trí:** AI/Backend Engineer
+
 **Họ và tên:** Nguyễn Bá Hào - 2A202600133
 
 ## 1. Công việc đã thực hiện
