@@ -1,58 +1,116 @@
 # Báo cáo Phân tích Thất bại (Failure Analysis Report)
 
-## 1. Tổng quan Benchmark
-- **Tổng số cases:** 50
-- **Tỉ lệ Pass/Fail/Error:** 38/10/2 (Fail status: 10, Error status: 2)
-- **Điểm RAGAS trung bình:**
-    - Faithfulness: 0.96
-    - Relevancy: 0.83
-- **Chỉ số Retrieval:**
-    - Hit Rate: 0.90
-    - Average MRR: 0.62
-- **Điểm LLM-Judge trung bình:** 3.96 / 5.0
-- **Agreement Rate (Giữa các Judge):** 88.5%
-- **Latency trung bình:** 5.81s
-- **Token usage ước tính (Total 50 cases):** ~185,000 tokens
-- **Chi phí ước tính:** ~$0.02 (Dựa trên Gemma-3 pricing. Thực ra là nhóm em đang dùng API free, nên cũng chưa rõ giá thực tế)
-- **Tốc độ thực thi:** Toàn bộ benchmark hoàn thành trong < 2 phút (Async mode enabled)
+## 1. Mục tiêu và phạm vi
+- So sánh 2 phiên bản agent trên cùng bộ 50 test cases:
+    - **V1 (Baseline):** retrieve `top_k=1`
+    - **V2 (Optimized):** retrieve `top_k=3`
+- Nguồn dữ liệu: `reports/summary.json` và `reports/benchmark_results.json` (kết quả mới nhất).
 
-## 2. Phân nhóm lỗi (Failure Clustering)
-| Nhóm lỗi | Số lượng | Nguyên nhân dự kiến |
-|----------|----------|---------------------|
-| Evaluation Bias / GT Mismatch | 7 | Golden Set có expected_answer quá hẹp (chỉ lấy 1 chunk) trong khi Agent trả lời đầy đủ dựa trên 3-5 chunks, dẫn đến Judge chấm "Inaccurate" sai. |
-| Hallucination (Real) | 3 | Agent suy diễn thông tin không có trong tài liệu hoặc trộn lẫn thông tin giữa các phiên bản policy khác nhau. |
-| System Error | 2 | Server API (Google GenAI) bị ngắt kết nối giữa chừng (Server disconnected). |
+## 2. Kết quả tổng quan so sánh V1 vs V2
 
-## 3. Phân tích 5 Whys (Chọn 3 case tệ nhất)
+| Chỉ số | V1 (`top_k=1`) | V2 (`top_k=3`) | Delta (V2 - V1) |
+|---|---:|---:|---:|
+| Tổng số cases | 50 | 50 | 0 |
+| Pass | 34 | 38 | **+4** |
+| Fail | 16 | 12 | **-4** |
+| Error | 0 | 0 | 0 |
+| Avg LLM-Judge Score | 3.74 | 4.07 | **+0.33** |
+| Judge Agreement Rate | 0.91 | 0.88 | -0.03 |
+| Retrieval Hit Rate | 0.46 | 0.94 | **+0.48** |
+| Retrieval MRR | 0.46 | 0.66 | **+0.20** |
+| RAGAS Faithfulness | 1.00 | 1.00 | 0.00 |
+| RAGAS Relevancy | 0.40 | 0.87 | **+0.47** |
+| Avg Latency (s) | 1.78 | 2.48 | +0.69 |
 
-### Case #1: Hỏi về ngoại lệ chính sách không áp dụng
-1. **Symptom:** Agent trả lời không có ngoại lệ, trong khi thực tế có.
-2. **Why 1:** LLM không thấy thông tin ngoại lệ trong context truyền vào.
-3. **Why 2:** Vector DB không đưa đoạn văn chứa ngoại lệ vào top danh sách search.
-4. **Why 3:** Từ khóa câu hỏi có "ngoại lệ" nhưng văn bản lại ghi "lưu ý khác" hoặc "trường hợp loại trừ", khoảng cách ngữ nghĩa (semantic distance) khá xa.
-5. **Why 4:** Chưa có công đoạn re-ranking bằng cross-encoder để cải thiện và đối chiếu sự tương đồng ngữ nghĩa một cách tỉ mỉ.
-6. **Root Cause:** Quá phụ thuộc vào cơ chế Vector Search thuần tuý (dense embedding đôi lúc gặp nhược điểm với lexical gap).
+### Kết luận nhanh
+- V2 cải thiện rõ rệt về **retrieval quality** (Hit Rate/MRR) và **answer quality** (Judge score, Relevancy).
+- Trade-off: **latency tăng** và **agreement giữa judge giảm nhẹ**.
+- Theo regression hiện tại: **APPROVE**.
 
-### Case #2: Kết hợp thông tin 2 điều kiện từ 2 quy định khác nhau
-1. **Symptom:** Khách hàng hỏi điều kiện vay kép, Agent chỉ trả lời đúng 1 điều kiện.
-2. **Why 1:** Agent chỉ focus (hội tụ) thông tin vào chunk đầu tiên.
-3. **Why 2:** LLM judge đánh giá relevancy thấp với câu hỏi do thiếu vế sau.
-4. **Why 3:** Ingestion chunking không liên kết tốt các đoạn dài. Khả năng kết nối multi-hop suy yếu khi một chunk lấn át các chunk còn lại.
-5. **Why 4:** Context dồn dập khiến mô hình sinh gặp tình trạng "lost in the middle" (quên ý).
-6. **Root Cause:** Nhược điểm của RAG cơ bản thiếu quy trình Multi-hop traversal, không có agent chuyên trách tổng hợp ý.
+## 3. Failure Clustering (theo dữ liệu mới)
 
-### Case #3: Trả lời sai thông tin tính toán chỉ số
-1. **Symptom:** Agent cung cấp mức tính toán sai cho chính sách ưu đãi tích luỹ.
-2. **Why 1:** Generation Model không thực sự giỏi suy luận toán học/logic tổng hợp thuần túy bằng prompt text.
-3. **Why 2:** Hệ thống không cung cấp Tool Calling cho phép thực hiện phép tính.
-4. **Why 3:** Design RAG hiện tại chỉ chuyên về QA tài liệu văn bản, chưa có module function calling chuyên việt.
-5. **Why 4:** Agent base chỉ feed context dạng string vào cho một LLM.
-6. **Root Cause:** Kiến trúc thiếu vắng Tool-use/ReAct agent nhằm thực thi các thao tác operation (tính toán, cross-check).
+### 3.1. Phân bố fail theo nhóm tài liệu
 
-## 4. Kế hoạch cải tiến (Action Plan)
-- [x] Thay đổi Chunking strategy từ Fixed-size sang Semantic Chunking kết hợp overlapping.
-- [x] Nối rộng top_k = 3 lên top_k = 5 cho v2 agent để bao phủ ngữ cảnh lớn hơn.
-- [ ] Tích hợp Reranking Layer (Cohere Rerank / BGE-M3 Reranker) giữa bước Retrieve và Generate.
-- [ ] **Cải thiện Golden Set:** Cập nhật expected_answer để bao quát toàn bộ thông tin tài liệu thay vì chỉ focus vào 1 chunk duy nhất.
-- [ ] Cập nhật System Prompt với chain-of-thought instructions: "Suy nghĩ từng bước, chỉ trả lời dựa vào context cung cấp, nếu có tính toán hãy phân tích cẩn thận".
-- [ ] Nghiên cứu áp dụng quy trình Agentic RAG / ReAct để model có năng lực gọi function call.
+**V1 (`top_k=1`) - 16 fail**
+- access_control_sop: 4
+- hr_leave_policy: 4
+- sla_p1_2026: 4
+- it_helpdesk_faq: 2
+- policy_refund_v4: 2
+
+**V2 (`top_k=3`) - 12 fail**
+- hr_leave_policy: 4
+- policy_refund_v4: 4
+- it_helpdesk_faq: 2
+- access_control_sop: 2
+
+### 3.2. Phân loại nguyên nhân lỗi chính
+
+**V1 (`top_k=1`)**
+- Retrieval miss (`hit_rate=0`): **16/16 fail**
+- Off-target answer (trả lời lệch đoạn được hỏi): **10/16 fail**
+- Missing detail (thiếu ý quan trọng): **9/16 fail**
+
+**V2 (`top_k=3`)**
+- Retrieval miss (`hit_rate=0`): **1/12 fail**
+- Off-target answer: **5/12 fail**
+- Missing detail: **4/12 fail**
+
+### 3.3. Diễn giải
+- Khi tăng `top_k` từ 1 lên 3, lỗi do retrieval miss gần như được triệt tiêu (16 -> 1).
+- Phần fail còn lại của V2 tập trung nhiều hơn vào **generation grounding**: trả lời rộng nhưng lệch focus câu hỏi hoặc thiếu chi tiết yêu cầu.
+
+## 4. Phân tích chuyển trạng thái giữa 2 version
+
+- Pairwise theo cùng index test case:
+    - **Improved (điểm tăng):** 23 cases
+    - **Worsened (điểm giảm):** 12 cases
+    - **Giữ nguyên:** 15 cases
+
+### 4.1. Mẫu cải thiện tiêu biểu (V1 fail -> V2 pass)
+- Các case index: 2, 3, 9, 12, 14 có mức tăng điểm lần lượt: +2.0, +3.0, +3.0, +2.5, +2.0.
+- Đặc điểm chung: câu hỏi cần đúng đoạn/chủ đề nhỏ trong tài liệu; V1 thường lấy nhầm chunk, V2 lấy đủ ngữ cảnh hơn nên trả lời trúng ý hơn.
+
+### 4.2. Mẫu thoái lui tiêu biểu (V1 pass -> V2 fail)
+- Các case index: 7, 10, 25, 31, 34 có mức giảm điểm lần lượt: -3.0, -1.5, -3.0, -3.0, -1.0.
+- Đặc điểm chung: V2 đôi lúc “mở rộng” nội dung quá mức (do nhiều chunk hơn), làm giảm tính tập trung vào đoạn được yêu cầu cụ thể.
+
+## 5. 5 Whys (theo lỗi còn lại của V2)
+
+### Case A: Trả lời lệch đoạn được hỏi (Off-target)
+1. **Symptom:** Câu trả lời đúng về mặt nội dung chung nhưng không đúng “đoạn liên quan” của câu hỏi.
+2. **Why 1:** Với `top_k=3`, context rộng hơn nên model có nhiều hướng trả lời.
+3. **Why 2:** Prompt chưa ép đủ mạnh việc ưu tiên đúng section/intent trong câu hỏi.
+4. **Why 3:** Chưa có bước chọn evidence theo cấp độ section-level trước khi generate.
+5. **Why 4:** Chưa có post-check bắt buộc kiểm tra “answer-to-question focus”.
+6. **Root Cause:** Thiếu cơ chế grounding theo intent/section, khiến câu trả lời có thể đúng nhưng không đúng trọng tâm.
+
+### Case B: Thiếu chi tiết bắt buộc (Missing detail)
+1. **Symptom:** Trả lời đúng khung chính nhưng thiếu điều kiện/ngoại lệ quan trọng.
+2. **Why 1:** Model tóm tắt quá mạnh khi context dài.
+3. **Why 2:** Chưa có checklist các slot thông tin bắt buộc theo loại câu hỏi.
+4. **Why 3:** Không có bước self-critique trước khi trả lời final.
+5. **Why 4:** Expected answer trong golden set một số nơi nhấn mạnh chi tiết nhỏ nhưng prompt hiện tại chưa match chiến lược chấm.
+6. **Root Cause:** Thiếu schema trả lời theo yêu cầu thông tin và thiếu bước tự kiểm tra độ bao phủ trước khi output.
+
+### Case C: Disagreement giữa judge tăng nhẹ
+1. **Symptom:** Agreement Rate giảm từ 0.91 xuống 0.88.
+2. **Why 1:** V2 cho câu trả lời dài hơn và giàu thông tin hơn, tạo biên độ diễn giải lớn hơn giữa các judge.
+3. **Why 2:** Một số câu trả lời “đúng nhưng thừa” dễ bị judge đánh giá khác nhau (coverage vs strictness).
+4. **Why 3:** Rubric judge chưa chuẩn hóa đủ mức phạt cho nội dung dư hoặc lệch nhẹ trọng tâm.
+5. **Why 4:** Thiếu calibration định kỳ giữa các model judge.
+6. **Root Cause:** Độ mở trong tiêu chí chấm khiến variance tăng khi câu trả lời nhiều thông tin.
+
+## 6. Kế hoạch cải tiến (Action Plan)
+
+- [x] Nâng retrieve từ `top_k=1` lên `top_k=3` để tăng recall retrieval.
+- [ ] Thêm reranking (cross-encoder) để ưu tiên chunk đúng section/intent thay vì chỉ semantic gần nghĩa.
+- [ ] Bổ sung prompt ràng buộc: trả lời đúng đoạn được hỏi trước, sau đó mới mở rộng nếu cần.
+- [ ] Thêm bước answer validation: kiểm tra đủ các slot thông tin bắt buộc (điều kiện, ngoại lệ, timeline, owner).
+- [ ] Chuẩn hóa rubric judge cho các trường hợp “đúng nhưng dư” để giảm disagreement.
+- [ ] Rà soát lại golden set ở các case có ambiguity cao để giảm nhiễu khi đánh giá regression.
+
+## 7. Kết luận
+- So với baseline `top_k=1`, phiên bản `top_k=3` cho hiệu năng tốt hơn rõ rệt ở cả retrieval và chất lượng trả lời tổng thể.
+- Failure hiện tại không còn chủ yếu ở retrieval, mà chuyển sang bài toán **focus và coverage trong generation**.
+- Hướng tối ưu tiếp theo nên tập trung vào **reranking + grounding theo intent + self-check trước khi trả lời**.

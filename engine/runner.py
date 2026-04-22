@@ -11,21 +11,21 @@ class BenchmarkRunner:
     async def run_single_test(self, test_case: Dict) -> Dict:
         start_time = time.perf_counter()
         try:
-            print(f"[{test_case['question'][:15]}] Gọi agent.query...")
+            # print(f"[{test_case['question'][:15]}] Gọi agent.query...")
             response = await self.agent.query(test_case["question"])
-            print(f"[{test_case['question'][:15]}] Agent trả lời xong.")
+            # print(f"[{test_case['question'][:15]}] Agent trả lời xong.")
             latency = time.perf_counter() - start_time
 
-            print(f"[{test_case['question'][:15]}] Tính điểm RAGAS...")
+            # print(f"[{test_case['question'][:15]}] Tính điểm RAGAS...")
             ragas_scores = self.evaluator.score(test_case, response)
             
-            print(f"[{test_case['question'][:15]}] Bắt đầu judge...")
+            # print(f"[{test_case['question'][:15]}] Bắt đầu judge...")
             judge_result = await self.judge.evaluate_multi_judge(
                 test_case["question"],
                 response["answer"],
                 test_case["expected_answer"],
             )
-            print(f"[{test_case['question'][:15]}] Judge xong.")
+            # print(f"[{test_case['question'][:15]}] Judge xong.")
 
             return {
                 "test_case": test_case["question"],

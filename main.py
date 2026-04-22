@@ -19,6 +19,20 @@ def _load_dataset(path: str = "data/golden_set.jsonl") -> List[Dict]:
     return dataset
 
 
+def _extract_hit_rate(result: Dict) -> float:
+    ragas = result.get("ragas", {})
+    if "hit_rate" in ragas:
+        return float(ragas.get("hit_rate", 0.0))
+    return float(ragas.get("retrieval", {}).get("hit_rate", 0.0))
+
+
+def _extract_mrr(result: Dict) -> float:
+    ragas = result.get("ragas", {})
+    if "mrr" in ragas:
+        return float(ragas.get("mrr", 0.0))
+    return float(ragas.get("retrieval", {}).get("mrr", 0.0))
+
+
 async def run_benchmark_with_results(agent_version: str, top_k: int) -> Tuple[Optional[List[Dict]], Optional[Dict]]:
     print(f"🚀 Khởi động Benchmark cho {agent_version}...")
 
@@ -50,8 +64,8 @@ async def run_benchmark_with_results(agent_version: str, top_k: int) -> Tuple[Op
 
     total = len(results)
     avg_score = sum(r["judge"]["final_score"] for r in results) / total if total else 0.0
-    hit_rate = sum(r["ragas"]["retrieval"]["hit_rate"] for r in results) / total if total else 0.0
-    avg_mrr = sum(r["ragas"]["retrieval"]["mrr"] for r in results) / total if total else 0.0
+    hit_rate = sum(_extract_hit_rate(r) for r in results) / total if total else 0.0
+    avg_mrr = sum(_extract_mrr(r) for r in results) / total if total else 0.0
     agreement_rate = sum(r["judge"]["agreement_rate"] for r in results) / total if total else 0.0
     avg_latency = sum(r["latency"] for r in results) / total if total else 0.0
 
@@ -86,10 +100,10 @@ async def main():
         )
         print(f"✅ Ingestion stats: {stats}")
 
-    v1_summary = await run_benchmark("Agent_V1_Base", top_k=1)
+    v1_results, v1_summary = await run_benchmark_with_results("Agent_V1_Base", top_k=1)
     v2_results, v2_summary = await run_benchmark_with_results("Agent_V2_Optimized", top_k=3)
 
-    if not v1_summary or not v2_summary:
+    if not v1_results or not v2_results or not v1_summary or not v2_summary:
         print("❌ Không thể chạy Benchmark. Kiểm tra lại data/golden_set.jsonl.")
         return
 
@@ -99,16 +113,52 @@ async def main():
     print(f"V2 Score: {v2_summary['metrics']['avg_score']}")
     print(f"Delta: {'+' if delta >= 0 else ''}{delta:.2f}")
 
-    os.makedirs("reports", exist_ok=True)
-    with open("reports/summary.json", "w", encoding="utf-8") as f:
-        json.dump(v2_summary, f, ensure_ascii=False, indent=2)
-    with open("reports/benchmark_results.json", "w", encoding="utf-8") as f:
-        json.dump(v2_results, f, ensure_ascii=False, indent=2)
-
     min_delta = float(os.getenv("RELEASE_MIN_DELTA", "0.05"))
     min_hit_rate = float(os.getenv("RELEASE_MIN_HIT_RATE", "0.55"))
+    decision = "APPROVE" if delta >= min_delta and v2_summary["metrics"]["hit_rate"] >= min_hit_rate else "BLOCK"
+    if decision == "APPROVE":
+        version_decision = "V2"
+    else: 
+        version_decision = "BASELINE V1" 
+    merged_summary = {
+        "metadata": {
+            "total": v2_summary["metadata"]["total"],
+            "version": version_decision,
+            "timestamp": v2_summary["metadata"]["timestamp"],
+            "versions_compared": ["V1", "V2"],
+        },
+        "metrics": {
+            "avg_score": v1_summary["metrics"]["avg_score"],
+            "hit_rate": v1_summary["metrics"]["hit_rate"],
+            "agreement_rate": v1_summary["metrics"]["agreement_rate"],
+        },
+        "regression": {
+            "v1": {
+                "score": v1_summary["metrics"]["avg_score"],
+                "hit_rate": v1_summary["metrics"]["hit_rate"],
+                "judge_agreement": v1_summary["metrics"]["agreement_rate"],
+            },
+            "v2": {
+                "score": v2_summary["metrics"]["avg_score"],
+                "hit_rate": v2_summary["metrics"]["hit_rate"],
+                "judge_agreement": v2_summary["metrics"]["agreement_rate"],
+            },
+            "decision": decision,
+        },
+    }
 
-    if delta >= min_delta and v2_summary["metrics"]["hit_rate"] >= min_hit_rate:
+    merged_results = {
+        "v1": v1_results,
+        "v2": v2_results,
+    }
+
+    os.makedirs("reports", exist_ok=True)
+    with open("reports/summary.json", "w", encoding="utf-8") as f:
+        json.dump(merged_summary, f, ensure_ascii=False, indent=2)
+    with open("reports/benchmark_results.json", "w", encoding="utf-8") as f:
+        json.dump(merged_results, f, ensure_ascii=False, indent=2)
+
+    if decision == "APPROVE":
         print("✅ QUYẾT ĐỊNH: CHẤP NHẬN BẢN CẬP NHẬT (APPROVE)")
     else:
         print("❌ QUYẾT ĐỊNH: TỪ CHỐI (BLOCK RELEASE)")

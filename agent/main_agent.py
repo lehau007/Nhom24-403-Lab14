@@ -115,11 +115,11 @@ class MainAgent:
             return f"Error: {e}"
 
     async def query(self, question: str) -> Dict:
-        print(f"[{question[:15]}] -> Start _retrieve...")
+        # print(f"[{question[:15]}] -> Start _retrieve...")
         retrieval = await asyncio.to_thread(self._retrieve, question)
-        print(f"[{question[:15]}] -> Finished _retrieve, starting _generate_answer...")
+        # print(f"[{question[:15]}] -> Finished _retrieve, starting _generate_answer...")
         answer = await self._generate_answer_async(question, retrieval["contexts"])
-        print(f"[{question[:15]}] -> Finished _generate_answer.")
+        # print(f"[{question[:15]}] -> Finished _generate_answer.")
 
         return {
             "answer": answer,
